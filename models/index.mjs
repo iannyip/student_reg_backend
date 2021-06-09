@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import allConfig from '../config/config.js';
 
-import initItemModel from './item.mjs';
+// import initItemModel from './item.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 
