@@ -2,20 +2,439 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+    await queryInterface.createTable('users', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      mobile: {
+        type: Sequelize.INTEGER,
+      },
+      email: {
+        type: Sequelize.STRING,
+      },
+      password: {
+        type: Sequelize.STRING,
+      },
+      isAdmin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: FALSE,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+    await queryInterface.createTable('pay_schemes', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      rate: {
+        type: Sequelize.INTEGER,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+    await queryInterface.createTable('parents', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      address: {
+        type: Sequelize.STRING,
+      },
+      postal_code: {
+        type: Sequelize.STRING,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'users',
+          key: 'id',
+        }
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+    await queryInterface.createTable('students', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      dob: {
+        type: Sequelize.DATE,
+      },
+      additional_info: {
+        type: Sequelize.STRING,
+      },
+      parent_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'users',
+          key: 'id',
+        }
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+    await queryInterface.createTable('course_packages', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      code: {
+        type: Sequelize.STRING,
+      },
+      parent_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'users',
+          key: 'id',
+        }
+      },
+      value: {
+        type: Sequelize.INTEGER,
+      },
+      total_sessions: {
+        type: Sequelize.INTEGER,
+      },
+      sessions_left: {
+        type: Sequelize.INTEGER,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+    await queryInterface.createTable('instructors', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      employment: {
+        type: Sequelize.STRING,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'users',
+          key: 'id',
+        }
+      },
+      rate_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'pay_schemes',
+          key: 'id',
+        }
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+    
+    await queryInterface.createTable('coursetypes', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      learning_pathway: {
+        type: Sequelize.STRING,
+      },
+      level: {
+        type: Sequelize.STRING,
+      },
+      order: {
+        type: Sequelize.INTEGER,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+    await queryInterface.createTable('courses', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      start_datetime: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      end_datetime: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      location: {
+        type: Sequelize.STRING,
+      },
+      limit: {
+        type: Sequelize.INTEGER,
+      },
+      coursetype_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'coursetypes',
+          key: 'id',
+        }
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+    await queryInterface.createTable('sessions', { 
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      start_datetime: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      end_datetime: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      instructor: {
+        type: Sequelize.STRING,
+      },
+      comments: {
+        type: Sequelize.STRING,
+      },
+      location: {
+        type: Sequelize.STRING,
+      },
+      limit: {
+        type: Sequelize.INTEGER,
+      },
+      course_id: {
+        type: Sequelize.INTEGER,
+      },
+      sessiontype: {
+        type: Sequelize.STRING,
+      },
+      course_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'courses',
+          key: 'id',
+        }
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+
+    await queryInterface.createTable('signups', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      course_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'courses',
+          key: 'id',
+        }
+      },
+      student_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'students',
+          key: 'id',
+        }
+      },
+      comments: {
+        type: Sequelize.STRING,
+      },
+      status: {
+        type: Sequelize.STRING,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+    await queryInterface.createTable('attendance', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      session_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'sessions',
+          key: 'id',
+        }
+      },
+      student_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'students',
+          key: 'id',
+        }
+      },
+      comments: {
+        type: Sequelize.STRING,
+      },
+      marked: {
+        type: Sequelize.STRING,
+      },
+      payment: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'course_packages',
+          key: 'id',
+        }
+      },
+      status: {
+        type: Sequelize.STRING,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+    await queryInterface.createTable('assignments', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      session_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'sessions',
+          key: 'id',
+        }
+      },
+      instructor_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'instructors',
+          key: 'id',
+        }
+      },
+      rate: {
+        type: Sequelize.INTEGER,
+      },
+      role: {
+        type: Sequelize.STRING,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+    
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('signups');
+    await queryInterface.dropTable('attendance');
+    await queryInterface.dropTable('assignments');
+
+    await queryInterface.dropTable('sessions');
+    await queryInterface.dropTable('courses');
+    await queryInterface.dropTable('coursetypes');
+    
+    await queryInterface.dropTable('course_packages');
+    await queryInterface.dropTable('students');
+    await queryInterface.dropTable('parents');
+    await queryInterface.dropTable('instructors');
+
+    await queryInterface.dropTable('pay_schemes');
+    await queryInterface.dropTable('users');
+
   }
-};
+}; 
