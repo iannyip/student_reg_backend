@@ -466,14 +466,15 @@ module.exports = {
 
     await queryInterface.dropTable('sessions');
     await queryInterface.dropTable('courses');
-    await queryInterface.dropTable('coursetypes');
+    await queryInterface.dropTable('course_types');
     
-    await queryInterface.dropTable('course_packages');
+    await queryInterface.dropTable('credits');
     await queryInterface.dropTable('students');
     await queryInterface.dropTable('parents');
     await queryInterface.dropTable('instructors');
 
     await queryInterface.dropTable('pay_schemes');
+    await queryInterface.dropTable('items');
     await queryInterface.dropTable('users');
 
   }
