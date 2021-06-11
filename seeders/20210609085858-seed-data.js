@@ -58,25 +58,37 @@ module.exports = {
       {employment: 'Full Time',user_id: 4, rate_id: 8, created_at: new Date(), updated_at: new Date()},
       {employment: 'Part Time',user_id: 5, rate_id: 3, created_at: new Date(), updated_at: new Date()},
     ];
-    const EV3Levels = ['Beginner Level 1', 'Beginner Level 2', 'Intermediate Level 1', 'Intermediate Level 1', 'Advanced Level 1', 'Advanced Level 1', 'Competition Training'];
-    const ArduinoLevels = ['Introduction', 'Beginner Level 1', 'Beginner Level 2', 'Intermediate Level 1', 'Intermediate Level 1', 'CATALYST'];
-    const WeDoLevels = [];
     const seedCourseTypes = [];
-    const seedCourseTypes = [
-      {learning_pathway: 'EV3', level: 'Beginner Level 1', order: 1, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'EV3', level: 'Beginner Level 2', order: 2, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'EV3', level: 'Intermediate Level 1', order: 3, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'EV3', level: 'Intermediate Level 1', order: 4, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'EV3', level: 'Advanced Level 1', order: 5, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'EV3', level: 'Advanced Level 1', order: 6, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'EV3', level: 'Competition Training', order: 7, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'Arduino', level: 'Introduction', order: 1, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'Arduino', level: 'Beginner Level 1', order: 2, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'Arduino', level: 'Beginner Level 2', order: 3, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'Arduino', level: 'Intermediate Level 1', order: 4, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'Arduino', level: 'Intermediate Level 1', order: 5, item_id: '', created_at: new Date(), updated_at: new Date()},
-      {learning_pathway: 'Arduino', level: 'CATALYST', order: 6, item_id: '', created_at: new Date(), updated_at: new Date()},
-    ];
+    const EV3Levels = ['Beginner Level 1', 'Beginner Level 2', 'Intermediate Level 1', 'Intermediate Level 2', 'Advanced Level 1', 'Advanced Level 2', 'Competition Training'];
+    const ArduinoLevels = ['Introduction', 'Beginner Level 1', 'Beginner Level 2', 'Intermediate Level 1', 'Intermediate Level 2', 'CATALYST'];
+    const WeDoLevels = ['Animals', 'Creepy Crawlies', 'Environment', 'Dinosaurs', 'Machinery', 'Nature', 'Robots', 'Star Wars', 'Hand Tools', 'Vehicles', 'Festivity', 'Transportation'];
+    const PythonLevels = ['Beginner Level 1', 'Beginner Level 2','Beginner Level 3', 'Intermediate Level 1', 'Intermediate Level 2', 'Intermediate Level 3', 'Advanced Level 1', 'Advanced Level 2'];
+    const ScratchLevels = ['Tier 1 - Classic Arcade', 'Tier 1 - Animal Planet', 'Tier 1 - Food Hunt', 'Tier 2 - Arcade', 'Tier 2 - Reaction Speed', 'Tier 2 - Sports & Racing'];
+    const learningPathsName = ['EV3', 'Arduino', 'WeDo', 'Python', 'Scratch']
+    const learningPathsArr = [EV3Levels, ArduinoLevels, WeDoLevels, PythonLevels, ScratchLevels]
+    for (let i = 0; i < learningPathsName.length; i += 1){
+      const currArray = learningPathsArr[i];
+      for (let j = 0; j < currArray.length; j += 1){
+        let order;
+        if (learningPathsName[i] === 'WeDo'){
+          order = 0;
+        } else if (learningPathsName[i] === 'Scratch') {
+          order = Math.floor(j / 3) + 1;
+        } else {
+          order = j + 1;
+        }
+        seedCourseTypes.push({
+          learning_pathway: learningPathsName[i],
+          level: currArray[j],
+          order,
+          item_id: 1,
+          created_at: new Date(), 
+          updated_at: new Date(),
+        });
+      }
+    }
+
+    
 
   },
 
