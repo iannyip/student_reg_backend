@@ -17,13 +17,6 @@ export default function initCoursetypeModel(sequelize, DataTypes) {
       order: {
         type: DataTypes.INTEGER,
       },
-      item_id: {
-        type: DataTypes.INTEGER,
-        references:{
-          model: 'items',
-          key: 'id',
-        }
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
