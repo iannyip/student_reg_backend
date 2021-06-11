@@ -25,6 +25,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: FALSE,
       },
+      isParent: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: FALSE,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -186,7 +190,7 @@ module.exports = {
       },
     });
     
-    await queryInterface.createTable('coursetypes', {
+    await queryInterface.createTable('course_types', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -277,17 +281,15 @@ module.exports = {
       },
       course_id: {
         type: Sequelize.INTEGER,
-      },
-      sessiontype: {
-        type: Sequelize.STRING,
-      },
-      course_id: {
-        type: Sequelize.INTEGER,
         references:{
           model: 'courses',
           key: 'id',
         }
       },
+      sessiontype: {
+        type: Sequelize.STRING,
+      },
+
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
