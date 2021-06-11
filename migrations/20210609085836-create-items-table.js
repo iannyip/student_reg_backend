@@ -166,11 +166,18 @@ module.exports = {
       value: {
         type: Sequelize.INTEGER,
       },
-      total_sessions: {
+      credit_total: {
         type: Sequelize.INTEGER,
       },
-      sessions_left: {
+      expiry: {
+        type: Sequelize.DATE,
+      },
+      item_id: {
         type: Sequelize.INTEGER,
+        references:{
+          model: 'items',
+          key: 'id',
+        }
       },
       created_at: {
         allowNull: false,

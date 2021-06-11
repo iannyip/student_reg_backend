@@ -21,11 +21,18 @@ export default function initCreditModel(sequelize, DataTypes) {
       value: {
         type: DataTypes.INTEGER,
       },
-      totalSessions: {
+      creditTotal: {
         type: DataTypes.INTEGER,
       },
-      sessionsLeft: {
+      expiry: {
+        type: DataTypes.DATE,
+      },
+      itemId: {
         type: DataTypes.INTEGER,
+        references:{
+          model: 'items',
+          key: 'id',
+        }
       },
       createdAt: {
         allowNull: false,
