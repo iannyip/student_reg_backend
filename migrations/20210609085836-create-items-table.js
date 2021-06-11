@@ -146,7 +146,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable('course_packages', {
+    await queryInterface.createTable('credits', {
       id: {
         allowNull: false,
         autoIncrement: true,

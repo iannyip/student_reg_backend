@@ -1,6 +1,6 @@
-export default function initCoursePackageModel(sequelize, DataTypes) {
+export default function initCreditModel(sequelize, DataTypes) {
   return sequelize.define(
-    'coursePackage',
+    'credit',
     {
       id: {
         allowNull: false,
