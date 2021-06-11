@@ -38,6 +38,31 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.createTable('items', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      credit_count: {
+        type: Sequelize.INTEGER,
+      },
+      price: {
+        type: Sequelize.INTEGER,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
     await queryInterface.createTable('pay_schemes', {
       id: {
         allowNull: false,
@@ -289,7 +314,6 @@ module.exports = {
       sessiontype: {
         type: Sequelize.STRING,
       },
-
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
