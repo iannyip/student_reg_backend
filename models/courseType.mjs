@@ -1,6 +1,6 @@
-export default function initCourseTypeModel(sequelize, DataTypes) {
+export default function initCoursetypeModel(sequelize, DataTypes) {
   return sequelize.define(
-    'courseType',
+    'coursetype',
     {
       id: {
         allowNull: false,

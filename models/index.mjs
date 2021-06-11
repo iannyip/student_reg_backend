@@ -32,7 +32,7 @@ db.Parent = initParentModel(sequelize, Sequelize.DataTypes);
 db.Student = initStudentModel(sequelize, Sequelize.DataTypes);
 db.Credit = initCreditModel(sequelize, Sequelize.DataTypes);
 db.Instructor = initInstructorModel(sequelize, Sequelize.DataTypes);
-db.CourseType = initCourseTypeModel(sequelize, Sequelize.DataTypes);
+db.Coursetype = initCoursetypeModel(sequelize, Sequelize.DataTypes);
 db.Course = initCourseModel(sequelize, Sequelize.DataTypes);
 db.Session = initSessionModel(sequelize, Sequelize.DataTypes);
 db.Signup = initSignupModel(sequelize, Sequelize.DataTypes);
@@ -51,6 +51,9 @@ db.Credit.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'payme
 // -- Assignment through table
 db.Session.belongsToMany(db.Instructor, { through: db.Assignment, foreignKey: 'sessionId'});
 db.Instructor.belongsToMany(db.Session, { through: db.Assignment, foreignKey: 'payment'});
+// -- CourseTypes and items through table
+db.Coursetype.belongsToMany(db.Item, { through: 'coursetype_items' });
+db.Item.belongsToMany(db.Coursetype, { through: 'coursetype_items' });
 
 // Define 1-M relationships here
 db.User.hasMany(db.Student);
@@ -59,12 +62,10 @@ db.User.hasMany(db.Credit);
 db.Credit.belongsTo(db.User, { foreignKey: 'parentId'});
 db.PayScheme.hasMany(db.Instructor);
 db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId'});
-db.CourseType.hasMany(db.Course);
-db.Course.belongsTo(db.CourseType, { foreignKey: 'coursetypeId'}); 
+db.Coursetype.hasMany(db.Course);
+db.Course.belongsTo(db.Coursetype, { foreignKey: 'coursetypeId'}); 
 db.Course.hasMany(db.Session);
 db.Session.belongsTo(db.Course); // default courseId FK
-db.Item.hasMany(db.CourseType);
-db.CourseType.belongsTo(db.Item, { foreignKey: 'itemId'});
 db.Item.hasMany(db.Credit);
 db.Credit.belongsTo(db.Item, { foreignKey: 'itemId'});
 // -- Signup through table

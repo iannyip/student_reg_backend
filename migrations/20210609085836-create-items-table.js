@@ -222,7 +222,7 @@ module.exports = {
       },
     });
     
-    await queryInterface.createTable('course_types', {
+    await queryInterface.createTable('coursetypes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -237,6 +237,36 @@ module.exports = {
       },
       order: {
         type: Sequelize.INTEGER,
+      },
+      item_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'items',
+          key: 'id',
+        }
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    }); 
+    await queryInterface.createTable('coursetype_items', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      coursetype_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'coursetypes',
+          key: 'id',
+        }
       },
       item_id: {
         type: Sequelize.INTEGER,
@@ -466,13 +496,14 @@ module.exports = {
 
     await queryInterface.dropTable('sessions');
     await queryInterface.dropTable('courses');
-    await queryInterface.dropTable('course_types');
+    await queryInterface.dropTable('coursetypes');
     
     await queryInterface.dropTable('credits');
     await queryInterface.dropTable('students');
     await queryInterface.dropTable('parents');
     await queryInterface.dropTable('instructors');
 
+    await queryInterface.dropTable('coursetype_items');
     await queryInterface.dropTable('pay_schemes');
     await queryInterface.dropTable('items');
     await queryInterface.dropTable('users');
