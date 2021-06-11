@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('users', { 
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,11 +21,11 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
-      isAdmin: {
+      is_admin: {
         type: Sequelize.BOOLEAN,
         defaultValue: FALSE,
       },
-      isParent: {
+      is_parent: {
         type: Sequelize.BOOLEAN,
         defaultValue: FALSE,
       },
@@ -374,7 +374,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }); 
-    await queryInterface.createTable('attendance', {
+    await queryInterface.createTable('attendances', { 
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -404,7 +404,7 @@ module.exports = {
       payment: {
         type: Sequelize.INTEGER,
         references:{
-          model: 'course_packages',
+          model: 'credits',
           key: 'id',
         }
       },
@@ -419,7 +419,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
+    });
     await queryInterface.createTable('assignments', {
       id: {
         allowNull: false,
@@ -461,7 +461,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('signups');
-    await queryInterface.dropTable('attendance');
+    await queryInterface.dropTable('attendances');
     await queryInterface.dropTable('assignments');
 
     await queryInterface.dropTable('sessions');

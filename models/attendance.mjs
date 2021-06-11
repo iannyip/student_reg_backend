@@ -31,7 +31,7 @@ export default function initAttendanceModel(sequelize, DataTypes) {
       payment: {
         type: DataTypes.INTEGER,
         references:{
-          model: 'course_packages',
+          model: 'credits',
           key: 'id',
         }
       },
