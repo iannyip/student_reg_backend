@@ -2,11 +2,12 @@ import { Sequelize } from 'sequelize';
 import allConfig from '../config/config.js';
 
 import initUserModel from './user.mjs';
+import initItemModel from './item.mjs';
 import initPaySchemeModel from './payScheme.mjs';
 import initParentModel from './parent.mjs';
 import initStudentModel from './student.mjs';
-import initCoursePackageModel from './coursePackage.mjs';
-import initInstructorModel from './user.mjs';
+import initCreditModel from './credit.mjs';
+import initInstructorModel from './instructor.mjs';
 import initCourseTypeModel from './courseType.mjs';
 import initCourseModel from './course.mjs';
 import initSessionModel from './session.mjs';
@@ -24,19 +25,65 @@ const db = {};
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 // add your model definitions to db here
-db.user = initUserModel(sequelize, Sequelize.DataTypes);
-db.payScheme = initPaySchemeModel(sequelize, Sequelize.DataTypes);
-db.parent = initParentModel(sequelize, Sequelize.DataTypes);
-db.student = initStudentModel(sequelize, Sequelize.DataTypes);
-db.coursePackage = initCoursePackageModel(sequelize, Sequelize.DataTypes);
-db.user = initInstructorModel(sequelize, Sequelize.DataTypes);
-db.courseType = initCourseTypeModel(sequelize, Sequelize.DataTypes);
-db.course = initCourseModel(sequelize, Sequelize.DataTypes);
-db.session = initSessionModel(sequelize, Sequelize.DataTypes);
-db.signup = initSignupModel(sequelize, Sequelize.DataTypes);
-db.attendance = initAttendanceModel(sequelize, Sequelize.DataTypes);
-db.assignment = initAssignmentModel(sequelize, Sequelize.DataTypes);
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Item = initItemModel(sequelize, Sequelize.DataTypes);
+db.PayScheme = initPaySchemeModel(sequelize, Sequelize.DataTypes);
+db.Parent = initParentModel(sequelize, Sequelize.DataTypes);
+db.Student = initStudentModel(sequelize, Sequelize.DataTypes);
+db.Credit = initCreditModel(sequelize, Sequelize.DataTypes);
+db.Instructor = initInstructorModel(sequelize, Sequelize.DataTypes);
+db.CourseType = initCourseTypeModel(sequelize, Sequelize.DataTypes);
+db.Course = initCourseModel(sequelize, Sequelize.DataTypes);
+db.Session = initSessionModel(sequelize, Sequelize.DataTypes);
+db.Signup = initSignupModel(sequelize, Sequelize.DataTypes);
+db.Attendance = initAttendanceModel(sequelize, Sequelize.DataTypes);
+db.Assignment = initAssignmentModel(sequelize, Sequelize.DataTypes);
 
+// Define M-M relationships here
+// -- Signup through table
+db.Course.belongsToMany(db.Student, { through: db.Signup, foreignKey: 'courseId'});
+db.Student.belongsToMany(db.Course, { through: db.Signup, foreignKey: 'studentId'});
+// -- Attendance through table
+db.Session.belongsToMany(db.Student, { through: db.Attendance, foreignKey: 'sessionId'});
+db.Student.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'studentId'});
+db.Session.belongsToMany(db.Credit, { through: db.Attendance, foreignKey: 'sessionId'});
+db.Credit.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'payment'});
+// -- Assignment through table
+db.Session.belongsToMany(db.Instructor, { through: db.Assignment, foreignKey: 'sessionId'});
+db.Instructor.belongsToMany(db.Session, { through: db.Assignment, foreignKey: 'payment'});
+
+// Define 1-M relationships here
+db.User.hasMany(db.Student);
+db.Student.belongsTo(db.User,{ foreignKey: 'parentId'});
+db.User.hasMany(db.Credit);
+db.Credit.belongsTo(db.User, { foreignKey: 'parentId'});
+db.PayScheme.hasMany(db.Instructor);
+db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId'});
+db.CourseType.hasMany(db.Course);
+db.Course.belongsTo(db.CourseType, { foreignKey: 'coursetypeId'}); 
+db.Course.hasMany(db.Session);
+db.Session.belongsTo(db.Course); // default courseId FK
+db.Item.hasMany(db.CourseType);
+db.CourseType.belongsTo(db.Item, { foreignKey: 'itemId'});
+db.Item.hasMany(db.Credit);
+db.Credit.belongsTo(db.Item, { foreignKey: 'itemId'});
+// -- Signup through table
+db.Student.hasMany(db.Signup);
+db.Signup.belongsTo(db.Student);
+db.Course.hasMany(db.Signup);
+db.Signup.belongsTo(db.Course); 
+// -- Attendance through table
+db.Student.hasMany(db.Attendance);
+db.Attendance.belongsTo(db.Student);
+db.Session.hasMany(db.Attendance);
+db.Attendance.belongsTo(db.Session);
+db.Credit.hasMany(db.Attendance);
+db.Attendance.belongsTo(db.Credit);
+// -- Assignment through table
+db.Session.hasMany(db.Assignment);
+db.Assignment.belongsTo(db.Session);
+db.Instructor.hasMany(db.Assignment);
+db.Assignment.belongsTo(db.Instructor);
 
 
 db.sequelize = sequelize;

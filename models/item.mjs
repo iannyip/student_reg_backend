@@ -14,7 +14,7 @@ export default function initItemModel(sequelize, DataTypes) {
       creditCount: {
         type: DataTypes.INTEGER,
       },
-      price : {
+      price: {
         type: DataTypes.INTEGER,
       },
       createdAt: {
