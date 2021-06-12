@@ -8,7 +8,7 @@ import initParentModel from './parent.mjs';
 import initStudentModel from './student.mjs';
 import initCreditModel from './credit.mjs';
 import initInstructorModel from './instructor.mjs';
-import initCoursetypeModel from './courseType.mjs';
+import initCoursetypeModel from './coursetype.mjs';
 import initCourseModel from './course.mjs';
 import initSessionModel from './session.mjs';
 import initSignupModel from './signup.mjs';
