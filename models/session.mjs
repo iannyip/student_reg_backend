@@ -25,6 +25,9 @@ export default function initSessionModel(sequelize, DataTypes) {
       limit: {
         type: DataTypes.INTEGER,
       },
+      isChargeable: {
+        type: DataTypes.BOOLEAN,
+      },
       courseId: {
         type: DataTypes.INTEGER,
         references: {
@@ -32,7 +35,7 @@ export default function initSessionModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
-      sessiontype: {
+      sessionType: {
         type: DataTypes.STRING,
       },
       createdAt: {

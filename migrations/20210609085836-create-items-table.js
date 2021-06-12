@@ -336,6 +336,9 @@ module.exports = {
       limit: {
         type: Sequelize.INTEGER,
       },
+      is_chargeable: {
+        type: Sequelize.BOOLEAN,
+      },
       course_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -343,7 +346,7 @@ module.exports = {
           key: 'id',
         },
       },
-      sessiontype: {
+      session_type: {
         type: Sequelize.STRING,
       },
       created_at: {
