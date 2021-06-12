@@ -185,7 +185,6 @@ module.exports = {
         }
       }
       const seededCoursetype = await queryInterface.bulkInsert('coursetypes', seedCourseTypes, { returning: true });
-      console.log(seededCoursetype);
       // seed coursetypes_items
       const seedCoursetypesItems = [];
       for (let i = 0; i < seededCoursetype.length; i += 1) {
@@ -252,7 +251,7 @@ module.exports = {
             limit: 5,
             is_chargeable: true,
             course_id: i + 1,
-            sessionType: null,
+            session_type: null,
             created_at: new Date(),
             updated_at: new Date(),
           });
@@ -276,7 +275,7 @@ module.exports = {
       }
       await queryInterface.bulkInsert('assignments', seedAssignments);
     } catch (error) {
-      console.log('banananana');
+      console.log('-----------error message-------------');
       console.log(error);
     }
   },
