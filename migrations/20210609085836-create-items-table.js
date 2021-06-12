@@ -327,9 +327,6 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE,
       },
-      instructor: {
-        type: Sequelize.STRING,
-      },
       comments: {
         type: Sequelize.STRING,
       },

@@ -16,9 +16,6 @@ export default function initSessionModel(sequelize, DataTypes) {
         allowNull: true,
         type: DataTypes.DATE,
       },
-      instructor: {
-        type: DataTypes.STRING,
-      },
       comments: {
         type: DataTypes.STRING,
       },
