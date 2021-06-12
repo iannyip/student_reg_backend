@@ -4,48 +4,48 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Seed users
     const seedUsers = [
-      {name: 'userA',mobile: 99999999, email: 'userA@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at=new Date(), updated_at: new Date()},
-      {name: 'userB',mobile: 98888888, email: 'userB@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at=new Date(), updated_at: new Date()},
-      {name: 'userC',mobile: 97777777, email: 'userC@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at=new Date(), updated_at: new Date()},
-      {name: 'userD',mobile: 96666666, email: 'userD@gmail.com', password: 'qwerty', is_admin: false, is_parent: false, created_at=new Date(), updated_at: new Date()},
-      {name: 'userE',mobile: 95555555, email: 'userE@gmail.com', password: 'qwerty', is_admin: true, is_parent: false, created_at=new Date(), updated_at: new Date()},
+      {name: 'userA',mobile: 99999999, email: 'userA@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at:new Date(), updated_at: new Date()},
+      {name: 'userB',mobile: 98888888, email: 'userB@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at:new Date(), updated_at: new Date()},
+      {name: 'userC',mobile: 97777777, email: 'userC@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at:new Date(), updated_at: new Date()},
+      {name: 'userD',mobile: 96666666, email: 'userD@gmail.com', password: 'qwerty', is_admin: false, is_parent: false, created_at:new Date(), updated_at: new Date()},
+      {name: 'userE',mobile: 95555555, email: 'userE@gmail.com', password: 'qwerty', is_admin: true, is_parent: false, created_at:new Date(), updated_at: new Date()},
     ];
     const [userA, userB, userC, userD, userE] = await queryInterface.bulkInsert('users', seedUsers, {returning: true})
     // Seed items
     const seedItems = [
-      {name: '1-session package', credit_count: 1, price: 110, created_at=new Date(), updated_at: new Date()},
-      {name: '4-session package', credit_count: 4, price: 380, created_at=new Date(), updated_at: new Date()},
-      {name: '8-session package', credit_count: 8, price: 700, created_at=new Date(), updated_at: new Date()},
-      {name: '24-session package', credit_count: 24, price: 1980, created_at=new Date(), updated_at: new Date()},
-      {name: 'WeDo package', credit_count: 4, price: 300, created_at=new Date(), updated_at: new Date()},
-      {name: 'Generic Proficiency Test', credit_count: 1, price: 50, created_at=new Date(), updated_at: new Date()},
+      {name: '1-session package', credit_count: 1, price: 110, created_at: new Date(), updated_at: new Date()},
+      {name: '4-session package', credit_count: 4, price: 380, created_at: new Date(), updated_at: new Date()},
+      {name: '8-session package', credit_count: 8, price: 700, created_at: new Date(), updated_at: new Date()},
+      {name: '24-session package', credit_count: 24, price: 1980, created_at: new Date(), updated_at: new Date()},
+      {name: 'WeDo package', credit_count: 4, price: 300, created_at: new Date(), updated_at: new Date()},
+      {name: 'Generic Proficiency Test', credit_count: 1, price: 50, created_at: new Date(), updated_at: new Date()},
     ];
     const seededItemsArr = await queryInterface.bulkInsert('items', seedItems, {returning: true})
     // seed payschemes
     const seedPaySchemes = [
-      {name: 'Shadow', rate: 5, created_at=new Date(), updated_at: new Date()},
-      {name: 'Event', rate: 10, created_at=new Date(), updated_at: new Date()},
-      {name: 'Assistant Trainer 1', rate: 13, created_at=new Date(), updated_at: new Date()},
-      {name: 'Assistant Trainer 2', rate: 17, created_at=new Date(), updated_at: new Date()},
-      {name: 'Main Trainer 1', rate: 23, created_at=new Date(), updated_at: new Date()},
-      {name: 'Main Trainer 2', rate: 27, created_at=new Date(), updated_at: new Date()},
-      {name: 'Senior Main', rate: 32, created_at=new Date(), updated_at: new Date()},
-      {name: 'Full Time', rate: 62, created_at=new Date(), updated_at: new Date()},
+      {name: 'Shadow', rate: 5, created_at: new Date(), updated_at: new Date()},
+      {name: 'Event', rate: 10, created_at: new Date(), updated_at: new Date()},
+      {name: 'Assistant Trainer 1', rate: 13, created_at: new Date(), updated_at: new Date()},
+      {name: 'Assistant Trainer 2', rate: 17, created_at: new Date(), updated_at: new Date()},
+      {name: 'Main Trainer 1', rate: 23, created_at: new Date(), updated_at: new Date()},
+      {name: 'Main Trainer 2', rate: 27, created_at: new Date(), updated_at: new Date()},
+      {name: 'Senior Main', rate: 32, created_at: new Date(), updated_at: new Date()},
+      {name: 'Full Time', rate: 62, created_at: new Date(), updated_at: new Date()},
     ];
     const [ptA, ptE, ptAT1, ptAT2, ptMT1, ptMT2, ptSM, ftM] = await queryInterface.bulkInsert('pay_schemes', seedPaySchemes, {returning: true})
     // seed parent data
     const seedParents = [
-       {address: '1 Street A', postal_code: '123456', user_id: userA.id, created_at=new Date(), updated_at: new Date()},
-       {address: '1 Street B', postal_code: '123456', user_id: userB.id, created_at=new Date(), updated_at: new Date()},
-       {address: '1 Street C', postal_code: '123456', user_id: userC.id, created_at=new Date(), updated_at: new Date()},
+       {address: '1 Street A', postal_code: '123456', user_id: userA.id, created_at: new Date(), updated_at: new Date()},
+       {address: '1 Street B', postal_code: '123456', user_id: userB.id, created_at: new Date(), updated_at: new Date()},
+       {address: '1 Street C', postal_code: '123456', user_id: userC.id, created_at: new Date(), updated_at: new Date()},
     ];
     const [parentA, parentB, parentC] = await queryInterface.bulkInsert('parents', seedParents, {returning: true})
     // seed student data
     const seedStudents = [
-       {name: 'Child A', dob: new Date('2008/1/1'), additional_info: '', parent_id: userA.id, created_at=new Date(), updated_at: new Date()},
-       {name: 'Child B1', dob: new Date('2011/1/1'), additional_info: 'Likes oreos', parent_id: userB.id, created_at=new Date(), updated_at: new Date()},
-       {name: 'Child B2', dob: new Date('2014/1/1'), additional_info: '', parent_id: userB.id, created_at=new Date(), updated_at: new Date()},
-       {name: 'Child C', dob: new Date('2011/1/1'), additional_info: '', parent_id: userC.id, created_at=new Date(), updated_at: new Date()},
+       {name: 'Child A', dob: new Date('2008/1/1'), additional_info: '', parent_id: userA.id, created_at: new Date(), updated_at: new Date()},
+       {name: 'Child B1', dob: new Date('2011/1/1'), additional_info: 'Likes oreos', parent_id: userB.id, created_at: new Date(), updated_at: new Date()},
+       {name: 'Child B2', dob: new Date('2014/1/1'), additional_info: '', parent_id: userB.id, created_at: new Date(), updated_at: new Date()},
+       {name: 'Child C', dob: new Date('2011/1/1'), additional_info: '', parent_id: userC.id, created_at: new Date(), updated_at: new Date()},
     ];
     const [childA, childB1, childB2, childC] = await queryInterface.bulkInsert('students', seedStudents, {returning: true})
     // seed credits data
