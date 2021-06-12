@@ -35,4 +35,8 @@ export default function bindRoutes(app) {
   const SessionsController = initSessionsController(db);
 
   // define your route matchers here using app
+  app.get('/', (request, response) => {
+    response.send('root page. building in progress!');
+  });
+  app.get('/users', UsersController.index);
 }
