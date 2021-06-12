@@ -22,11 +22,11 @@ export default function initUserModel(sequelize, DataTypes) {
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
-        defaultValue: FALSE,
+        defaultValue: false,
       },
       isParent: {
         type: DataTypes.BOOLEAN,
-        defaultValue: FALSE,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +39,6 @@ export default function initUserModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}
