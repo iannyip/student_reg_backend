@@ -1,7 +1,8 @@
 export default function initItemsController(db) {
   const index = async (request, response) => {
     try {
-      await db.Item.findAll();
+      const allItems = await db.Item.findAll();
+      response.send(allItems);
     } catch (error) {
       console.log(error);
     }

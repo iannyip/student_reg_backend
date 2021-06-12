@@ -1,7 +1,8 @@
 export default function initPayschemesController(db) {
   const index = async (request, response) => {
     try {
-      await db.Item.findAll();
+      const allPaySchemes = await db.PayScheme.findAll();
+      response.send(allPaySchemes);
     } catch (error) {
       console.log(error);
     }

@@ -1,7 +1,8 @@
 export default function initParentsController(db) {
   const index = async (request, response) => {
     try {
-      await db.Item.findAll();
+      const allParents = await db.Parents.findAll();
+      response.send(allParents);
     } catch (error) {
       console.log(error);
     }
