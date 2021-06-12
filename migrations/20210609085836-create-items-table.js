@@ -1,8 +1,6 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', { 
+    await queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -100,10 +98,10 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       created_at: {
         allowNull: false,
@@ -132,10 +130,10 @@ module.exports = {
       },
       parent_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       created_at: {
         allowNull: false,
@@ -158,10 +156,10 @@ module.exports = {
       },
       parent_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       value: {
         type: Sequelize.INTEGER,
@@ -174,10 +172,10 @@ module.exports = {
       },
       item_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'items',
           key: 'id',
-        }
+        },
       },
       created_at: {
         allowNull: false,
@@ -200,17 +198,17 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       rate_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'pay_schemes',
           key: 'id',
-        }
+        },
       },
       created_at: {
         allowNull: false,
@@ -221,7 +219,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    
+
     await queryInterface.createTable('coursetypes', {
       id: {
         allowNull: false,
@@ -246,7 +244,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
+    });
     await queryInterface.createTable('coursetype_items', {
       id: {
         allowNull: false,
@@ -256,17 +254,17 @@ module.exports = {
       },
       coursetype_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'coursetypes',
           key: 'id',
-        }
+        },
       },
       item_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'items',
           key: 'id',
-        }
+        },
       },
       created_at: {
         allowNull: false,
@@ -276,7 +274,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
+    });
     await queryInterface.createTable('courses', {
       id: {
         allowNull: false,
@@ -300,10 +298,10 @@ module.exports = {
       },
       coursetype_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'coursetypes',
           key: 'id',
-        }
+        },
       },
       created_at: {
         allowNull: false,
@@ -313,8 +311,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
-    await queryInterface.createTable('sessions', { 
+    });
+    await queryInterface.createTable('sessions', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -343,10 +341,10 @@ module.exports = {
       },
       course_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'courses',
           key: 'id',
-        }
+        },
       },
       sessiontype: {
         type: Sequelize.STRING,
@@ -359,7 +357,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
+    });
 
     await queryInterface.createTable('signups', {
       id: {
@@ -370,17 +368,17 @@ module.exports = {
       },
       course_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'courses',
           key: 'id',
-        }
+        },
       },
       student_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'students',
           key: 'id',
-        }
+        },
       },
       comments: {
         type: Sequelize.STRING,
@@ -396,8 +394,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
-    await queryInterface.createTable('attendances', { 
+    });
+    await queryInterface.createTable('attendances', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -406,17 +404,17 @@ module.exports = {
       },
       session_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'sessions',
           key: 'id',
-        }
+        },
       },
       student_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'students',
           key: 'id',
-        }
+        },
       },
       comments: {
         type: Sequelize.STRING,
@@ -426,10 +424,10 @@ module.exports = {
       },
       payment: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'credits',
           key: 'id',
-        }
+        },
       },
       status: {
         type: Sequelize.STRING,
@@ -452,17 +450,17 @@ module.exports = {
       },
       session_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'sessions',
           key: 'id',
-        }
+        },
       },
       instructor_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: 'instructors',
           key: 'id',
-        }
+        },
       },
       rate: {
         type: Sequelize.INTEGER,
@@ -478,11 +476,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }); 
-    
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('signups');
     await queryInterface.dropTable('attendances');
     await queryInterface.dropTable('assignments');
@@ -490,7 +487,7 @@ module.exports = {
     await queryInterface.dropTable('sessions');
     await queryInterface.dropTable('courses');
     await queryInterface.dropTable('coursetypes');
-    
+
     await queryInterface.dropTable('credits');
     await queryInterface.dropTable('students');
     await queryInterface.dropTable('parents');
@@ -500,6 +497,5 @@ module.exports = {
     await queryInterface.dropTable('pay_schemes');
     await queryInterface.dropTable('items');
     await queryInterface.dropTable('users');
-
-  }
-}; 
+  },
+};
