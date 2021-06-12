@@ -178,7 +178,6 @@ module.exports = {
           learning_pathway: learningPathsName[i],
           level: currArray[j],
           order,
-          item_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         });
