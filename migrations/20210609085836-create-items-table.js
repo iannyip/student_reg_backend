@@ -23,11 +23,11 @@ module.exports = {
       },
       is_admin: {
         type: Sequelize.BOOLEAN,
-        defaultValue: FALSE,
+        defaultValue: false,
       },
       is_parent: {
         type: Sequelize.BOOLEAN,
-        defaultValue: FALSE,
+        defaultValue: false,
       },
       created_at: {
         allowNull: false,
