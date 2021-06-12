@@ -69,7 +69,8 @@ module.exports = {
           name: 'Full Time', rate: 62, created_at: new Date(), updated_at: new Date(),
         },
       ];
-      const [ptA, ptE, ptAT1, ptAT2, ptMT1, ptMT2, ptSM, ftM] = await queryInterface.bulkInsert('pay_schemes', seedPaySchemes, { returning: true });
+      const seededPaySchemes = await queryInterface.bulkInsert('pay_schemes', seedPaySchemes, { returning: true });
+      const [ptA, ptE, ptAT1, ptAT2, ptMT1, ptMT2, ptSM, ftM] = seededPaySchemes;
       // seed parent data
       const seedParents = [
         {
@@ -267,7 +268,7 @@ module.exports = {
         seedAssignments.push({
           session_id: seededSessions[i].id,
           instructor_id: seededInstructorsArr[instructorId].id,
-          rate: seededInstructorsArr[instructorId].rate_id,
+          rate: seededPaySchemes[seededInstructorsArr[instructorId].rate_id - 1].rate,
           role: 'main',
           created_at: new Date(),
           updated_at: new Date(),
