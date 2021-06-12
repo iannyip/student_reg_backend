@@ -28,6 +28,6 @@ export default function initCoursetypeModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

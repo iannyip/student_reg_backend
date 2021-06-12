@@ -7,7 +7,6 @@ export default function initParentModel(sequelize, DataTypes) {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
-        
       },
       address: {
         type: DataTypes.STRING,
@@ -17,10 +16,10 @@ export default function initParentModel(sequelize, DataTypes) {
       },
       userId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +32,6 @@ export default function initParentModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

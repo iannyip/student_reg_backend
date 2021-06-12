@@ -30,10 +30,10 @@ export default function initSessionModel(sequelize, DataTypes) {
       },
       courseId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'courses',
           key: 'id',
-        }
+        },
       },
       sessiontype: {
         type: DataTypes.STRING,
@@ -49,6 +49,6 @@ export default function initSessionModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

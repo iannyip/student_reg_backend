@@ -10,17 +10,17 @@ export default function initAttendanceModel(sequelize, DataTypes) {
       },
       sessionId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'sessions',
           key: 'id',
-        }
+        },
       },
       studentId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'students',
           key: 'id',
-        }
+        },
       },
       comments: {
         type: DataTypes.STRING,
@@ -30,10 +30,10 @@ export default function initAttendanceModel(sequelize, DataTypes) {
       },
       payment: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'credits',
           key: 'id',
-        }
+        },
       },
       status: {
         type: DataTypes.STRING,
@@ -49,6 +49,6 @@ export default function initAttendanceModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

@@ -10,17 +10,17 @@ export default function initAssignmentModel(sequelize, DataTypes) {
       },
       sessionId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'sessions',
           key: 'id',
-        }
+        },
       },
       instructorId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'instructors',
           key: 'id',
-        }
+        },
       },
       rate: {
         type: DataTypes.INTEGER,
@@ -39,6 +39,6 @@ export default function initAssignmentModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

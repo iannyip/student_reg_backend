@@ -8,13 +8,12 @@ import initParentModel from './parent.mjs';
 import initStudentModel from './student.mjs';
 import initCreditModel from './credit.mjs';
 import initInstructorModel from './instructor.mjs';
-import initCourseTypeModel from './courseType.mjs';
+import initCoursetypeModel from './courseType.mjs';
 import initCourseModel from './course.mjs';
 import initSessionModel from './session.mjs';
 import initSignupModel from './signup.mjs';
 import initAttendanceModel from './attendance.mjs';
 import initAssignmentModel from './assignment.mjs';
-
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -41,38 +40,38 @@ db.Assignment = initAssignmentModel(sequelize, Sequelize.DataTypes);
 
 // Define M-M relationships here
 // -- Signup through table
-db.Course.belongsToMany(db.Student, { through: db.Signup, foreignKey: 'courseId'});
-db.Student.belongsToMany(db.Course, { through: db.Signup, foreignKey: 'studentId'});
+db.Course.belongsToMany(db.Student, { through: db.Signup, foreignKey: 'courseId' });
+db.Student.belongsToMany(db.Course, { through: db.Signup, foreignKey: 'studentId' });
 // -- Attendance through table
-db.Session.belongsToMany(db.Student, { through: db.Attendance, foreignKey: 'sessionId'});
-db.Student.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'studentId'});
-db.Session.belongsToMany(db.Credit, { through: db.Attendance, foreignKey: 'sessionId'});
-db.Credit.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'payment'});
+db.Session.belongsToMany(db.Student, { through: db.Attendance, foreignKey: 'sessionId' });
+db.Student.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'studentId' });
+db.Session.belongsToMany(db.Credit, { through: db.Attendance, foreignKey: 'sessionId' });
+db.Credit.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'payment' });
 // -- Assignment through table
-db.Session.belongsToMany(db.Instructor, { through: db.Assignment, foreignKey: 'sessionId'});
-db.Instructor.belongsToMany(db.Session, { through: db.Assignment, foreignKey: 'payment'});
+db.Session.belongsToMany(db.Instructor, { through: db.Assignment, foreignKey: 'sessionId' });
+db.Instructor.belongsToMany(db.Session, { through: db.Assignment, foreignKey: 'payment' });
 // -- CourseTypes and items through table
 db.Coursetype.belongsToMany(db.Item, { through: 'coursetype_items' });
 db.Item.belongsToMany(db.Coursetype, { through: 'coursetype_items' });
 
 // Define 1-M relationships here
 db.User.hasMany(db.Student);
-db.Student.belongsTo(db.User,{ foreignKey: 'parentId'});
+db.Student.belongsTo(db.User, { foreignKey: 'parentId' });
 db.User.hasMany(db.Credit);
-db.Credit.belongsTo(db.User, { foreignKey: 'parentId'});
+db.Credit.belongsTo(db.User, { foreignKey: 'parentId' });
 db.PayScheme.hasMany(db.Instructor);
-db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId'});
+db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId' });
 db.Coursetype.hasMany(db.Course);
-db.Course.belongsTo(db.Coursetype, { foreignKey: 'coursetypeId'}); 
+db.Course.belongsTo(db.Coursetype, { foreignKey: 'coursetypeId' });
 db.Course.hasMany(db.Session);
 db.Session.belongsTo(db.Course); // default courseId FK
 db.Item.hasMany(db.Credit);
-db.Credit.belongsTo(db.Item, { foreignKey: 'itemId'});
+db.Credit.belongsTo(db.Item, { foreignKey: 'itemId' });
 // -- Signup through table
 db.Student.hasMany(db.Signup);
 db.Signup.belongsTo(db.Student);
 db.Course.hasMany(db.Signup);
-db.Signup.belongsTo(db.Course); 
+db.Signup.belongsTo(db.Course);
 // -- Attendance through table
 db.Student.hasMany(db.Attendance);
 db.Attendance.belongsTo(db.Student);
@@ -85,7 +84,6 @@ db.Session.hasMany(db.Assignment);
 db.Assignment.belongsTo(db.Session);
 db.Instructor.hasMany(db.Assignment);
 db.Assignment.belongsTo(db.Instructor);
-
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

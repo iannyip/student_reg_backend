@@ -10,17 +10,17 @@ export default function initSignupModel(sequelize, DataTypes) {
       },
       courseId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'courses',
           key: 'id',
-        }
+        },
       },
       studentId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'students',
           key: 'id',
-        }
+        },
       },
       comments: {
         type: DataTypes.STRING,
@@ -39,6 +39,6 @@ export default function initSignupModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

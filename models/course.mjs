@@ -24,10 +24,10 @@ export default function initCourseModel(sequelize, DataTypes) {
       },
       coursetypeId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'coursetypes',
           key: 'id',
-        }
+        },
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +40,6 @@ export default function initCourseModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

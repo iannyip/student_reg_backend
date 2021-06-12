@@ -19,10 +19,10 @@ export default function initStudentModel(sequelize, DataTypes) {
       },
       parentId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +35,6 @@ export default function initStudentModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

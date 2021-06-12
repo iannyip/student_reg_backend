@@ -13,17 +13,17 @@ export default function initInstructorModel(sequelize, DataTypes) {
       },
       userId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       rateId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'pay_schemes',
           key: 'id',
-        }
+        },
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +36,6 @@ export default function initInstructorModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

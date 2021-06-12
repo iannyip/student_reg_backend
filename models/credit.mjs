@@ -13,10 +13,10 @@ export default function initCreditModel(sequelize, DataTypes) {
       },
       parentId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'users',
           key: 'id',
-        }
+        },
       },
       value: {
         type: DataTypes.INTEGER,
@@ -29,10 +29,10 @@ export default function initCreditModel(sequelize, DataTypes) {
       },
       itemId: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
           model: 'items',
           key: 'id',
-        }
+        },
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +45,6 @@ export default function initCreditModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}
