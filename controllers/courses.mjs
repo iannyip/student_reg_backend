@@ -1,7 +1,9 @@
 export default function initCoursesController(db) {
   const index = async (request, response) => {
     try {
-      await db.Item.findAll();
+      const allCourses = await db.Course.findAll();
+      response.send(allCourses);
+      // response.render('courses');
     } catch (error) {
       console.log(error);
     }
