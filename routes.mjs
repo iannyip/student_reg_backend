@@ -36,7 +36,9 @@ export default function bindRoutes(app) {
 
   // define your route matchers here using app
   app.get('/', (request, response) => {
+    // response.redirect('students');
     response.send('root page. building in progress!');
   });
   app.get('/users', UsersController.index);
+  app.get('/students', StudentsController.index);
 }
