@@ -11,6 +11,7 @@ export default function initStudentsController(db) {
         },
       });
       // response.send(allStudents);
+      // console.log(allStudents);
       response.render('people/allStudents', { allStudents, moment });
     } catch (error) {
       console.log(error);
