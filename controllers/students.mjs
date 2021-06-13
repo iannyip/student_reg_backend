@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function initStudentsController(db) {
   const index = async (request, response) => {
     try {
@@ -5,11 +7,11 @@ export default function initStudentsController(db) {
         attributes: ['name', 'dob', 'parentId'],
         include: {
           model: db.User,
-          // include: [db.Parent],
+          attributes: ['name', 'email'],
         },
       });
-      response.send(allStudents);
-      // response.render('people/allStudents');
+      // response.send(allStudents);
+      response.render('people/allStudents', { allStudents, moment });
     } catch (error) {
       console.log(error);
     }
