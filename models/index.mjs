@@ -55,7 +55,7 @@ db.Coursetype.belongsToMany(db.Item, { through: 'coursetype_items' });
 db.Item.belongsToMany(db.Coursetype, { through: 'coursetype_items' });
 
 // Define 1-M relationships here
-db.User.hasMany(db.Student);
+db.User.hasMany(db.Student, { foreignKey: 'parentId' });
 db.Student.belongsTo(db.User, { foreignKey: 'parentId' });
 db.User.hasMany(db.Credit);
 db.Credit.belongsTo(db.User, { foreignKey: 'parentId' });
