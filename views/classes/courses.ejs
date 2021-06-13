@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div class="container">
+      <h1>All Courses</h1>
+      <hr />
+      <div>Search bar here</div>
+      <div>Table goes here</div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Learning Pathway</th>
+            <th scope="col">Course</th>
+            <th scope="col">Date</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+            <th scope="col">Signups</th>
+            <th scope="col">Signups</th>
+            <th scope="col">Instructor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% allStudents.forEach(student => { %>
+          <tr>
+            <th><%= student.name %></th>
+            <td><%= moment(student.dob).fromNow(true) %></td>
+            <td><%= student.user.name %></td>
+            <td><%= student.user.email %></td>
+            <td>0</td>
+          </tr>
+
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
