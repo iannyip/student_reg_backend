@@ -65,7 +65,7 @@ db.User.hasMany(db.Credit);
 db.Credit.belongsTo(db.User, { foreignKey: 'parentId' });
 db.PayScheme.hasMany(db.Instructor);
 db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId' });
-db.Coursetype.hasMany(db.Course);
+db.Coursetype.hasMany(db.Course, { foreignKey: 'coursetypeId' });
 db.Course.belongsTo(db.Coursetype, { foreignKey: 'coursetypeId' });
 db.Course.hasMany(db.Session);
 db.Session.belongsTo(db.Course); // default courseId FK
