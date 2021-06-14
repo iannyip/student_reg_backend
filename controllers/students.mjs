@@ -26,7 +26,7 @@ export default function initStudentsController(db) {
           {
             // Table 1: parent
             model: db.User,
-            attributes: ['name', 'email'],
+            attributes: ['id', 'name', 'email'],
           },
           {
             // Table 2: signups

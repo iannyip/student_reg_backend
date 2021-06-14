@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <a class="btn btn-primary" href="/students">back</a>
+      <h1><%= parent.name %></h1>
+      <i>parent</i>
+      <hr class="my-4" />
+      <!-- Parent info -->
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th>Email</th>
+                <td><%= parent.email %></td>
+              </tr>
+              <tr>
+                <th>Mobile</th>
+                <td><%= parent.mobile %></td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td><%= parent.parent.address %></td>
+              </tr>
+              <tr>
+                <th>Postal Code</th>
+                <td><%= parent.parent.postalCode %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <p>To convert each child into a card</p>
+          <div class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Child</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Learning Pathways</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% parent.students.forEach(student => { %>
+                <tr>
+                  <th>
+                    <a href="/student/<%= student.id %>"><%= student.name %></a>
+                  </th>
+                  <td><%= moment(student.dob).fromNow(true) %></td>
+                  <td><%= student.dataValues.learningPathways %></td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Children info-->
+      <div class="row">
+        <h3 class="my-4">Purchases</h3>
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Purchase Date</th>
+                <th scope="col">Usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% parent.credits.forEach(package => { %>
+              <tr>
+                <th><%= package.code %></th>
+                <td>to include</td>
+                <td>
+                  <%= package.attendances.length %> / <%= package.creditTotal %>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Children course history -->
+      <div class="row">
+        <!-- Course history -->
+        <h3 class="my-4">Course History</h3>
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Learning Pathway</th>
+                <th scope="col">Course</th>
+                <th scope="col">Name</th>
+                <th scope="col">Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% parent.students.forEach(student => { %> <%
+              student.courses.forEach(course => { %>
+              <td><%= course.coursetype.learningPathway %></td>
+              <td><%= course.coursetype.level %></td>
+              <td>Todo</td>
+              <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
+              <% }); %> <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
