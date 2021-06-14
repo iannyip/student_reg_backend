@@ -65,7 +65,7 @@ db.Instructor.belongsTo(db.User);
 // Define 1-M relationships here
 db.User.hasMany(db.Student, { foreignKey: 'parentId' });
 db.Student.belongsTo(db.User, { foreignKey: 'parentId' });
-db.User.hasMany(db.Credit);
+db.User.hasMany(db.Credit, { foreignKey: 'parentId' });
 db.Credit.belongsTo(db.User, { foreignKey: 'parentId' });
 db.PayScheme.hasMany(db.Instructor, { foreignKey: 'rateId' });
 db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId' });

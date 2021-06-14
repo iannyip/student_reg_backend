@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div class="container">
+      <h1>All Credits</h1>
+      <hr />
+      <div>Search bar here</div>
+      <div>Table goes here</div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Parent</th>
+            <th scope="col">Value</th>
+            <th scope="col">Remaining</th>
+            <th scope="col">Expiry</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% allCredits.forEach(package => { %>
+          <tr>
+            <th><%= package.user.name %></th>
+            <td><%= package.value %></td>
+            <td>/ <%= package.creditTotal %></td>
+            <td><%= moment(package.expiry).fromNow(true) %></td>
+          </tr>
+
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
