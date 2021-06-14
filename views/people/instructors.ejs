@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <h1>All Instructors</h1>
+      <hr class="my-4" />
+      <div class="row">Put search bar and filters here</div>
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Employment</th>
+                <th scope="col">Scheme</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% allInstructors.forEach(instructor => { %>
+              <tr>
+                <td scope="row">
+                  <a href="/instructor/<%= instructor.id %>"
+                    ><%= instructor.user.name %></a
+                  >
+                </td>
+                <td><%= instructor.employment%></td>
+                <td><%= student.user.email %></td>
+                <td>0</td>
+              </tr>
+
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

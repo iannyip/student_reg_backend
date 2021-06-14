@@ -1,7 +1,8 @@
 export default function initInstructorsController(db) {
   const index = async (request, response) => {
     try {
-      await db.Item.findAll();
+      const allInstructors = await db.Instructor.findAll({ include: [db.User, db.PayScheme] });
+      response.send(allInstructors);
     } catch (error) {
       console.log(error);
     }
