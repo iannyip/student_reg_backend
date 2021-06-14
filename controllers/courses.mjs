@@ -23,7 +23,7 @@ export default function initCoursesController(db) {
           },
           {
             model: db.Attendance,
-            attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('student_id')), 'n_students']],
+            // attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('student_id')), 'n_students']],
           }],
         }],
       });
