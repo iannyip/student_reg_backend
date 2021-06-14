@@ -12,6 +12,7 @@ export default function initInstructorsController(db) {
           db.Employment,
           {
             model: db.Session,
+            // add where filter for current month
             attributes: ['startDatetime', 'endDatetime'],
             through: { model: db.Assignment, attributes: [] },
           },
