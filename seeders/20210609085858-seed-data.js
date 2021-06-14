@@ -220,7 +220,7 @@ module.exports = {
       ];
       const cTimes = [
         { hour: [9, 12], min: [30, 0] },
-        { hour: [1, 15], min: [0, 30] },
+        { hour: [13, 15], min: [0, 30] },
         { hour: [16, 18], min: [0, 30] },
       ];
       const seedCourses = [];

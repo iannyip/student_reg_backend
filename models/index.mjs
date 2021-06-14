@@ -23,8 +23,6 @@ const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-console.log(Sequelize.fn);
-
 // add your model definitions to db here
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Item = initItemModel(sequelize, Sequelize.DataTypes);

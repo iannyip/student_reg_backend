@@ -30,9 +30,11 @@
                     ><%= instructor.user.name %></a
                   >
                 </td>
-                <td><%= instructor.employment%></td>
-                <td><%= student.user.email %></td>
-                <td>0</td>
+                <td><%= instructor.employment.type%></td>
+                <td><%= instructor.employment.name %></td>
+                <td>$ <%= instructor.employment.rate %></td>
+                <td><%= instructor.user.mobile %></td>
+                <td><%= instructor.dataValues.hours%></td>
               </tr>
 
               <% }); %>
