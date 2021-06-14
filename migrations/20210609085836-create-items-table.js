@@ -206,7 +206,7 @@ module.exports = {
       rate_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'pay_schemes',
+          model: 'employment',
           key: 'id',
         },
       },
@@ -494,7 +494,7 @@ module.exports = {
     await queryInterface.dropTable('instructors');
 
     await queryInterface.dropTable('coursetype_items');
-    await queryInterface.dropTable('pay_schemes');
+    await queryInterface.dropTable('employment');
     await queryInterface.dropTable('items');
     await queryInterface.dropTable('users');
   },
