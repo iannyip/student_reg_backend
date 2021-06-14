@@ -49,7 +49,7 @@ db.Session.belongsToMany(db.Credit, { through: db.Attendance, foreignKey: 'sessi
 db.Credit.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'payment' });
 // -- Assignment through table
 db.Session.belongsToMany(db.Instructor, { through: db.Assignment, foreignKey: 'sessionId' });
-db.Instructor.belongsToMany(db.Session, { through: db.Assignment, foreignKey: 'payment' });
+db.Instructor.belongsToMany(db.Session, { through: db.Assignment, foreignKey: 'instructorId' });
 // -- CourseTypes and items through table
 db.Coursetype.belongsToMany(db.Item, { through: 'coursetype_items' });
 db.Item.belongsToMany(db.Coursetype, { through: 'coursetype_items' });
