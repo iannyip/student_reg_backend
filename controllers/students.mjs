@@ -17,9 +17,33 @@ export default function initStudentsController(db) {
       console.log(error);
     }
   };
+  const show = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const student = await db.Student.findOne({
+        where: { id },
+        include: [
+          {
+            // Table 1: parent
+            model: db.User,
+            attributes: ['name', 'email'],
+          },
+          {
+            // Table 2: signups
+            model: db.Course,
+            include: db.Coursetype,
+          }],
+      });
+      // response.send(student);
+      response.render('people/student', { student, moment });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // return all methods we define in an object
   return {
     index,
+    show,
   };
 }
