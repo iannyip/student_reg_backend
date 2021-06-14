@@ -12,7 +12,7 @@ export default function initStudentsController(db) {
       });
       // response.send(allStudents);
       // console.log(allStudents);
-      response.render('people/allStudents', { allStudents, moment });
+      response.render('people/students', { allStudents, moment });
     } catch (error) {
       console.log(error);
     }
