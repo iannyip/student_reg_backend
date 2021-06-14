@@ -1,8 +1,8 @@
 export default function initEmploymentController(db) {
   const index = async (request, response) => {
     try {
-      const allPaySchemes = await db.PayScheme.findAll();
-      response.send(allPaySchemes);
+      const allEmployment = await db.Employment.findAll();
+      response.send(allEmployment);
     } catch (error) {
       console.log(error);
     }

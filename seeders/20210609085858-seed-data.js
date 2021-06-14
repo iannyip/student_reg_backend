@@ -69,7 +69,7 @@ module.exports = {
           type: 'Full time', name: 'Full Time', rate: 62, created_at: new Date(), updated_at: new Date(),
         },
       ];
-      const seededEmployment = await queryInterface.bulkInsert('employment', seedEmployment, { returning: true });
+      const seededEmployment = await queryInterface.bulkInsert('employments', seedEmployment, { returning: true });
       const [ptA, ptE, ptAT1, ptAT2, ptMT1, ptMT2, ptSM, ftM] = seededEmployment;
       // seed parent data
       const seedParents = [

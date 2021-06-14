@@ -61,7 +61,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable('employment', {
+    await queryInterface.createTable('employments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -206,7 +206,7 @@ module.exports = {
       rate_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'employment',
+          model: 'employments',
           key: 'id',
         },
       },
@@ -494,7 +494,7 @@ module.exports = {
     await queryInterface.dropTable('instructors');
 
     await queryInterface.dropTable('coursetype_items');
-    await queryInterface.dropTable('employment');
+    await queryInterface.dropTable('employments');
     await queryInterface.dropTable('items');
     await queryInterface.dropTable('users');
   },
