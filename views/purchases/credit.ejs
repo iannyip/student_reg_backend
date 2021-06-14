@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <h1><%= credit.code%></h1>
+      <hr class="my-4" />
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th>Parent</th>
+                <td>
+                  <a href="/parent/<%=credit.user.id%>"
+                    ><%= credit.user.name %></a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <th>Purchase Date</th>
+                <td><%= moment(credit.createdAt).format("D MMM YYYY")%></td>
+              </tr>
+              <tr>
+                <th>Expiry Date</th>
+                <td><%= moment(credit.expiry).format("D MMM YYYY")%></td>
+              </tr>
+              <tr>
+                <th>Usage</th>
+                <td><%= credit.creditTotal %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="my-4">Credit usage</h3>
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Learning Pathway</th>
+                <th scope="col">Level</th>
+                <th scope="col">Student</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% credit.sessions.forEach(session => { %>
+              <tr>
+                <td>Learning Pathway</td>
+                <td>Level</td>
+                <td>Student</td>
+                <td>Date</td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

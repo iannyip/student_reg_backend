@@ -15,8 +15,9 @@
             <thead>
               <tr>
                 <th scope="col">Parent</th>
+                <th scope="col">Code</th>
                 <th scope="col">Value</th>
-                <th scope="col">Remaining</th>
+                <th scope="col">Usage</th>
                 <th scope="col">Expiry</th>
               </tr>
             </thead>
@@ -24,8 +25,11 @@
               <% allCredits.forEach(package => { %>
               <tr>
                 <th><%= package.user.name %></th>
+                <th><a href="#"><%= package.code %></a></th>
                 <td><%= package.value %></td>
-                <td>/ <%= package.creditTotal %></td>
+                <td>
+                  <%= package.attendances.length %>/ <%= package.creditTotal %>
+                </td>
                 <td><%= moment(package.expiry).fromNow(true) %></td>
               </tr>
 
