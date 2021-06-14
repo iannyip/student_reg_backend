@@ -1,7 +1,8 @@
 export default function initCoursetypesController(db) {
   const index = async (request, response) => {
     try {
-      await db.Item.findAll();
+      const allCoursetypes = await db.Coursetype.findAll();
+      response.send(allCoursetypes);
     } catch (error) {
       console.log(error);
     }
