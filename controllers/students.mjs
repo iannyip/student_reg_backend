@@ -7,7 +7,7 @@ export default function initStudentsController(db) {
         attributes: ['id', 'name', 'dob', 'parentId'],
         include: {
           model: db.User,
-          attributes: ['name', 'email'],
+          attributes: ['id', 'name', 'email'],
         },
       });
       // response.send(allStudents);
