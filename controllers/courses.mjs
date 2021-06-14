@@ -1,4 +1,5 @@
 import moment from 'moment';
+// import { Sequelize } from 'sequelize';
 
 export default function initCoursesController(db) {
   const index = async (request, response) => {
@@ -10,7 +11,20 @@ export default function initCoursesController(db) {
           attributes: ['learningPathway', 'level'],
         }, {
           model: db.Session,
-          include: [db.Instructor],
+          attributes: ['id'],
+          include: [{
+            model: db.Instructor,
+            attributes: ['id'],
+            through: { attributes: [] }, // this excludes the through table
+            include: {
+              model: db.User,
+              attributes: ['name'],
+            },
+          },
+          {
+            model: db.Attendance,
+            attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('student_id')), 'n_students']],
+          }],
         }],
       });
       response.send(allCourses);

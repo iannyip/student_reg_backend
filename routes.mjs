@@ -46,4 +46,6 @@ export default function bindRoutes(app) {
 
   // COURSES
   app.get('/courses', CoursesController.index);
+  console.log('inside routes');
+  console.log(db.sequelize.fn);
 }
