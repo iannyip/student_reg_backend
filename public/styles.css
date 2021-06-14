@@ -2,3 +2,15 @@
   margin-left: 300px;
   background-color: pink;
 } */
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}

@@ -24,8 +24,14 @@
             <tbody>
               <% allCredits.forEach(package => { %>
               <tr>
-                <th><%= package.user.name %></th>
-                <th><a href="#"><%= package.code %></a></th>
+                <td>
+                  <a href="/parent/<%=package.user.id%>"
+                    ><%= package.user.name %></a
+                  >
+                </td>
+                <td>
+                  <a href="/credit/<%= package.id%>"><%= package.code %></a>
+                </td>
                 <td><%= package.value %></td>
                 <td>
                   <%= package.attendances.length %>/ <%= package.creditTotal %>

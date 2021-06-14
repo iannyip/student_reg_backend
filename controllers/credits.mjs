@@ -6,7 +6,7 @@ export default function initCreditsController(db) {
       const allCredits = await db.Credit.findAll({
         include: [{
           model: db.User,
-          attributes: ['name'],
+          attributes: ['id', 'name'],
         },
         {
           model: db.Attendance,
