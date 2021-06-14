@@ -4,7 +4,7 @@ export default function initStudentsController(db) {
   const index = async (request, response) => {
     try {
       const allStudents = await db.Student.findAll({
-        attributes: ['name', 'dob', 'parentId'],
+        attributes: ['id', 'name', 'dob', 'parentId'],
         include: {
           model: db.User,
           attributes: ['name', 'email'],

@@ -24,7 +24,9 @@
             <tbody>
               <% allStudents.forEach(student => { %>
               <tr>
-                <th scope="row"><%= student.name %></th>
+                <th scope="row">
+                  <a href="/student/<%= student.id %>"><%= student.name %></a>
+                </th>
                 <td><%= moment(student.dob).fromNow(true) %></td>
                 <td><%= student.user.name %></td>
                 <td><%= student.user.email %></td>
