@@ -43,34 +43,34 @@ module.exports = {
       ];
       const seededItemsArr = await queryInterface.bulkInsert('items', seedItems, { returning: true });
       // seed payschemes
-      const seedPaySchemes = [
+      const seedEmployment = [
         {
-          name: 'Shadow', rate: 5, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Shadow', rate: 5, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Event', rate: 10, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Event', rate: 10, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Assistant Trainer 1', rate: 13, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Assistant Trainer 1', rate: 13, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Assistant Trainer 2', rate: 17, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Assistant Trainer 2', rate: 17, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Main Trainer 1', rate: 23, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Main Trainer 1', rate: 23, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Main Trainer 2', rate: 27, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Main Trainer 2', rate: 27, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Senior Main', rate: 32, created_at: new Date(), updated_at: new Date(),
+          type: 'Part time', name: 'Senior Main', rate: 32, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Full Time', rate: 62, created_at: new Date(), updated_at: new Date(),
+          type: 'Full time', name: 'Full Time', rate: 62, created_at: new Date(), updated_at: new Date(),
         },
       ];
-      const seededPaySchemes = await queryInterface.bulkInsert('pay_schemes', seedPaySchemes, { returning: true });
-      const [ptA, ptE, ptAT1, ptAT2, ptMT1, ptMT2, ptSM, ftM] = seededPaySchemes;
+      const seededEmployment = await queryInterface.bulkInsert('employment', seedPaySchemes, { returning: true });
+      const [ptA, ptE, ptAT1, ptAT2, ptMT1, ptMT2, ptSM, ftM] = seededEmployment;
       // seed parent data
       const seedParents = [
         {
@@ -149,10 +149,10 @@ module.exports = {
       // seed instructor data (2)
       const seedInstructors = [
         {
-          employment: 'Full Time', user_id: userD.id, rate_id: ptAT1.id, created_at: new Date(), updated_at: new Date(),
+          user_id: userD.id, rate_id: ptAT1.id, created_at: new Date(), updated_at: new Date(),
         },
         {
-          employment: 'Part Time', user_id: userE.id, rate_id: ftM.id, created_at: new Date(), updated_at: new Date(),
+          user_id: userE.id, rate_id: ftM.id, created_at: new Date(), updated_at: new Date(),
         },
       ];
       const seededInstructorsArr = await queryInterface.bulkInsert('instructors', seedInstructors, { returning: true });
@@ -268,7 +268,7 @@ module.exports = {
         seedAssignments.push({
           session_id: seededSessions[i].id,
           instructor_id: seededInstructorsArr[instructorId].id,
-          rate: seededPaySchemes[seededInstructorsArr[instructorId].rate_id - 1].rate,
+          rate: seededEmployment[seededInstructorsArr[instructorId].rate_id - 1].rate,
           role: 'main',
           created_at: new Date(),
           updated_at: new Date(),
@@ -291,7 +291,7 @@ module.exports = {
     await queryInterface.bulkDelete('credits', null, {});
     await queryInterface.bulkDelete('students', null, {});
     await queryInterface.bulkDelete('parents', null, {});
-    await queryInterface.bulkDelete('pay_schemes', null, {});
+    await queryInterface.bulkDelete('employment', null, {});
     await queryInterface.bulkDelete('items', null, {});
     await queryInterface.bulkDelete('users', null, {});
   },

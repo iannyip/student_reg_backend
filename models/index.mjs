@@ -3,7 +3,7 @@ import allConfig from '../config/config.js';
 
 import initUserModel from './user.mjs';
 import initItemModel from './item.mjs';
-import initPaySchemeModel from './payScheme.mjs';
+import initEmploymentModel from './employment.mjs';
 import initParentModel from './parent.mjs';
 import initStudentModel from './student.mjs';
 import initCreditModel from './credit.mjs';
@@ -28,7 +28,7 @@ console.log(Sequelize.fn);
 // add your model definitions to db here
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Item = initItemModel(sequelize, Sequelize.DataTypes);
-db.PayScheme = initPaySchemeModel(sequelize, Sequelize.DataTypes);
+db.Employment = initEmploymentModel(sequelize, Sequelize.DataTypes);
 db.Parent = initParentModel(sequelize, Sequelize.DataTypes);
 db.Student = initStudentModel(sequelize, Sequelize.DataTypes);
 db.Credit = initCreditModel(sequelize, Sequelize.DataTypes);
@@ -67,8 +67,8 @@ db.User.hasMany(db.Student, { foreignKey: 'parentId' });
 db.Student.belongsTo(db.User, { foreignKey: 'parentId' });
 db.User.hasMany(db.Credit, { foreignKey: 'parentId' });
 db.Credit.belongsTo(db.User, { foreignKey: 'parentId' });
-db.PayScheme.hasMany(db.Instructor, { foreignKey: 'rateId' });
-db.Instructor.belongsTo(db.PayScheme, { foreignKey: 'rateId' });
+db.Employment.hasMany(db.Instructor, { foreignKey: 'rateId' });
+db.Instructor.belongsTo(db.Employment, { foreignKey: 'rateId' });
 db.Coursetype.hasMany(db.Course, { foreignKey: 'coursetypeId' });
 db.Course.belongsTo(db.Coursetype, { foreignKey: 'coursetypeId' });
 db.Course.hasMany(db.Session);

@@ -3,7 +3,7 @@ import db from './models/index.mjs';
 // import your controllers here
 import initUsersController from './controllers/users.mjs';
 import initItemsController from './controllers/items.mjs';
-import initPayschemesController from './controllers/paySchemes.mjs';
+import initEmploymentController from './controllers/employment.mjs';
 import initParentsController from './controllers/parents.mjs';
 import initStudentsController from './controllers/students.mjs';
 import initCreditsController from './controllers/credits.mjs';
@@ -21,7 +21,7 @@ export default function bindRoutes(app) {
   // pass in the db for all callbacks
   const UsersController = initUsersController(db);
   const ItemsController = initItemsController(db);
-  const PayschemesController = initPayschemesController(db);
+  const EmploymentController = initEmploymentController(db);
   const ParentsController = initParentsController(db);
   const StudentsController = initStudentsController(db);
   const CreditsController = initCreditsController(db);

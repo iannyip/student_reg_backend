@@ -61,12 +61,15 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable('pay_schemes', {
+    await queryInterface.createTable('employment', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+      },
+      type: {
+        type: Sequelize.STRING,
       },
       name: {
         type: Sequelize.STRING,
@@ -192,9 +195,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      employment: {
-        type: Sequelize.STRING,
       },
       user_id: {
         type: Sequelize.INTEGER,

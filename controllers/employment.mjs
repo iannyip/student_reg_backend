@@ -1,4 +1,4 @@
-export default function initPayschemesController(db) {
+export default function initEmploymentController(db) {
   const index = async (request, response) => {
     try {
       const allPaySchemes = await db.PayScheme.findAll();

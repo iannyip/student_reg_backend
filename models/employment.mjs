@@ -1,12 +1,15 @@
-export default function initPaySchemeModel(sequelize, DataTypes) {
+export default function initEmploymentModel(sequelize, DataTypes) {
   return sequelize.define(
-    'payScheme',
+    'employment',
     {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
+      },
+      type: {
+        type: DataTypes.STRING,
       },
       name: {
         type: DataTypes.STRING,
@@ -25,6 +28,6 @@ export default function initPaySchemeModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}
