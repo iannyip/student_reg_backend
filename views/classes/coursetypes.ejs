@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <h1>CourseTypes</h1>
+
+      <div class="row">
+        <div class='col'>
+          Info section here 
+        </div>
+      </div>
+      <div class="row">
+        <div class='col'><a href="#" class='btn btn-primary'>Create new coursetype</a></div>
+        
+      </div>
+      <hr class="my-4" />
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Learning Pathway</th>
+                <th scope="col">Level</th>
+                <th scope="col">Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% allCoursetypes.forEach(coursetype => { %>
+              <tr>
+                <td><%= coursetype.learningPathway %></th>
+                <td><%= coursetype.level %></th>
+                <td><%= coursetype.order %></th>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
