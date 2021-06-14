@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
   <body>
     <div class="container">
       <h1>All Courses</h1>
@@ -13,8 +15,7 @@
             <th scope="col">Learning Pathway</th>
             <th scope="col">Course</th>
             <th scope="col">Date</th>
-            <th scope="col">Start Time</th>
-            <th scope="col">End Time</th>
+            <th scope="col">Time</th>
             <th scope="col">Location</th>
             <th scope="col">Signups</th>
             <th scope="col">Instructor</th>
@@ -24,16 +25,22 @@
           <% allCourses.forEach(course => { %>
           <tr>
             <th><%= course.coursetype.learningPathway %></th>
-            <th><%= course.coursetype.level %></th>
+            <td><%= course.coursetype.level %></td>
             <td>
               <%= moment(course.startDatetime).format('DD/MM/YYYY') %>-<%=
               moment(course.endDatetime).format('DD/MM/YYYY') %>
             </td>
-            <td><%= moment(course.startDatetime).format('HH:mm') %></td>
-            <td><%= moment(course.endDatetime).format('HH:mm') %></td>
+            <td>
+              <%= moment(course.startDatetime).format('HH:mm') %>-<%=
+              moment(course.endDatetime).format('HH:mm') %>
+            </td>
             <td><%= course.location %></td>
-            <td>Signups</td>
-            <td>Instructor</td>
+            <td><%= course.signups.length %> / <%= course.limit %></td>
+            <td>
+              <%= course.sessions.map((session) =>
+              {session.instructors[0].user.name}) %>
+            </td>
+            <!-- display array of unique instructor names -->
           </tr>
 
           <% }); %>

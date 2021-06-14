@@ -6,29 +6,35 @@ export default function initCoursesController(db) {
     try {
       const allCourses = await db.Course.findAll({
         attributes: ['startDatetime', 'endDatetime', 'location', 'limit'],
-        include: [{
-          model: db.Coursetype,
-          attributes: ['learningPathway', 'level'],
-        }, {
-          model: db.Session,
-          attributes: ['id'],
-          include: [{
-            model: db.Instructor,
+        include: [
+          {
+            // 1st table: coursetypes
+            model: db.Coursetype,
+            attributes: ['learningPathway', 'level'],
+          },
+          {
+            // 2nd table: sessions
+            model: db.Session,
             attributes: ['id'],
-            through: { attributes: [] }, // this excludes the through table
             include: {
-              model: db.User,
-              attributes: ['name'],
+              model: db.Instructor,
+              attributes: ['id'],
+              through: { attributes: [] }, // this excludes the through table
+              include: {
+                model: db.User,
+                attributes: ['name'],
+              },
             },
           },
           {
-            model: db.Attendance,
-            // attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('student_id')), 'n_students']],
-          }],
-        }],
+            // 3rd table: signups
+            model: db.Signup,
+            attributes: ['id'],
+          },
+        ],
       });
-      response.send(allCourses);
-      // response.render('classes/courses', { allCourses, moment });
+      // response.send(allCourses);
+      response.render('classes/courses', { allCourses, moment });
     } catch (error) {
       console.log(error);
     }
