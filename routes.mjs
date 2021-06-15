@@ -52,6 +52,9 @@ export default function bindRoutes(app) {
   app.get('/instructor/:id', InstructorsController.show);
   app.get('/employment', EmploymentController.index);
 
+  app.get('/students/new', StudentsController.createForm);
+  app.post('/students/new', StudentsController.create);
+
   // COURSES
   app.get('/courses', CoursesController.index);
   app.get('/course/:id', CoursesController.show);
