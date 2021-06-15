@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <a class="btn btn-primary" href="/instructors"> back to instructors </a>
+      <h1><%= instructor.name %></h1>
+      <hr class="my-4" />
+      <div class="row">
+        <!-- Instructor info -->
+        <div class="col-md-6">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th>Mobile</th>
+                <td><%= instructor.user.mobile %></td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td><%= instructor.user.email %></td>
+              </tr>
+              <tr>
+                <th>Employment</th>
+                <td><%= instructor.employment.type %></td>
+              </tr>
+              <tr>
+                <th>Employment level</th>
+                <td><%= instructor.employment.name %></td>
+              </tr>
+              <tr>
+                <th>Additional Info</th>
+                <td>to add column</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Session history -->
+        <h1 class="my-4">Session history</h1>
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Date</th>
+                <th scope="col">Course</th>
+                <th scope="col">Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < instructor.sessions.length; i += 1) { %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><%= instructor.sessions[i].dataValues.formattedDate %></td>
+                <td>Course name</td>
+                <td><%= instructor.sessions[i].dataValues.duration %></td>
+              </tr>
+              <% }; %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
