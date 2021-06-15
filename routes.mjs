@@ -47,19 +47,21 @@ export default function bindRoutes(app) {
   app.get('/users', UsersController.index);
   app.get('/students', StudentsController.index);
   app.get('/student/:id', StudentsController.show);
-  app.get('/parent/:id', ParentsController.show);
-  app.get('/instructors', InstructorsController.index);
-  app.get('/instructor/:id', InstructorsController.show);
-  app.get('/employment', EmploymentController.index);
-
   app.get('/students/new', StudentsController.createForm);
   app.post('/students/new', StudentsController.create);
 
+  app.get('/parent/:id', ParentsController.show);
   app.get('/parents/new', ParentsController.createForm);
   app.post('/parents/new', ParentsController.create);
 
+  app.get('/instructors', InstructorsController.index);
+  app.get('/instructor/:id', InstructorsController.show);
   app.get('/instructors/new', InstructorsController.createForm);
   app.post('/instructors/new', InstructorsController.create);
+
+  app.get('/employment', EmploymentController.index);
+  app.get('/employment/new', EmploymentController.createForm);
+  app.post('/employment/new', EmploymentController.create);
 
   // COURSES
   app.get('/courses', CoursesController.index);
