@@ -63,9 +63,99 @@ export default function initInstructorsController(db) {
       console.log(error);
     }
   };
+
+  const createForm = async (request, response) => {
+    try {
+      const employments = await db.Employment.findAll({ attributes: ['id', 'type', 'name'] });
+      const empOptionsList = [];
+      employments.forEach((emp) => {
+        empOptionsList.push({
+          id: emp.id,
+          name: `${emp.type} - ${emp.name}`,
+        });
+      });
+      const adminList = [
+        { id: 1, name: 'Yes' },
+        { id: 2, name: 'No' },
+      ];
+      const formMeta = {
+        title: 'Create new instructor',
+        notes: '',
+        formAction: '/instructors/new',
+        method: 'post',
+        submitVal: 'Submit',
+        cancelVal: 'Cancel',
+        onCancel: '/instructors',
+        fields: [
+          {
+            name: 'name',
+            label: 'Name',
+            type: 'text',
+            placeholder: '',
+            value: '',
+          },
+          {
+            name: 'mobile',
+            label: 'Mobile',
+            type: 'text',
+            placeholder: '',
+            value: '',
+          },
+          {
+            name: 'email',
+            label: 'Email',
+            type: 'email',
+            placeholder: '',
+            value: '',
+          },
+          {
+            name: 'isAdmin',
+            label: 'Admin Access?',
+            type: 'select',
+            options: adminList,
+            placeholder: '',
+            value: '',
+          },
+          {
+            name: 'rateId',
+            label: 'Employment Type',
+            type: 'select',
+            options: empOptionsList,
+            placeholder: '',
+            value: '',
+          },
+        ],
+      };
+      response.render('partial/formTemplate', { form: formMeta });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const create = async (request, response) => {
+    try {
+      console.log(request.body);
+      const formData = request.body;
+      const newUser = await db.User.create({
+        name: formData.name,
+        mobile: formData.mobile,
+        email: formData.email,
+        isAdmin: (Number(formData.isAdmin) === 1),
+        isParent: false,
+      });
+      const newInstructor = await newUser.createInstructor({
+        rateId: formData.rateId,
+      });
+      response.redirect(`/instructor/${newInstructor.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // return all methods we define in an object
   return {
     index,
     show,
+    createForm,
+    create,
   };
 }
