@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function initCoursetypesController(db) {
   const index = async (request, response) => {
     try {
@@ -25,18 +27,21 @@ export default function initCoursetypesController(db) {
             label: 'Learning Pathway',
             type: 'text',
             placeholder: 'E.g. EV3, WeDo, Arduino',
+            value: '',
           },
           {
             name: 'level',
             label: 'Level',
             type: 'text',
             placeholder: 'E.g. Beginner Level 1',
+            value: '',
           },
           {
             name: 'order',
             label: 'Order',
             type: 'number',
             placeholder: '0 if no order',
+            value: '',
           },
         ],
       };

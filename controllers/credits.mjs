@@ -35,6 +35,7 @@ export default function initCreditsController(db) {
 
   const createForm = async (request, response) => {
     try {
+      const today = moment(new Date()).add(2, 'years');
       const itemsList = await db.Item.findAll({
         attributes: ['id', 'name'],
       });
@@ -42,11 +43,9 @@ export default function initCreditsController(db) {
         where: { is_parent: true },
         attributes: ['id', 'name'],
       });
-      console.log(itemsList);
-      console.log(parentList);
       const formMeta = {
         title: 'Create new package',
-        notes: 'Packages can only be assigned to existing parents',
+        notes: 'Packages can only be assigned to existing parents. Expires 2 years by default',
         formAction: '/credits/new',
         method: 'post',
         submitVal: 'Submit',
@@ -58,6 +57,7 @@ export default function initCreditsController(db) {
             label: 'Package Code',
             type: 'text',
             placeholder: 'Code',
+            value: '',
           },
           {
             name: 'parentName',
@@ -65,6 +65,7 @@ export default function initCreditsController(db) {
             type: 'select',
             options: parentList,
             placeholder: 'Select from dropdown',
+            value: '',
           },
           {
             name: 'packageType',
@@ -72,12 +73,14 @@ export default function initCreditsController(db) {
             type: 'select',
             options: itemsList,
             placeholder: 'Select from dropdown',
+            value: '',
           },
           {
             name: 'expiry',
             label: 'Expiry',
             type: 'date',
             placeholder: '',
+            value: moment(today).format('YYYY-MM-DD'),
           },
         ],
       };
@@ -90,8 +93,19 @@ export default function initCreditsController(db) {
 
   const create = async (request, response) => {
     try {
-      console.log('request came in');
-      console.log(request.body);
+      const formData = request.body;
+      const item = await db.Item.findOne({
+        where: { id: formData.packageType },
+      });
+      const newCredit = await db.Credit.create({
+        code: formData.code,
+        parentId: formData.parentName,
+        value: item.price,
+        creditTotal: item.creditCount,
+        expiry: formData.expiry,
+        itemId: formData.packageType,
+      });
+      response.redirect(`/credit/${newCredit.id}`);
     } catch (error) {
       console.log(error);
     }
