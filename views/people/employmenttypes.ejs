@@ -6,12 +6,12 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
-      <h1>All Instructors</h1>
+      <h1>Employment Types</h1>
       <hr class="my-4" />
       <div class="row">
         <div class="col">
           <a href="/employment" class="btn btn-outline-primary"
-            >View employment types</a
+            >+ employment type</a
           >
         </div>
 
@@ -22,29 +22,20 @@
           <table class="table">
             <thead>
               <tr>
+                <th scope="col">Type</th>
                 <th scope="col">Name</th>
-                <th scope="col">Employment</th>
-                <th scope="col">Scheme</th>
                 <th scope="col">Rate</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">Hours</th>
+                <th scope="col">Edit</th>
               </tr>
             </thead>
             <tbody>
-              <% allInstructors.forEach(instructor => { %>
+              <% allEmployment.forEach(employment => { %>
               <tr>
-                <td scope="row">
-                  <a href="/instructor/<%= instructor.id %>"
-                    ><%= instructor.user.name %></a
-                  >
-                </td>
-                <td><%= instructor.employment.type%></td>
-                <td><%= instructor.employment.name %></td>
-                <td>$ <%= instructor.employment.rate %></td>
-                <td><%= instructor.user.mobile %></td>
-                <td><%= instructor.dataValues.hours%></td>
+                <td><%= employment.type%></td>
+                <td><%= employment.name %></td>
+                <td>$ <%= employment.rate %></td>
+                <td>Edit button here</td>
               </tr>
-
               <% }); %>
             </tbody>
           </table>

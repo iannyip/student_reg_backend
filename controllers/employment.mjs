@@ -2,7 +2,8 @@ export default function initEmploymentController(db) {
   const index = async (request, response) => {
     try {
       const allEmployment = await db.Employment.findAll();
-      response.send(allEmployment);
+      // response.send(allEmployment);
+      response.render('people/employmenttypes', { allEmployment });
     } catch (error) {
       console.log(error);
     }
