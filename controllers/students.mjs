@@ -84,7 +84,7 @@ export default function initStudentsController(db) {
       };
 
       // response.send(formMeta);
-      response.render('people/newStudentForm', { formMeta });
+      response.render('partial/formTemplate', { form: formMeta });
     } catch (error) {
       console.log(error);
     }

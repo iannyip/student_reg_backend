@@ -45,7 +45,7 @@ export default function initCoursetypesController(db) {
           },
         ],
       };
-      response.render('classes/newCoursetypeForm', { formMeta });
+      response.render('partial/formTemplate', { form: formMeta });
     } catch (error) {
       console.log(error);
     }

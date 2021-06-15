@@ -85,7 +85,7 @@ export default function initCreditsController(db) {
         ],
       };
       // response.send(formMeta);
-      response.render('purchases/newPurchaseForm', { formMeta });
+      response.render('partial/formTemplate', { form: formMeta });
     } catch (error) {
       console.log(error);
     }
