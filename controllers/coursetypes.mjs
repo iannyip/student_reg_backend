@@ -53,8 +53,12 @@ export default function initCoursetypesController(db) {
 
   const create = async (request, response) => {
     try {
-      console.log('post request received');
-      console.log('request.body: ', request.body);
+      const formData = request.body;
+      const newCourse = await db.Coursetype.create({
+        learningPathway: formData.learningPathway,
+        level: formData.level,
+        order: formData.order,
+      });
       response.redirect('/coursetypes');
     } catch (error) {
       console.log(error);
