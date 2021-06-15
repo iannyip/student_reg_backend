@@ -54,6 +54,7 @@ export default function bindRoutes(app) {
 
   // COURSES
   app.get('/courses', CoursesController.index);
+  app.get('/course/:id', CoursesController.show);
   app.get('/coursetypes', CoursetypesController.index);
 
   // CREDITS

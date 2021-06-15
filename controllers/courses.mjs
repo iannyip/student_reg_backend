@@ -40,6 +40,27 @@ export default function initCoursesController(db) {
     }
   };
 
+  const show = async (request, response) => {
+    try {
+      const { id } = request.params;
+      console.log(id);
+      const course = await db.Course.findOne({
+        where: { id },
+        include: [
+          db.Coursetype,
+          {
+            model: db.Session,
+            include: db.Student,
+          },
+        ],
+      });
+      // response.send(course);
+      response.render('classes/course', { course, moment });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const dashboard = async (request, response) => {
     try {
       response.render('classes/dashboard');
@@ -51,6 +72,7 @@ export default function initCoursesController(db) {
   // return all methods we define in an object
   return {
     index,
+    show,
     dashboard,
   };
 }
