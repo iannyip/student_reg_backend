@@ -45,7 +45,8 @@ export default function initCreditsController(db) {
       console.log(itemsList);
       console.log(parentList);
       const formMeta = {
-        title: 'Create new course type',
+        title: 'Create new package',
+        notes: 'Packages can only be assigned to existing parents',
         formAction: '/credits/new',
         method: 'post',
         submitVal: 'Submit',

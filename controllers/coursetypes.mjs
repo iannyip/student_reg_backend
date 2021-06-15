@@ -13,6 +13,7 @@ export default function initCoursetypesController(db) {
     try {
       const formMeta = {
         title: 'Create new course type',
+        notes: '',
         formAction: '/coursetypes/new',
         method: 'post',
         submitVal: 'Submit',

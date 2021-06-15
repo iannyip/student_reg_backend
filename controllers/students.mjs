@@ -48,6 +48,7 @@ export default function initStudentsController(db) {
       });
       const formMeta = {
         title: 'Add new student',
+        notes: 'Parent must be created before adding student',
         formAction: '/students/new',
         method: 'post',
         submitVal: 'Submit',
