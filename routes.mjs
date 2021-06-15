@@ -62,4 +62,6 @@ export default function bindRoutes(app) {
   // CREDITS
   app.get('/credits', CreditsController.index);
   app.get('/credit/:id', CreditsController.show);
+  app.get('/credits/new', CreditsController.createForm);
+  app.post('/credits/new', CreditsController.create);
 }

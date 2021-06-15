@@ -11,12 +11,12 @@ export default function initCoursetypesController(db) {
 
   const createForm = async (request, response) => {
     try {
-      console.log('request came in');
       const formMeta = {
         title: 'Create new course type',
         formAction: '/coursetypes/new',
         method: 'post',
         submitVal: 'Submit',
+        cancelVal: 'Cancel',
         onCancel: '/coursetypes',
         fields: [
           {

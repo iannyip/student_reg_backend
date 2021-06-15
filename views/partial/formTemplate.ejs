@@ -4,10 +4,23 @@
   <!-- Dynamically  -->
   <% form.fields.forEach(field => { %>
   <div class="row mb-3">
-    <label for="<%= field.name%>" class="col-sm-2 col-form-label"
+    <label for="<%= field.name%>" class="col-sm-3 col-form-label"
       ><%= field.label %></label
     >
-    <div class="col-sm-10">
+    <div class="col-sm-9">
+      <% if (field.type === 'select') { %>
+
+      <select
+        class="form-select"
+        name="<%= field.name %>"
+        id="<%= field.name %>"
+      >
+        <option value="" hidden selected>Select from dropdown</option>
+        <% field.options.forEach(option => { %>
+        <option value="<%=option.id%>"><%=option.name%></option>
+        <% }) %>
+      </select>
+      <% } else { %>
       <input
         type="<%= field.type %>"
         class="form-control"
@@ -15,19 +28,22 @@
         name="<%= field.name%>"
         placeholder="<%= field.placeholder %>"
       />
+      <% } %>
     </div>
   </div>
   <% }); %>
 
   <!-- Submit button -->
   <div class="row mb-3 justify-content-end">
-    <div class="col-sm-10">
+    <div class="col-sm-9">
       <input
         class="btn btn-primary"
         type="submit"
         value="<%= form.submitVal %>"
       />
-      <a class="btn btn-danger" href="<%= form.onCancel %>">Cancel</a>
+      <a class="btn btn-danger" href="<%= form.onCancel %>"
+        ><%= form.cancelVal %></a
+      >
     </div>
   </div>
 </form>
