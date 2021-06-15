@@ -5,7 +5,7 @@ export default function initCoursesController(db) {
   const index = async (request, response) => {
     try {
       const allCourses = await db.Course.findAll({
-        attributes: ['startDatetime', 'endDatetime', 'location', 'limit'],
+        attributes: ['id', 'name', 'startDatetime', 'endDatetime', 'location', 'limit'],
         include: [
           {
             // 1st table: coursetypes

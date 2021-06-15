@@ -21,8 +21,9 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Learning Pathway</th>
                 <th scope="col">Course</th>
+                <th scope="col">Learning Pathway</th>
+                <th scope="col">Level</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Location</th>
@@ -33,7 +34,8 @@
             <tbody>
               <% allCourses.forEach(course => { %>
               <tr>
-                <th><%= course.coursetype.learningPathway %></th>
+                <td><a href="/course/<%=course.id%>"><%= course.name %></a></td>
+                <td><%= course.coursetype.learningPathway %></td>
                 <td><%= course.coursetype.level %></td>
                 <td>
                   <%= moment(course.startDatetime).format('DD/MM/YYYY') %>-<%=
