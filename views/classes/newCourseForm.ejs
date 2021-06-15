@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-8">
+          <h1>New Course</h1>
+          <% form.fields.forEach(field => { %>
+          <div class="row mb-3">
+            <label for="<%= field.name%>" class="col-sm-3 col-form-label"
+              ><%= field.label %></label
+            >
+            <div class="col-sm-9">
+              <input
+                type="<%= field.type %>"
+                class="form-control"
+                id="<%= field.name%>"
+                name="<%= field.name%>"
+                placeholder="<%= field.placeholder %>"
+                value="<%= field.value %>"
+              />
+            </div>
+          </div>
+          <% }); %>
+          <div id="sessionsContainer"></div>
+        </div>
+      </div>
+    </div>
+    <script src="/script.js"></script>
+  </body>
+</html>

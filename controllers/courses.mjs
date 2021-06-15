@@ -69,10 +69,67 @@ export default function initCoursesController(db) {
     }
   };
 
+  const createForm = async (request, response) => {
+    try {
+      const formMeta = {
+        title: 'Create new course',
+        notes: '',
+        formAction: '/coursetypes/new',
+        method: 'post',
+        submitVal: 'Submit',
+        cancelVal: 'Cancel',
+        onCancel: '/coursetypes',
+        fields: [
+          {
+            name: 'learningPathway',
+            label: 'Learning Pathway',
+            type: 'text',
+            placeholder: 'User chooses pathway',
+            value: '',
+          },
+          {
+            name: 'level',
+            label: 'Level',
+            type: 'text',
+            placeholder: 'user chooses level',
+            value: '',
+          },
+          {
+            name: 'location',
+            label: 'Location',
+            type: 'text',
+            placeholder: 'EAST, WEST, HBL',
+            value: '',
+          },
+          {
+            name: 'limit',
+            label: 'Class Limit',
+            type: 'number',
+            placeholder: 'Maximum of students per session',
+            value: '',
+          },
+        ],
+      };
+      response.render('classes/newCourseForm', { form: formMeta });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const create = async (request, response) => {
+    try {
+      response.render('classes/courses', { allCourses, moment });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // return all methods we define in an object
   return {
     index,
     show,
     dashboard,
+    createForm,
+    create,
   };
 }
