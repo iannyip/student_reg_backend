@@ -40,8 +40,17 @@ export default function initCoursesController(db) {
     }
   };
 
+  const dashboard = async (request, response) => {
+    try {
+      response.render('classes/dashboard');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // return all methods we define in an object
   return {
     index,
+    dashboard,
   };
 }

@@ -39,6 +39,10 @@ export default function bindRoutes(app) {
     // response.redirect('students');
     response.send('root page. building in progress!');
   });
+
+  // DASHBOARD
+  app.get('/dashboard', CoursesController.dashboard);
+
   // PEOPLE
   app.get('/users', UsersController.index);
   app.get('/students', StudentsController.index);
