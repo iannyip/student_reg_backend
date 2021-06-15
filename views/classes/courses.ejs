@@ -22,13 +22,14 @@
             <thead>
               <tr>
                 <th scope="col">Course</th>
-                <th scope="col">Learning Pathway</th>
+                <th scope="col">Pathway</th>
                 <th scope="col">Level</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Location</th>
                 <th scope="col">Signups</th>
                 <th scope="col">Instructor</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -51,6 +52,7 @@
                   <%= course.sessions.map((session) =>
                   {session.instructors[0].user.name}) %>
                 </td>
+                <td>Dropdown: actions</td>
                 <!-- display array of unique instructor names -->
               </tr>
 
