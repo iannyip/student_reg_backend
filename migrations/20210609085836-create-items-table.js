@@ -282,6 +282,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       start_datetime: {
         allowNull: true,
         type: Sequelize.DATE,

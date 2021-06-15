@@ -8,6 +8,10 @@ export default function initCourseModel(sequelize, DataTypes) {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
       startDatetime: {
         allowNull: true,
         type: DataTypes.DATE,

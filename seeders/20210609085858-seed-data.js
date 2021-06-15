@@ -234,6 +234,7 @@ module.exports = {
 
         //  add course
         seedCourses.push({
+          name: `${randCourseType.learning_pathway} ${randCourseType.level}`,
           start_datetime: new Date(2020, cDates[i].month, cDates[i].days[0], timeHour[0], timeMin[0], 0, 0),
           end_datetime: new Date(2020, cDates[i].month, cDates[i].days[3], timeHour[1], timeMin[1], 0, 0),
           location: 'WEST',
