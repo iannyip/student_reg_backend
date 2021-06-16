@@ -6,6 +6,7 @@ const courseState = {
 };
 
 // Identify existing form elements
+const eleLearningPathway = document.getElementById('learningPathway');
 const eleLevel = document.getElementById('level');
 const eleName = document.getElementById('name');
 const eleLocation = document.getElementById('location');
@@ -13,6 +14,7 @@ const eleLimit = document.getElementById('limit');
 const sessionsHeaderContainer = document.getElementById('sessionsHeaderContainer');
 const sessionsContainer = document.getElementById('sessionsContainer');
 const newSessionBtn = document.getElementById('newSessionBtn');
+const submitBtnn = document.getElementById('submitBtnn');
 
 // EVENT LISTENER to automatically fill up name
 eleLevel.addEventListener('change', () => {
@@ -88,6 +90,9 @@ const showSessionHeader = () => {
     columnTitles.appendChild(columnTitleEle);
   });
   sessionsHeaderContainer.appendChild(columnTitles);
+
+  // For submit button
+  submitBtnn.classList.remove('d-none');
 };
 
 // EVENT LISTENER to handle addition of new session
