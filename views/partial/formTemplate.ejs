@@ -9,14 +9,14 @@
       <div class="row">
         <nav>
           <ol class="breadcrumb">
-            <% form.breadcrumbs.forEach(breadcrumb => { if (breadcrumb.href ===
-            '') { %>
+            <% form.breadcrumbs.forEach(breadcrumb => { %> <% if
+            (breadcrumb.href === '') { %>
             <li class="breadcrumb-item active"><%= breadcrumb.text %></li>
             <% } else { %>
             <li class="breadcrumb-item">
               <a href="<%= breadcrumb.href %>"><%= breadcrumb.text %></a>
             </li>
-            <% }}); %>
+            <% } %> <%}); %>
           </ol>
         </nav>
       </div>
