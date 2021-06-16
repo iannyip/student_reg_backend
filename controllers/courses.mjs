@@ -81,19 +81,21 @@ export default function initCoursesController(db) {
 
   const createForm = async (request, response) => {
     try {
-      const coursetypes = await db.Coursetype.findAll({
-        attributes: ['learningPathway'],
+      const { pathwayName } = request.params;
+      const pathLevels = await db.Coursetype.findAll({
+        where: { learningPathway: pathwayName },
+        attributes: ['level'],
       });
-      const coursetypesArr = [];
-      coursetypes.forEach((coursetype) => {
-        if (!coursetypesArr.includes(coursetype.learningPathway)) {
-          coursetypesArr.push(
-            coursetype.learningPathway,
+      const levelArr = [];
+      pathLevels.forEach((item) => {
+        if (!levelArr.includes(item.level)) {
+          levelArr.push(
+            item.level,
           );
         }
       });
       const formMeta = {
-        title: 'Create new course',
+        title: `Create new ${pathwayName} course`,
         notes: '',
         formAction: '/coursetypes/new',
         method: 'post',
@@ -102,19 +104,11 @@ export default function initCoursesController(db) {
         onCancel: '/coursetypes',
         fields: [
           {
-            name: 'learningPathway',
-            label: 'Learning Pathway',
-            type: 'select',
-            placeholder: 'Select from dropdown',
-            options: coursetypesArr,
-            value: '',
-          },
-          {
             name: 'level',
             label: 'Level',
             type: 'select',
             placeholder: 'Select from dropdown',
-            options: ['option1', 'option2'],
+            options: levelArr,
             value: '',
           },
           {
