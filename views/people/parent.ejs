@@ -114,15 +114,18 @@
             <tbody>
               <% parent.students.forEach(student => { %> <%
               student.courses.forEach(course => { %>
-              <td><%= course.coursetype.learningPathway %></td>
-              <td><%= course.coursetype.level %></td>
-              <td>Todo</td>
-              <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
-              <% }); %> <% }); %>
+              <tr>
+                <td><%= course.coursetype.learningPathway %></td>
+                <td><%= course.coursetype.level %></td>
+                <td>Todo</td>
+                <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
+                <% }); }); %>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+    <%- include('../partial/requiredJS') %>
   </body>
 </html>
