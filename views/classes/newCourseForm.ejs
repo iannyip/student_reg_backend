@@ -21,13 +21,13 @@
       </div>
 
       <h1 class="mb-4"><%= form.title %></h1>
-      <form>
+      <form action="<%= form.formAction%>" method="<%= form.method%>">
         <div class="row">
           <div class="col-md-8">
             <div class="row mb-3">
               <label for="learningPathway" class="col-sm-3 col-form-label">Learning Pathway</label>
               <div class="col-sm-9">
-                <input id = 'learningPathway' class='form-control' type="text" readonly value='<%= form.learningPathway %>'>
+                <input id = 'learningPathway' name = 'learningPathway' class='form-control-plaintext' type="text" readonly value='<%= form.learningPathway %>'>
                 </input>
               </div>
             </div>
