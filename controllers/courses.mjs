@@ -104,7 +104,7 @@ export default function initCoursesController(db) {
             label: 'Level',
             type: 'select',
             placeholder: 'Select from dropdown',
-            options: [],
+            options: ['option1', 'option2'],
             value: '',
           },
           {
