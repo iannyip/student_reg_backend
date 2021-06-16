@@ -57,6 +57,10 @@ export default function initParentsController(db) {
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/students',
+        breadcrumbs: [
+          { text: 'parents', href: '/students' },
+          { text: 'new parent', href: '' },
+        ],
         fields: [
           {
             name: 'name',
