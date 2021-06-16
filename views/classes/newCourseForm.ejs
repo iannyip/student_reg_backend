@@ -21,68 +21,73 @@
       </div>
 
       <h1 class="mb-4"><%= form.title %></h1>
-      <div class="row">
-        <div class="col-md-8">
-          <div class="row mb-3">
-            <label for="learningPathway" class="col-sm-3 col-form-label">Learning Pathway</label>
-            <div class="col-sm-9">
-              <input id = 'learningPathway' class='form-control' type="text" readonly value='<%= form.learningPathway %>'>
-              </input>
+      <form>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row mb-3">
+              <label for="learningPathway" class="col-sm-3 col-form-label">Learning Pathway</label>
+              <div class="col-sm-9">
+                <input id = 'learningPathway' class='form-control' type="text" readonly value='<%= form.learningPathway %>'>
+                </input>
+              </div>
             </div>
-          </div>
-          
-          <% form.fields.forEach(field => { %>
-          <div class="row mb-3">
-            <label 
-            for="<%= field.name%>" 
-            class="col-sm-3 col-form-label">
-              <%= field.label %>
-            </label>
-            <div class="col-sm-9">
-              <% if (field.type === 'select') { %>
+            
+            <% form.fields.forEach(field => { %>
+            <div class="row mb-3">
+              <label 
+              for="<%= field.name%>" 
+              class="col-sm-3 col-form-label">
+                <%= field.label %>
+              </label>
+              <div class="col-sm-9">
+                <% if (field.type === 'select') { %>
 
-              <select
-                class="form-select"
-                name="<%= field.name %>"
-                id="<%= field.name %>"
-              >
-                <option value="" hidden selected>Select from dropdown</option>
-                <% field.options.forEach(option => { %>
-                <option value="<%=option%>"><%=option%></option>
-                <% }) %>
-              </select>
-              <% } else { %>
-              <input
-                type="<%= field.type %>"
-                class="form-control"
-                id="<%= field.name%>"
-                name="<%= field.name%>"
-                placeholder="<%= field.placeholder %>"
-                value="<%= field.value %>"
-              />
-              <% } %>
+                <select
+                  class="form-select"
+                  name="<%= field.name %>"
+                  id="<%= field.name %>"
+                >
+                  <option value="" hidden selected>Select from dropdown</option>
+                  <% field.options.forEach(option => { %>
+                  <option value="<%=option%>"><%=option%></option>
+                  <% }) %>
+                </select>
+                <% } else { %>
+                <input
+                  type="<%= field.type %>"
+                  class="form-control"
+                  id="<%= field.name%>"
+                  name="<%= field.name%>"
+                  placeholder="<%= field.placeholder %>"
+                  value="<%= field.value %>"
+                />
+                <% } %>
+              </div>
             </div>
-          </div>
-          <% }); %>
+            <% }); %>
 
-          <div class="row mb-3 justify-content-end">
-            <div id= 'btnsContainer' class="col-sm-9">
-              <button id="newSessionBtn" class="btn btn-primary">
-                Add session
-              </button>
-              <button 
-                id="submitBtnn" 
-                class="btn btn-primary d-none" 
-                type='submit'>
-                Submit
-              </button>
+            <div class="row mb-3 justify-content-end">
+              <div id= 'btnsContainer' class="col-sm-9">
+                <button 
+                  id="newSessionBtn" 
+                  class="btn btn-primary"
+                  onclick="return false">
+                  Add session
+                </button>
+                <button 
+                  id="submitBtnn" 
+                  class="btn btn-primary d-none" 
+                  type='submit'>
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
+
         </div>
-
-      </div>
-      <div class="row" id="sessionsHeaderContainer"></div>
-      <div class="row" id="sessionsContainer"></div>
+        <div class="row" id="sessionsHeaderContainer"></div>
+        <div class="row" id="sessionsContainer"></div>
+      </form>
     </div>
     <script src="/script.js"></script>
   </body>
