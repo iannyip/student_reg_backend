@@ -6,7 +6,6 @@ const courseState = {
 };
 
 // Identify existing form elements
-const eleLearningPathway = document.getElementById('learningPathway');
 const eleLevel = document.getElementById('level');
 const eleName = document.getElementById('name');
 const eleLocation = document.getElementById('location');
@@ -14,22 +13,6 @@ const eleLimit = document.getElementById('limit');
 const sessionsHeaderContainer = document.getElementById('sessionsHeaderContainer');
 const sessionsContainer = document.getElementById('sessionsContainer');
 const newSessionBtn = document.getElementById('newSessionBtn');
-
-// EVENT LISTENER to handle change of learning pathway
-eleLearningPathway.addEventListener('change', () => {
-  // make axios request here
-  // axios
-  //   .get('/coursetypes/levels')
-  //   .then((result) => {
-  //     console.log(result);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
-  // For each level queries, add to eleLocation
-  console.log(eleLearningPathway.value);
-});
 
 // EVENT LISTENER to automatically fill up name
 eleLevel.addEventListener('change', () => {
