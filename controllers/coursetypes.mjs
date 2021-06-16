@@ -42,6 +42,11 @@ export default function initCoursetypesController(db) {
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/coursetypes',
+        breadcrumbs: [
+          { text: 'courses', href: '/courses' },
+          { text: 'coursetypes', href: '/coursetypes' },
+          { text: 'new coursetype', href: '' },
+        ],
         fields: [
           {
             name: 'learningPathway',
