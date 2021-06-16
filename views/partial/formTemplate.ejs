@@ -6,22 +6,21 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
-      <!-- breadcrumbs ROW -->
       <div class="row">
         <nav>
           <ol class="breadcrumb">
-            <% form.breadcrumbs.forEach(breadcrumb => { %> <% if
-            (breadcrumb.href === '') { %>
+            <% form.breadcrumbs.forEach(breadcrumb => { if (breadcrumb.href ===
+            '') { %>
             <li class="breadcrumb-item active"><%= breadcrumb.text %></li>
             <% } else { %>
             <li class="breadcrumb-item">
               <a href="<%= breadcrumb.href %>"><%= breadcrumb.text %></a>
             </li>
-            <% }; %> <% }); %>
+            <% }}); %>
           </ol>
         </nav>
       </div>
-      <!-- Form ROW -->
+
       <div class="row">
         <div class="col-md-8">
           <h1 class="mb-2"><%= form.title %></h1>
@@ -30,12 +29,11 @@
           </p>
 
           <form action="<%= form.formAction%>" method="<%= form.method%>">
-            <!-- Dynamically  -->
             <% form.fields.forEach(field => { %>
             <div class="row mb-3">
               <label for="<%= field.name%>" class="col-sm-3 col-form-label"
-                ><%= field.label %></label
-              >
+                ><%= field.label %>
+              </label>
               <div class="col-sm-9">
                 <% if (field.type === 'select') { %>
 
@@ -63,7 +61,6 @@
             </div>
             <% }); %>
 
-            <!-- Submit button -->
             <div class="row mb-3 justify-content-end">
               <div class="col-sm-9">
                 <input
@@ -72,8 +69,8 @@
                   value="<%= form.submitVal %>"
                 />
                 <a class="btn btn-danger" href="<%= form.onCancel %>"
-                  ><%= form.cancelVal %></a
-                >
+                  ><%= form.cancelVal %>
+                </a>
               </div>
             </div>
           </form>
