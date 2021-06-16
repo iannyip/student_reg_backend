@@ -127,7 +127,7 @@ newSessionBtn.addEventListener('click', () => {
     newInputEle.classList.add(`${item.class}`);
 
     newInputEle.setAttribute('type', `${item.type}`);
-    newInputEle.setAttribute('name', `${item.name}`);
+    newInputEle.setAttribute('name', `sessions[${courseState.sessions - 1}[${item.name}]`);
     newInputEle.setAttribute('placeholder', `${item.placeholder}`);
 
     if (item.label === 'Limit') {
