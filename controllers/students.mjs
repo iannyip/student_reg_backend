@@ -54,6 +54,10 @@ export default function initStudentsController(db) {
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/students',
+        breadcrumbs: [
+          { text: 'students', href: '/students' },
+          { text: 'new student', href: '' },
+        ],
         fields: [
           {
             name: 'name',
