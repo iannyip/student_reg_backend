@@ -6,8 +6,18 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/instructors">instructors</a>
+            </li>
+            <li class="breadcrumb-item active"><%= instructor.user.name %></li>
+          </ol>
+        </nav>
+      </div>
       <a class="btn btn-primary" href="/instructors"> back to instructors </a>
-      <h1><%= instructor.name %></h1>
+      <h1><%= instructor.user.name %></h1>
       <hr class="my-4" />
       <div class="row">
         <!-- Instructor info -->

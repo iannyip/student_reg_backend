@@ -86,6 +86,10 @@ export default function initInstructorsController(db) {
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/instructors',
+        breadcrumbs: [
+          { text: 'instructors', href: '/instructors' },
+          { text: 'new instructor', href: '' },
+        ],
         fields: [
           {
             name: 'name',
@@ -126,6 +130,7 @@ export default function initInstructorsController(db) {
           },
         ],
       };
+      // response.send(formMeta);
       response.render('partial/formTemplate', { form: formMeta });
     } catch (error) {
       console.log(error);
