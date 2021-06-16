@@ -4,6 +4,16 @@ import moment from 'moment';
 export default function initCoursesController(db) {
   const index = async (request, response) => {
     try {
+      const pathways = await db.Coursetype.findAll({
+        attributes: ['learningPathway'],
+      });
+      const pathwaysArr = [];
+      pathways.forEach((item) => {
+        if (!pathwaysArr.includes(item.learningPathway)) {
+          pathwaysArr.push(item.learningPathway);
+        }
+      });
+      console.log(pathwaysArr);
       const allCourses = await db.Course.findAll({
         attributes: ['id', 'name', 'startDatetime', 'endDatetime', 'location', 'limit'],
         include: [
@@ -34,7 +44,7 @@ export default function initCoursesController(db) {
         ],
       });
       // response.send(allCourses);
-      response.render('classes/courses', { allCourses, moment });
+      response.render('classes/courses', { allCourses, pathwaysArr, moment });
     } catch (error) {
       console.log(error);
     }
