@@ -11,6 +11,27 @@ export default function initCoursetypesController(db) {
     }
   };
 
+  const courseLevelIndex = async (request, response) => {
+    try {
+      console.log('ajax req came in');
+      // TO VERIFY
+      const learningPathway = request.params;
+      const levels = await db.Coursetype.findAll({
+        where: { learningPathway },
+        attributes: ['levels'],
+      });
+      const levelsArr = [];
+      levels.forEach((item) => {
+        if (!levelsArr.includes(item.level)) {
+          levelsArr.push(item.level);
+        }
+      });
+      response.send(levelsArr);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const createForm = async (request, response) => {
     try {
       const formMeta = {
@@ -68,6 +89,7 @@ export default function initCoursetypesController(db) {
   // return all methods we define in an object
   return {
     index,
+    courseLevelIndex,
     createForm,
     create,
   };
