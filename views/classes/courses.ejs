@@ -33,7 +33,11 @@
             </button>
             <ul class="dropdown-menu">
               <% pathwaysArr.forEach(item => { %>
-              <li><a class="dropdown-item" href="#"><%= item %></a></li>
+              <li>
+                <a class="dropdown-item" href="/courses/new/<%= item%>"
+                  ><%= item %></a
+                >
+              </li>
               <% }); %>
             </ul>
           </div>
