@@ -26,6 +26,14 @@ eleLevel.addEventListener('change', () => {
 // Define the fields to appear in sessions section here
 const sessionInputsArr = [
   {
+    name: 'no',
+    label: '#',
+    type: 'number',
+    size: '1',
+    placeholder: '',
+    class: 'form-control-plaintext',
+  },
+  {
     name: 'date',
     label: 'Date',
     type: 'date',
@@ -97,33 +105,41 @@ const showSessionHeader = () => {
 
 // EVENT LISTENER to handle addition of new session
 newSessionBtn.addEventListener('click', () => {
-  console.log('lol');
-  console.log(eleLimit.value);
+  // show session if course state starts from 0
   if (courseState.sessions === 0) {
     showSessionHeader();
   }
+  // increment state sessions by one
   courseState.sessions += 1;
+
+  // create DOM for a new session's row
   const eleSessionRow = document.createElement('div');
   eleSessionRow.classList.add('row', 'my-1');
-  eleSessionRow.innerHTML = courseState.sessions;
+  // eleSessionRow.innerHTML = courseState.sessions;
   sessionsContainer.prepend(eleSessionRow);
 
+  // append input fields to each session
   sessionInputsArr.forEach((item) => {
     const newInputCol = document.createElement('div');
     const newInputEle = document.createElement('input');
-    newInputCol.classList.add(`col-md-${item.size}`, 'justify-content-center');
+
+    newInputCol.classList.add(`col-md-${item.size}`);
     newInputEle.classList.add(`${item.class}`);
+
     newInputEle.setAttribute('type', `${item.type}`);
     newInputEle.setAttribute('name', `${item.name}`);
     newInputEle.setAttribute('placeholder', `${item.placeholder}`);
-    newInputEle.setAttribute('value', `${item.value}`);
+
+    if (item.label === 'Limit') {
+      newInputEle.setAttribute('value', `${eleLimit.value}`);
+    } else if (item.label === 'Chargeable?') {
+      newInputEle.checked = true;
+    } else if (item.label === '#') {
+      newInputEle.setAttribute('value', `${courseState.sessions}`);
+      newInputEle.readOnly = true;
+    }
+
     newInputCol.appendChild(newInputEle);
     eleSessionRow.appendChild(newInputCol);
   });
-  // date
-  // start time
-  // end time
-  // limit
-  // isChargeable
-  // sessionType
 });
