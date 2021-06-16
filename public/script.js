@@ -47,7 +47,6 @@ const sessionInputsArr = [
     size: '2',
     placeholder: '',
     class: 'form-control',
-    value: '',
   },
   {
     name: 'startTime',
@@ -56,7 +55,6 @@ const sessionInputsArr = [
     size: '2',
     placeholder: '',
     class: 'form-control',
-    value: '',
   },
   {
     name: 'endTime',
@@ -65,7 +63,6 @@ const sessionInputsArr = [
     size: '2',
     placeholder: '',
     class: 'form-control',
-    value: '',
   },
   {
     name: 'limit',
@@ -74,7 +71,6 @@ const sessionInputsArr = [
     size: '1',
     placeholder: 'limit',
     class: 'form-control',
-    value: '',
   },
   {
     name: 'isChargeable',
@@ -83,7 +79,6 @@ const sessionInputsArr = [
     size: '1',
     placeholder: '',
     class: 'form-check-input',
-    value: '',
   },
   {
     name: 'sessionType',
@@ -92,7 +87,6 @@ const sessionInputsArr = [
     size: '2',
     placeholder: 'Foundation/Practice',
     class: 'form-control',
-    value: '',
   },
 ];
 
