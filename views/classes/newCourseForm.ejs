@@ -6,15 +6,38 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <% form.breadcrumbs.forEach(breadcrumb => { if (breadcrumb.href === '') { %>
+            <li class="breadcrumb-item active"><%= breadcrumb.text %></li>
+            <% } else { %>
+            <li class="breadcrumb-item">
+              <a href="<%= breadcrumb.href %>"><%= breadcrumb.text %></a>
+            </li>
+            <% }}); %>
+          </ol>
+        </nav>
+      </div>
+
       <h1 class="mb-4"><%= form.title %></h1>
       <div class="row">
         <div class="col-md-8">
-          <!-- For each existing field, create input -->
+          <div class="row mb-3">
+            <label for="learningPathway" class="col-sm-3 col-form-label">Learning Pathway</label>
+            <div class="col-sm-9">
+              <input id = 'learningPathway' class='form-control' type="text" readonly value='<%= form.learningPathway %>'>
+              </input>
+            </div>
+          </div>
+          
           <% form.fields.forEach(field => { %>
           <div class="row mb-3">
-            <label for="<%= field.name%>" class="col-sm-3 col-form-label"
-              ><%= field.label %></label
-            >
+            <label 
+            for="<%= field.name%>" 
+            class="col-sm-3 col-form-label">
+              <%= field.label %>
+            </label>
             <div class="col-sm-9">
               <% if (field.type === 'select') { %>
 
@@ -41,17 +64,22 @@
             </div>
           </div>
           <% }); %>
-          <!-- Button to add session -->
+
           <div class="row mb-3 justify-content-end">
-            <div class="col-sm-9">
+            <div id= 'btnsContainer' class="col-sm-9">
               <button id="newSessionBtn" class="btn btn-primary">
                 Add session
+              </button>
+              <button 
+                id="submitBtnn" 
+                class="btn btn-primary d-none" 
+                type='submit'>
+                Submit
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Row for buttons -->
       </div>
       <div class="row" id="sessionsHeaderContainer"></div>
       <div class="row" id="sessionsContainer"></div>

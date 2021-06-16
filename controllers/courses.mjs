@@ -99,9 +99,14 @@ export default function initCoursesController(db) {
         notes: '',
         formAction: '/coursetypes/new',
         method: 'post',
+        learningPathway: pathwayName,
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/coursetypes',
+        breadcrumbs: [
+          { text: 'courses', href: '/courses' },
+          { text: `new ${pathwayName} course`, href: '' },
+        ],
         fields: [
           {
             name: 'level',
