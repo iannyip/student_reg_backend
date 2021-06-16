@@ -97,7 +97,7 @@ export default function initCoursesController(db) {
       const formMeta = {
         title: `Create new ${pathwayName} course`,
         notes: '',
-        formAction: '/coursetypes/new',
+        formAction: '/courses/new',
         method: 'post',
         learningPathway: pathwayName,
         submitVal: 'Submit',
@@ -147,7 +147,8 @@ export default function initCoursesController(db) {
 
   const create = async (request, response) => {
     try {
-      response.render('classes/courses', { allCourses, moment });
+      console.log(request.body);
+      response.send(200);
     } catch (error) {
       console.log(error);
     }
