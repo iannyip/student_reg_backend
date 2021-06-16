@@ -51,6 +51,10 @@ export default function initCreditsController(db) {
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/credits',
+        breadcrumbs: [
+          { text: 'credits', href: '/credits' },
+          { text: 'new credit purchase', href: '' },
+        ],
         fields: [
           {
             name: 'code',
