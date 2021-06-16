@@ -6,15 +6,29 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <h1 class="mb-4">New Course</h1>
       <div class="row">
         <div class="col-md-8">
-          <h1>New Course</h1>
+          <!-- For each existing field, create input -->
           <% form.fields.forEach(field => { %>
           <div class="row mb-3">
             <label for="<%= field.name%>" class="col-sm-3 col-form-label"
               ><%= field.label %></label
             >
             <div class="col-sm-9">
+              <% if (field.type === 'select') { %>
+
+              <select
+                class="form-select"
+                name="<%= field.name %>"
+                id="<%= field.name %>"
+              >
+                <option value="" hidden selected>Select from dropdown</option>
+                <% field.options.forEach(option => { %>
+                <option value="<%=option%>"><%=option%></option>
+                <% }) %>
+              </select>
+              <% } else { %>
               <input
                 type="<%= field.type %>"
                 class="form-control"
@@ -23,12 +37,24 @@
                 placeholder="<%= field.placeholder %>"
                 value="<%= field.value %>"
               />
+              <% } %>
             </div>
           </div>
           <% }); %>
-          <div id="sessionsContainer"></div>
+          <!-- Button to add session -->
+          <div class="row mb-3 justify-content-end">
+            <div class="col-sm-9">
+              <button id="newSessionBtn" class="btn btn-primary">
+                Add session
+              </button>
+            </div>
+          </div>
         </div>
+
+        <!-- Row for buttons -->
       </div>
+
+      <div class="row" id="sessionsContainer"></div>
     </div>
     <script src="/script.js"></script>
   </body>
