@@ -6,6 +6,22 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <!-- breadcrumbs ROW -->
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <% form.breadcrumbs.forEach(breadcrumb => { %> <% if
+            (breadcrumb.href === '') { %>
+            <li class="breadcrumb-item active"><%= breadcrumb.text %></li>
+            <% } else { %>
+            <li class="breadcrumb-item">
+              <a href="<%= breadcrumb.href %>"><%= breadcrumb.text %></a>
+            </li>
+            <% }; %> <% }); %>
+          </ol>
+        </nav>
+      </div>
+      <!-- Form ROW -->
       <div class="row">
         <div class="col-md-8">
           <h1 class="mb-2"><%= form.title %></h1>
