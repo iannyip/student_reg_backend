@@ -18,6 +18,11 @@ export default function initEmploymentController(db) {
         submitVal: 'Submit',
         cancelVal: 'Cancel',
         onCancel: '/employment',
+        breadcrumbs: [
+          { text: 'instructors', href: '/instructors' },
+          { text: 'employment', href: '/employment' },
+          { text: 'new employment type', href: '' },
+        ],
         fields: [
           {
             name: 'type',
