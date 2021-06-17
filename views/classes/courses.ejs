@@ -75,8 +75,9 @@
                 <td><%= course.location %></td>
                 <td><%= course.signups.length %> / <%= course.limit %></td>
                 <td>
-                  <%= course.sessions.map((session) =>
-                  {session.instructors[0].user.name}) %>
+                  <% course.instructor.instructor.map((person) => { %>
+                  <a href="/instructor/<%= person.id%>"><%= person.name %> </a>
+                  <% }) %>
                 </td>
                 <td>Dropdown: actions</td>
                 <!-- display array of unique instructor names -->

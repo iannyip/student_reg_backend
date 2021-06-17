@@ -23,7 +23,7 @@ export default function initCoursesController(db) {
 
       // Find a list of all courses and their relevant info
       const allCourses = await db.Course.findAll({
-        attributes: ['id', 'name', 'startDatetime', 'endDatetime', 'location', 'limit'],
+        attributes: ['id', 'name', 'startDatetime', 'endDatetime', 'location', 'limit', 'instructor'],
         include: [
           {
             // 1st table: coursetypes
@@ -51,8 +51,8 @@ export default function initCoursesController(db) {
           },
         ],
       });
-      response.send(allCourses);
-      // response.render('classes/courses', { allCourses, pathwaysArr, moment });
+      // response.send(allCourses);
+      response.render('classes/courses', { allCourses, pathwaysArr, moment });
     } catch (error) {
       console.log(error);
     }
