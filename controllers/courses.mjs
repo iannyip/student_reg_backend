@@ -33,7 +33,7 @@ export default function initCoursesController(db) {
           {
             // 2nd table: sessions
             model: db.Session,
-            attributes: ['id', 'instructor'],
+            attributes: ['id'],
           //   include: {
           //     model: db.Instructor,
           //     attributes: ['id'],

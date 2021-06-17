@@ -297,6 +297,12 @@ module.exports = {
       location: {
         type: Sequelize.STRING,
       },
+      instructor: {
+        type: Sequelize.JSON,
+      },
+      notes: {
+        type: Sequelize.JSON,
+      },
       limit: {
         type: Sequelize.INTEGER,
       },
