@@ -9,6 +9,7 @@ const splitTime = (timestring) => {
 export default function initCoursesController(db) {
   const index = async (request, response) => {
     try {
+      // Get array of pathways for create course dropdown
       const pathways = await db.Coursetype.findAll({
         attributes: ['learningPathway'],
       });
@@ -19,6 +20,8 @@ export default function initCoursesController(db) {
         }
       });
       console.log(pathwaysArr);
+
+      // Find a list of all courses and their relevant info
       const allCourses = await db.Course.findAll({
         attributes: ['id', 'name', 'startDatetime', 'endDatetime', 'location', 'limit'],
         include: [
@@ -30,16 +33,16 @@ export default function initCoursesController(db) {
           {
             // 2nd table: sessions
             model: db.Session,
-            attributes: ['id'],
-            include: {
-              model: db.Instructor,
-              attributes: ['id'],
-              through: { attributes: [] }, // this excludes the through table
-              include: {
-                model: db.User,
-                attributes: ['name'],
-              },
-            },
+            attributes: ['id', 'instructor'],
+          //   include: {
+          //     model: db.Instructor,
+          //     attributes: ['id'],
+          //     through: { attributes: [] }, // this excludes the through table
+          //     include: {
+          //       model: db.User,
+          //       attributes: ['name'],
+          //     },
+          //   },
           },
           {
             // 3rd table: signups
@@ -48,8 +51,8 @@ export default function initCoursesController(db) {
           },
         ],
       });
-      // response.send(allCourses);
-      response.render('classes/courses', { allCourses, pathwaysArr, moment });
+      response.send(allCourses);
+      // response.render('classes/courses', { allCourses, pathwaysArr, moment });
     } catch (error) {
       console.log(error);
     }

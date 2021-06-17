@@ -252,7 +252,7 @@ module.exports = {
             end_datetime: new Date(2020, cDates[i].month, cDates[i].days[j], timeHour[1], timeMin[1], 0, 0),
             comments: '',
             location: 'WEST',
-            instructor: JSON.stringify({ instructors: [instructorArrOptions[instructorOption]] }),
+            instructor: JSON.stringify({ instructor: [instructorArrOptions[instructorOption]] }),
             notes: JSON.stringify({ notes: [] }),
             limit: 5,
             is_chargeable: true,
