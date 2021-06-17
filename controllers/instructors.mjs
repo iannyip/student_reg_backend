@@ -263,16 +263,29 @@ export default function initInstructorsController(db) {
       console.log(inData);
       console.log('received update PUT!');
 
-      const updatedStudent = await db.Student.update(
+      await db.Instructor.update(
         {
-          name: inData.name,
-          dob: inData.dob,
+          rateId: inData.rateId,
           additionalInfo: inData.additionalInfo,
-          parentId: inData.parentName,
         },
         { where: { id } },
       );
-      response.redirect(`/student/${id}`);
+      const updatedInstructor = await db.Instructor.findOne({
+        where: { id },
+        include: db.User,
+      });
+
+      await db.User.update(
+        {
+          name: inData.name,
+          mobile: inData.mobile,
+          email: inData.email,
+          isAdmin: (Number(inData.isAdmin) === 1),
+        },
+        { where: { id: updatedInstructor.user.id } },
+      );
+
+      response.redirect(`/instructor/${id}`);
     } catch (error) {
       console.log(error);
     }
