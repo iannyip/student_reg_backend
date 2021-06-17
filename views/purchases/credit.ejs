@@ -47,6 +47,14 @@
                 <td><%= moment(credit.expiry).format("D MMM YYYY")%></td>
               </tr>
               <tr>
+                <th>Package Type</th>
+                <td><%= credit.item.name %></td>
+              </tr>
+              <tr>
+                <th>Value</th>
+                <td><%= credit.value %></td>
+              </tr>
+              <tr>
                 <th>Usage</th>
                 <td>
                   <%= credit.sessions.length %> / <%= credit.creditTotal %>

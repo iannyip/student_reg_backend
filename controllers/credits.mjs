@@ -27,6 +27,7 @@ export default function initCreditsController(db) {
         where: { id },
         include: [
           { model: db.Session },
+          { model: db.Item },
           {
             model: db.User,
             attributes: ['id', 'name'],
