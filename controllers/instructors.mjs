@@ -43,7 +43,7 @@ export default function initInstructorsController(db) {
           db.Employment,
           {
             model: db.User,
-            attributes: ['id', 'name', 'mobile', 'email'],
+            attributes: ['id', 'name', 'mobile', 'email', 'isAdmin'],
           },
           {
             model: db.Session,
@@ -128,6 +128,13 @@ export default function initInstructorsController(db) {
             placeholder: '',
             value: '',
           },
+          {
+            name: 'additionalInfo',
+            label: 'Additional Information',
+            type: 'text',
+            placeholder: 'Any special things we should know',
+            value: '',
+          },
         ],
       };
       // response.send(formMeta);
@@ -150,6 +157,7 @@ export default function initInstructorsController(db) {
       });
       const newInstructor = await newUser.createInstructor({
         rateId: formData.rateId,
+        additionalInfo: formData.additionalInfo,
       });
       response.redirect(`/instructor/${newInstructor.id}`);
     } catch (error) {
@@ -230,6 +238,13 @@ export default function initInstructorsController(db) {
             options: empOptionsList,
             placeholder: '',
             value: `${instructor.employment.type} - ${instructor.employment.name}`,
+          },
+          {
+            name: 'additionalInfo',
+            label: 'Additional Information',
+            type: 'text',
+            placeholder: 'Any special things we should know',
+            value: instructor.additionalInfo,
           },
         ],
       };
