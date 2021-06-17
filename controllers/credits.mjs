@@ -7,6 +7,7 @@ export default function initCreditsController(db) {
         include: [{
           model: db.User,
           attributes: ['id', 'name'],
+          include: { model: db.Parent, attributes: ['id'] },
         },
         {
           model: db.Attendance,

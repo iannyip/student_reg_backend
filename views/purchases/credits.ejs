@@ -38,7 +38,7 @@
               <% allCredits.forEach(package => { %>
               <tr>
                 <td>
-                  <a href="/parent/<%=package.user.id%>"
+                  <a href="/parent/<%=package.user.parent.id%>"
                     ><%= package.user.name %></a
                   >
                 </td>
