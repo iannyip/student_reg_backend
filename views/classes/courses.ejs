@@ -75,9 +75,10 @@
                 <td><%= course.location %></td>
                 <td><%= course.signups.length %> / <%= course.limit %></td>
                 <td>
-                  <% course.instructor.instructor.map((person) => { %>
+                  <% if (course.instructor === null) { %> Unassigned <% } else {
+                  %> <% course.instructor.instructor.map((person) => { %>
                   <a href="/instructor/<%= person.id%>"><%= person.name %> </a>
-                  <% }) %>
+                  <% })} %>
                 </td>
                 <td>Dropdown: actions</td>
                 <!-- display array of unique instructor names -->
