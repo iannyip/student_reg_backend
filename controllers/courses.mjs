@@ -1,5 +1,10 @@
 import moment from 'moment';
 // import { Sequelize } from 'sequelize';
+const splitTime = (timestring) => {
+  const hours = timestring.substring(0, 2);
+  const min = timestring.substring(3, 5);
+  return ([hours, min]);
+};
 
 export default function initCoursesController(db) {
   const index = async (request, response) => {
@@ -148,6 +153,52 @@ export default function initCoursesController(db) {
   const create = async (request, response) => {
     try {
       console.log(request.body);
+      const formData = request.body;
+      const sessionFieldNameArr = ['no', 'date', 'startTime', 'endTime', 'limit', 'isChargeable', 'sessionType'];
+
+      const sessionsArr = [];
+      for (let i = 0; i < formData.sessionsno.length; i += 1) {
+        const tempObj = {};
+        sessionFieldNameArr.forEach((field) => {
+          tempObj[`${field}`] = formData[`sessions${field}`][i];
+        });
+        tempObj.startDatetime = moment(`${tempObj.date} ${tempObj.startTime}`);
+        sessionsArr.push(tempObj);
+      }
+      console.log(sessionsArr);
+
+      // Get first and last date
+      const courseStart = moment.min(formData.sessionsdate.map((x) => moment(x)));
+      const courseEnd = moment.max(formData.sessionsdate.map((x) => moment(x)));
+
+      // Make array of start and end times
+      // if unique, assign to start and end
+      const distinctStartTime = [...new Set(formData.sessionsstartTime.map((x) => x))];
+      const distinctEndTime = [...new Set(formData.sessionsendTime.map((x) => x))];
+      if (distinctStartTime.length === 1 && distinctEndTime.length === 1) {
+        courseStart.hours(splitTime(distinctStartTime[0])[0]);
+        courseStart.minutes(splitTime(distinctStartTime[0])[1]);
+        courseEnd.hours(splitTime(distinctEndTime[0])[0]);
+        courseEnd.minutes(splitTime(distinctEndTime[0])[1]);
+      }
+
+      // Find out which coursetype
+      const coursetype = await db.Coursetype.findOne({
+        where: {
+          learningPathway: formData.learningPathway,
+          level: formData.level,
+        },
+      });
+      // Create course
+      const newCourse = await coursetype.createCourse({
+        name: formData.name,
+        startDatetime: courseStart.toDate(),
+        endDatetime: courseEnd.toDate(),
+        location: formData.location,
+        limit: formData.limit,
+      });
+      console.log(newCourse);
+      //
       response.send(200);
     } catch (error) {
       console.log(error);
