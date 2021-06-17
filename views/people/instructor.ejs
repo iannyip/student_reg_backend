@@ -43,6 +43,10 @@
                 <td><%= instructor.employment.name %></td>
               </tr>
               <tr>
+                <th>Admin access</th>
+                <td><%= (instructor.user.isAdmin ? "Yes" : "No") %></td>
+              </tr>
+              <tr>
                 <th>Additional Info</th>
                 <td><%= instructor.additionalInfo %></td>
               </tr>
