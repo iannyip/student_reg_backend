@@ -156,11 +156,119 @@ export default function initInstructorsController(db) {
       console.log(error);
     }
   };
+
+  const edit = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const instructor = await db.Instructor.findOne({
+        where: { id },
+        include: [
+          { model: db.User, attributes: ['name', 'mobile', 'email', 'isAdmin'] },
+          { model: db.Employment, attributes: ['type', 'name'] },
+        ],
+      });
+      const employments = await db.Employment.findAll({ attributes: ['id', 'type', 'name'] });
+      const empOptionsList = [];
+      employments.forEach((emp) => {
+        empOptionsList.push({
+          id: emp.id,
+          name: `${emp.type} - ${emp.name}`,
+        });
+      });
+      const adminList = [
+        { id: 1, name: 'Yes' },
+        { id: 2, name: 'No' },
+      ];
+
+      const formMeta = {
+        title: `Edit Instructor: ${instructor.user.name}`,
+        notes: '',
+        formAction: `/instructor/edit/${id}?_method=PUT`,
+        method: 'post',
+        submitVal: 'Update',
+        cancelVal: 'Cancel',
+        onCancel: `/instructor/${id}`,
+        breadcrumbs: [
+          { text: 'instructors', href: '/instructors' },
+          { text: `${instructor.user.name}`, href: `/instructor/${id}` },
+          { text: 'edit', href: '' },
+        ],
+        fields: [
+          {
+            name: 'name',
+            label: 'Name',
+            type: 'text',
+            placeholder: 'Full Name',
+            value: instructor.user.name,
+          },
+          {
+            name: 'mobile',
+            label: 'Mobile',
+            type: 'text',
+            placeholder: 'Mobile',
+            value: instructor.user.mobile,
+          },
+          {
+            name: 'email',
+            label: 'Email',
+            type: 'email',
+            placeholder: 'Email',
+            value: instructor.user.email,
+          },
+          {
+            name: 'isAdmin',
+            label: 'Admin Access?',
+            type: 'select',
+            options: adminList,
+            placeholder: '',
+            value: (instructor.user.isAdmin ? 'Yes' : 'No'),
+          },
+          {
+            name: 'rateId',
+            label: 'Employment Type',
+            type: 'select',
+            options: empOptionsList,
+            placeholder: '',
+            value: `${instructor.employment.type} - ${instructor.employment.name}`,
+          },
+        ],
+      };
+      // response.send(instructor);
+      // response.send(formMeta);
+      response.render('partial/formTemplate', { form: formMeta });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const update = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const inData = request.body;
+      console.log(inData);
+      console.log('received update PUT!');
+
+      const updatedStudent = await db.Student.update(
+        {
+          name: inData.name,
+          dob: inData.dob,
+          additionalInfo: inData.additionalInfo,
+          parentId: inData.parentName,
+        },
+        { where: { id } },
+      );
+      response.redirect(`/student/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // return all methods we define in an object
   return {
     index,
     show,
     createForm,
     create,
+    edit,
+    update,
   };
 }
