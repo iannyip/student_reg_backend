@@ -28,6 +28,7 @@ export default function initStudentsController(db) {
             // Table 1: parent
             model: db.User,
             attributes: ['id', 'name', 'email'],
+            include: { model: db.Parent, attributes: ['id'] },
           },
           {
             // Table 2: signups
