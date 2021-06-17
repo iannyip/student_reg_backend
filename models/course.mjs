@@ -23,6 +23,12 @@ export default function initCourseModel(sequelize, DataTypes) {
       location: {
         type: DataTypes.STRING,
       },
+      instructor: {
+        type: DataTypes.JSON,
+      },
+      notes: {
+        type: DataTypes.JSON,
+      },
       limit: {
         type: DataTypes.INTEGER,
       },
