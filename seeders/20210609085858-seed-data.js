@@ -233,6 +233,7 @@ module.exports = {
         const randCourseType = seededCoursetype[Math.floor(Math.random() * seededCoursetype.length)];
 
         //  add course
+        const instructorArrOptions = [{ id: 1, name: 'User D' }, { id: 2, name: 'User E' }];
         seedCourses.push({
           name: `${randCourseType.learning_pathway} ${randCourseType.level}`,
           start_datetime: new Date(2020, cDates[i].month, cDates[i].days[0], timeHour[0], timeMin[0], 0, 0),
@@ -245,11 +246,14 @@ module.exports = {
         });
         // add four sessions for each course
         for (let j = 0; j < 4; j += 1) {
+          const instructorOption = i % 2;
           seedSessions.push({
             start_datetime: new Date(2020, cDates[i].month, cDates[i].days[j], timeHour[0], timeMin[0], 0, 0),
             end_datetime: new Date(2020, cDates[i].month, cDates[i].days[j], timeHour[1], timeMin[1], 0, 0),
             comments: '',
             location: 'WEST',
+            instructor: JSON.stringify({ instructors: [instructorArrOptions[instructorOption]] }),
+            notes: JSON.stringify({ notes: [] }),
             limit: 5,
             is_chargeable: true,
             course_id: i + 1,

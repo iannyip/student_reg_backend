@@ -340,6 +340,12 @@ module.exports = {
       limit: {
         type: Sequelize.INTEGER,
       },
+      instructor: {
+        type: Sequelize.JSON,
+      },
+      notes: {
+        type: Sequelize.JSON,
+      },
       is_chargeable: {
         type: Sequelize.BOOLEAN,
       },

@@ -25,6 +25,12 @@ export default function initSessionModel(sequelize, DataTypes) {
       limit: {
         type: DataTypes.INTEGER,
       },
+      instructor: {
+        type: DataTypes.JSON,
+      },
+      notes: {
+        type: DataTypes.JSON,
+      },
       isChargeable: {
         type: DataTypes.BOOLEAN,
       },
