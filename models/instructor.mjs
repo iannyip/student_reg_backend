@@ -8,7 +8,7 @@ export default function initInstructorModel(sequelize, DataTypes) {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      additional_info: {
+      additionalInfo: {
         type: DataTypes.STRING,
       },
       userId: {
