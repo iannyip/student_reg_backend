@@ -163,6 +163,7 @@ export default function initCoursesController(db) {
           tempObj[`${field}`] = formData[`sessions${field}`][i];
         });
         tempObj.startDatetime = moment(`${tempObj.date} ${tempObj.startTime}`);
+        tempObj.endDatetime = moment(`${tempObj.date} ${tempObj.endTime}`);
         sessionsArr.push(tempObj);
       }
       console.log(sessionsArr);
@@ -198,8 +199,19 @@ export default function initCoursesController(db) {
         limit: formData.limit,
       });
       console.log(newCourse);
-      //
+      // Create sessions
+      sessionsArr.forEach(async (session) => {
+        const newSession = await newCourse.createSession({
+          startDatetime: session.startDatetime,
+          endDatetime: session.startDatetime,
+          location: 'EAST',
+          limit: session.limit,
+          isChargeable: (session.isChargeable === 'on'),
+          sessionType: session.sessionType,
+        });
+      });
       response.send(200);
+      response.redirect(`/course/${newCourse.id}`);
     } catch (error) {
       console.log(error);
     }
