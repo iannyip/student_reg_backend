@@ -107,7 +107,6 @@ export default function initParentsController(db) {
 
   const create = async (request, response) => {
     try {
-      console.log(request.body);
       const formData = request.body;
       const newUser = await db.User.create({
         name: formData.name,

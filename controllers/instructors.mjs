@@ -146,7 +146,6 @@ export default function initInstructorsController(db) {
 
   const create = async (request, response) => {
     try {
-      console.log(request.body);
       const formData = request.body;
       const newUser = await db.User.create({
         name: formData.name,
@@ -260,8 +259,6 @@ export default function initInstructorsController(db) {
     try {
       const { id } = request.params;
       const inData = request.body;
-      console.log(inData);
-      console.log('received update PUT!');
 
       await db.Instructor.update(
         {

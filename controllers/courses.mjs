@@ -19,7 +19,6 @@ export default function initCoursesController(db) {
           pathwaysArr.push(item.learningPathway);
         }
       });
-      console.log(pathwaysArr);
 
       // Find a list of all courses and their relevant info
       const allCourses = await db.Course.findAll({
@@ -61,7 +60,6 @@ export default function initCoursesController(db) {
   const show = async (request, response) => {
     try {
       const { id } = request.params;
-      console.log(id);
       const course = await db.Course.findOne({
         where: { id },
         include: [
@@ -155,7 +153,6 @@ export default function initCoursesController(db) {
 
   const create = async (request, response) => {
     try {
-      console.log(request.body);
       const formData = request.body;
       const sessionFieldNameArr = ['no', 'date', 'startTime', 'endTime', 'limit', 'isChargeable', 'sessionType'];
 
@@ -169,7 +166,6 @@ export default function initCoursesController(db) {
         tempObj.endDatetime = moment(`${tempObj.date} ${tempObj.endTime}`);
         sessionsArr.push(tempObj);
       }
-      console.log(sessionsArr);
 
       // Get first and last date
       const courseStart = moment.min(formData.sessionsdate.map((x) => moment(x)));
@@ -201,7 +197,7 @@ export default function initCoursesController(db) {
         location: formData.location,
         limit: formData.limit,
       });
-      console.log(newCourse);
+
       // Create sessions
       sessionsArr.forEach(async (session) => {
         const newSession = await newCourse.createSession({

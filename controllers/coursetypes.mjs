@@ -13,7 +13,6 @@ export default function initCoursetypesController(db) {
 
   const courseLevelIndex = async (request, response) => {
     try {
-      console.log('ajax req came in');
       // TO VERIFY
       const learningPathway = request.params;
       const levels = await db.Coursetype.findAll({

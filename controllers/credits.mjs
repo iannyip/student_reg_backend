@@ -129,7 +129,6 @@ export default function initCreditsController(db) {
   const edit = async (request, response) => {
     try {
       const { id } = request.params;
-      console.log(id);
 
       const credit = await db.Credit.findOne({
         where: { id },
@@ -147,7 +146,6 @@ export default function initCreditsController(db) {
         where: { is_parent: true },
         attributes: ['id', 'name'],
       });
-      console.log(credit);
       const formMeta = {
         title: 'Edit Credit Purchase',
         notes: 'Warning: Make sure you know what you are dong.',
@@ -220,7 +218,7 @@ export default function initCreditsController(db) {
     try {
       const { id } = request.params;
       const inData = request.body;
-      console.log(inData);
+
       await db.Credit.update(
         {
           code: inData.code,
