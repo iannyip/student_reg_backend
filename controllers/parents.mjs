@@ -133,16 +133,12 @@ export default function initParentsController(db) {
         where: { id },
         include: {
           model: db.User,
-          attributes: ['id', 'name', 'mobile', 'email'],
+          attributes: ['name', 'mobile', 'email'],
         },
-      });
-      const parentList = await db.User.findAll({
-        where: { is_parent: true },
-        attributes: ['id', 'name'],
       });
 
       const formMeta = {
-        title: `Edit parent: ${parent.name}`,
+        title: `Edit parent: ${parent.user.name}`,
         notes: '',
         formAction: `/parent/edit/${id}?_method=PUT`,
         method: 'post',
@@ -151,42 +147,48 @@ export default function initParentsController(db) {
         onCancel: `/parent/${id}`,
         breadcrumbs: [
           { text: 'students', href: '/students/' },
-          { text: `${parent.name}`, href: `/parent/${id}` },
+          { text: `${parent.user.name}`, href: `/parent/${id}` },
           { text: 'edit', href: '' },
         ],
         fields: [
           {
             name: 'name',
-            label: 'Student Name',
+            label: 'Parent Name',
             type: 'text',
             placeholder: 'Full Name',
-            value: parent.name,
+            value: parent.user.name,
           },
           {
-            name: 'parentName',
-            label: 'Parent Name',
-            type: 'select',
-            options: parentList,
-            placeholder: 'Select from dropdown',
-            value: parent.user.name, // to figure out
-          },
-          {
-            name: 'dob',
-            label: 'Date of Birth',
-            type: 'date',
-            placeholder: '',
-            value: moment(parent.dob).format('YYYY-MM-DD'),
-          },
-          {
-            name: 'additionalInfo',
-            label: 'Additional Information',
+            name: 'mobile',
+            label: 'Mobile',
             type: 'text',
-            placeholder: 'Allergies, learning aids',
-            value: parent.additionalInfo,
+            placeholder: 'Mobile No',
+            value: parent.user.mobile,
+          },
+          {
+            name: 'email',
+            label: 'Email',
+            type: 'email',
+            placeholder: 'email',
+            value: parent.user.email,
+          },
+          {
+            name: 'address',
+            label: 'Address',
+            type: 'text',
+            placeholder: '',
+            value: parent.address,
+          },
+          {
+            name: 'postalCode',
+            label: 'Postal Code',
+            type: 'text',
+            placeholder: '',
+            value: parent.postalCode,
           },
         ],
       };
-      // response.send(student);
+      // response.send(parent);
       // response.send(formMeta);
       response.render('partial/formTemplate', { form: formMeta });
     } catch (error) {
@@ -198,23 +200,32 @@ export default function initParentsController(db) {
     try {
       const { id } = request.params;
       const inData = request.body;
-      console.log(inData);
-      console.log('received update PUT!');
 
-      const updatedStudent = await db.Student.update(
+      await db.Parent.update(
         {
-          name: inData.name,
-          dob: inData.dob,
-          additionalInfo: inData.additionalInfo,
-          parentId: inData.parentName,
+          address: inData.address,
+          postalCode: inData.postalCode,
         },
         { where: { id } },
       );
-      response.redirect(`/student/${id}`);
+
+      const updatedParent = await db.Parent.findOne({
+        where: { id },
+        include: db.User,
+      });
+
+      await db.User.update({
+        name: inData.name,
+        mobile: inData.mobile,
+        email: inData.email,
+      }, { where: { id: updatedParent.user.id } });
+
+      response.redirect(`/parent/${id}`);
     } catch (error) {
       console.log(error);
     }
   };
+
   // return all methods we define in an object
   return {
     index,
