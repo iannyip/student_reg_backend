@@ -25,7 +25,16 @@ export default function initCreditsController(db) {
       const { id } = request.params;
       const credit = await db.Credit.findOne({
         where: { id },
-        include: [db.Session, { model: db.User, attributes: ['id', 'name'] }],
+        include: [
+          { model: db.Session },
+          {
+            model: db.User,
+            attributes: ['id', 'name'],
+            include: {
+              model: db.Parent,
+              attributes: ['id'],
+            },
+          }],
       });
       // response.send(credit);
       response.render('purchases/credit', { credit, moment });
