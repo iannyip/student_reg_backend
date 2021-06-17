@@ -73,6 +73,8 @@ export default function bindRoutes(app) {
   app.get('/coursetypes/pathways', CoursetypesController.courseLevelIndex);
   app.get('/coursetypes/new', CoursetypesController.createForm);
   app.post('/coursetypes/new', CoursetypesController.create);
+  app.get('/coursetypes/edit/:id', CoursetypesController.edit);
+  app.put('/coursetypes/edit/:id', CoursetypesController.update);
 
   // CREDITS
   app.get('/credits', CreditsController.index);

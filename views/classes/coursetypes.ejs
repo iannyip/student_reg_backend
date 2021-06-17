@@ -33,14 +33,16 @@
                 <th scope="col">Learning Pathway</th>
                 <th scope="col">Level</th>
                 <th scope="col">Order</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               <% allCoursetypes.forEach(coursetype => { %>
               <tr>
-                <td><%= coursetype.learningPathway %></th>
-                <td><%= coursetype.level %></th>
-                <td><%= coursetype.order %></th>
+                <td><%= coursetype.learningPathway %></td>
+                <td><%= coursetype.level %></td>
+                <td><%= coursetype.order %></td>
+                <td><a href="/coursetypes/edit/<%= coursetype.id %>"><i class="bi bi-pencil-fill"></i></a></td>
               </tr>
               <% }); %>
             </tbody>
