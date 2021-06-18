@@ -10,8 +10,7 @@ export default function initUsersController(db) {
 
   const createLogin = async (request, response) => {
     try {
-      console.log('login page');
-      response.render('auth/createLogin');
+      response.render('auth/createLogin', { errorClass: 'd-none' });
     } catch (error) {
       console.log(error);
     }
@@ -19,9 +18,18 @@ export default function initUsersController(db) {
 
   const verifyLogin = async (request, response) => {
     try {
-      await db.User.create({
-        // To add create code here
+      console.log(request.body);
+      const { email, password } = request.body;
+      const user = await db.User.findOne({
+        where: { email, password },
       });
+      console.log(user);
+      if (user === null) {
+        response.render('auth/createLogin', { errorClass: 'd-block' });
+      } else {
+        response.cookie('name', user.id);
+        response.redirect('/courses');
+      }
     } catch (error) {
       console.log(error);
     }

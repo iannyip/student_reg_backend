@@ -8,7 +8,7 @@
       <div class="row h-75 align-items-center justify-content-center">
         <div class="col-lg-4 col-md-6 row text-center">
           <img class="my-4" src="nullspaceLogo.png" alt="heaven" />
-          <form action="">
+          <form action="/login" method="post">
             <input
               name="email"
               class="form-control my-2"
@@ -16,12 +16,15 @@
               placeholder="login"
             />
             <input
-              name="email"
+              name="password"
               class="form-control my-2"
-              type="text"
+              type="password"
               placeholder="password"
             />
-            <button class="btn btn-dark w-100">Login</button>
+            <button type="submit" class="btn btn-dark w-100">Login</button>
+            <div class="my-2 p-1 alert alert-danger <%= errorClass %>">
+              Login failed
+            </div>
           </form>
         </div>
       </div>
