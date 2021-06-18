@@ -21,13 +21,13 @@ export default function initUsersController(db) {
       console.log(request.body);
       const { email, password } = request.body;
       const user = await db.User.findOne({
-        where: { email, password },
+        where: { email },
       });
       console.log(user);
-      if (user === null) {
+      if (user === null || password !== user.password) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       } else {
-        response.cookie('name', user.id);
+        response.cookie('userId', user.id);
         response.redirect('/courses');
       }
     } catch (error) {
