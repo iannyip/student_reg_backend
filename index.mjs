@@ -2,7 +2,15 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 
+import jsSha from 'jssha';
 import bindRoutes from './routes.mjs';
+
+const hash = (input) => {
+  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  const unhashedString = `${input}`;
+  shaObj.update(unhashedString);
+  return shaObj.getHash('HEX');
+};
 
 // Initialise Express instance
 const app = express();
@@ -16,6 +24,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 // Expose the files stored in the public folder
 app.use(express.static('public'));
+// Custom Middleware to verify hash and set request flag
+app.use((request, response, next) => {
+  request.isUserLoggedIn = false;
+  if (request.cookies.session && request.cookies.userId) {
+    const hashedUser = hash(request.cookies.userId);
+    if (request.cookies.session === hashedUser) {
+      request.isUserLoggedIn = true;
+    }
+  }
+  next();
+});
 
 // Bind route definitions to the Express application
 bindRoutes(app);
