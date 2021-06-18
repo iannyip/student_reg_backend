@@ -1,3 +1,18 @@
+import jsSha from 'jssha';
+
+const hasher = (input) => {
+  // create new SHA object
+  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+
+  // create an unhashed cookie string based on user ID and salt
+  const unhashedString = `${input}`;
+
+  // generate a hashed cookie string using SHA object
+  shaObj.update(unhashedString);
+
+  return shaObj.getHash('HEX');
+};
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
@@ -18,6 +33,9 @@ module.exports = {
       },
       password: {
         type: Sequelize.STRING,
+        set(value) {
+          this.setDataValue('password', hasher(value));
+        },
       },
       is_admin: {
         type: Sequelize.BOOLEAN,
