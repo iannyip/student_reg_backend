@@ -1,3 +1,18 @@
+import jsSha from 'jssha';
+
+const hash = (input) => {
+  // create new SHA object
+  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+
+  // create an unhashed cookie string based on user ID and salt
+  const unhashedString = `${input}`;
+
+  // generate a hashed cookie string using SHA object
+  shaObj.update(unhashedString);
+
+  return shaObj.getHash('HEX');
+};
+
 export default function initUsersController(db) {
   const index = async (request, response) => {
     try {
@@ -28,6 +43,7 @@ export default function initUsersController(db) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       } else {
         response.cookie('userId', user.id);
+        response.cookie('session', hash(user.id));
         response.redirect('/courses');
       }
     } catch (error) {
