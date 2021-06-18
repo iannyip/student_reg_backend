@@ -89,4 +89,8 @@ export default function bindRoutes(app) {
   app.post('/credits/new', CreditsController.create);
   app.get('/credit/edit/:id', CreditsController.edit);
   app.put('/credit/edit/:id', CreditsController.update);
+
+  // LOGIN
+  app.get('/login', UsersController.createLogin);
+  app.post('/login', UsersController.verifyLogin);
 }
