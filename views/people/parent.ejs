@@ -20,6 +20,7 @@
       <a class="btn btn-primary" href="/parent/edit/<%= parent.id %>"
         >Edit parent</a
       >
+      <a class="btn btn-secondary" href="#">Add student</a>
       <h1><%= parent.name %></h1>
       <i>parent</i>
       <hr class="my-4" />
@@ -47,30 +48,22 @@
             </tbody>
           </table>
         </div>
-        <div class="col-md-6">
-          <p>To convert each child into a card</p>
-          <div class="col">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Child</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Learning Pathways</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% parent.students.forEach(student => { %>
-                <tr>
-                  <th>
-                    <a href="/student/<%= student.id %>"><%= student.name %></a>
-                  </th>
-                  <td><%= moment(student.dob).fromNow(true) %></td>
-                  <td><%= student.dataValues.learningPathways %></td>
-                </tr>
-                <% }); %>
-              </tbody>
-            </table>
+        <div class="col-md-6 row mb-auto">
+          <% parent.students.forEach(student => { %>
+          <div class="card mx-2" style="width: 10rem">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="/student/<%= student.id%>"><%= student.name %></a>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                Aged <%= moment(student.dob).fromNow(true) %>
+              </h6>
+              <p class="card-text">
+                <%= student.dataValues.learningPathways %>
+              </p>
+            </div>
           </div>
+          <% }); %>
         </div>
       </div>
       <!-- Children info-->
