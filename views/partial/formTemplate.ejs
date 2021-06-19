@@ -30,10 +30,12 @@
 
           <form action="<%= form.formAction%>" method="<%= form.method%>">
             <% form.fields.forEach(field => { %>
+
             <div class="row mb-3">
               <label for="<%= field.name%>" class="col-sm-3 col-form-label"
                 ><%= field.label %>
               </label>
+
               <div class="col-sm-9">
                 <% if (field.type === 'select') { %>
 
