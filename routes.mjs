@@ -97,4 +97,5 @@ export default function bindRoutes(app) {
   // LOGIN
   app.get('/login', UsersController.createLogin);
   app.post('/login', UsersController.verifyLogin);
+  app.delete('/logout', UsersController.logout);
 }

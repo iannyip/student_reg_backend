@@ -62,11 +62,22 @@ export default function initUsersController(db) {
     }
   };
 
+  const logout = async (request, response) => {
+    try {
+      response.clearCookie('userId');
+      response.clearCookie('session');
+      response.redirect('/login');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // return all methods we define in an object
   return {
     index,
     create,
     createLogin,
     verifyLogin,
+    logout,
   };
 }
