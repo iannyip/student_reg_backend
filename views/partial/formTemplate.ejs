@@ -52,16 +52,11 @@
                   <option value="<%=option.id%>"><%=option.name%></option>
                   <% } %> <% }) %>
                 </select>
-                <% } else { %>
-                <input
-                  type="<%= field.type %>"
-                  class="form-control"
-                  id="<%= field.name%>"
-                  name="<%= field.name%>"
-                  placeholder="<%= field.placeholder %>"
-                  value="<%= field.value %>"
-                />
-                <% } %>
+                <% } else { %> <input type="<%= field.type %>"
+                class="form-control" id="<%= field.name%>" name="<%=
+                field.name%>" placeholder="<%= field.placeholder %>" value="<%=
+                field.value %>" <% ("<%= nfield.readonly %>" === true) ?
+                readonly : "" %> /> <% } %>
               </div>
             </div>
             <% }); %>

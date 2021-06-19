@@ -6,7 +6,9 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
-      <a class="btn btn-primary" href="#">Add student</a>
+      <a class="btn btn-primary" href="/course/register/<%= course.id %>"
+        >Register student</a
+      >
       <a class="btn btn-primary" href="#">Edit course</a>
       <h1><%= course.name %></h1>
       <hr class="my-4" />
