@@ -65,7 +65,13 @@ export default function initCoursesController(db) {
           db.Coursetype,
           {
             model: db.Session,
-            include: db.Student,
+            include: {
+              model: db.Student,
+              attributes: ['id', 'name'],
+              through: {
+                attributes: [],
+              },
+            },
           },
         ],
       });

@@ -97,8 +97,16 @@
                   moment(course.sessions[i].endDatetime).format('HH:mm') %>
                 </td>
                 <td><%= course.sessions[i].location%></td>
-                <td>students list</td>
-                <td>instructor</td>
+                <td>
+                  <% course.sessions[i].students.forEach(stu => { %>
+                  <a href="/student/<%=stu.id%>"><%= stu.name %></a>, <% } ); %>
+                </td>
+                <td>
+                  <% course.sessions[i].instructor.instructor.forEach(int => {
+                  %>
+                  <a href="/instructor/<%=int.id%>"><%= int.name %></a>
+                  <% } ); %>
+                </td>
               </tr>
               <% }; %>
             </tbody>

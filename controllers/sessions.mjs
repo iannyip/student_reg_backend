@@ -165,6 +165,8 @@ export default function initSessionsController(db) {
         instructor: instructorObj,
       });
 
+      // TO CREATE ASSIGNMENT FOR A GIVEN INSTRUCTOR
+
       response.redirect(`/course/${id}`);
     } catch (error) {
       console.log(error);
