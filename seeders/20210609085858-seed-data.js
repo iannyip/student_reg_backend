@@ -1,22 +1,31 @@
+// import jsSha from 'jssha';
+const jsSha = require('jssha');
+
+const hash = (input) => {
+  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  const unhashedString = `${input}`;
+  shaObj.update(unhashedString);
+  return shaObj.getHash('HEX');
+};
 module.exports = {
   up: async (queryInterface) => {
     try {
     // Seed users
       const seedUsers = [
         {
-          name: 'userA', mobile: 99999999, email: 'userA@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at: new Date(), updated_at: new Date(),
+          name: 'userA', mobile: 99999999, email: 'userA@gmail.com', password: hash('qwerty'), is_admin: false, is_parent: true, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'userB', mobile: 98888888, email: 'userB@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at: new Date(), updated_at: new Date(),
+          name: 'userB', mobile: 98888888, email: 'userB@gmail.com', password: hash('qwerty'), is_admin: false, is_parent: true, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'userC', mobile: 97777777, email: 'userC@gmail.com', password: 'qwerty', is_admin: false, is_parent: true, created_at: new Date(), updated_at: new Date(),
+          name: 'userC', mobile: 97777777, email: 'userC@gmail.com', password: hash('qwerty'), is_admin: false, is_parent: true, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'userD', mobile: 96666666, email: 'userD@gmail.com', password: 'qwerty', is_admin: false, is_parent: false, created_at: new Date(), updated_at: new Date(),
+          name: 'userD', mobile: 96666666, email: 'userD@gmail.com', password: hash('qwerty'), is_admin: false, is_parent: false, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'userE', mobile: 95555555, email: 'userE@gmail.com', password: 'qwerty', is_admin: true, is_parent: false, created_at: new Date(), updated_at: new Date(),
+          name: 'userE', mobile: 95555555, email: 'userE@gmail.com', password: hash('qwerty'), is_admin: true, is_parent: false, created_at: new Date(), updated_at: new Date(),
         },
       ];
       const [userA, userB, userC, userD, userE] = await queryInterface.bulkInsert('users', seedUsers, { returning: true });
