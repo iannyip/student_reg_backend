@@ -66,6 +66,36 @@
           <% }); %>
         </div>
       </div>
+      <!-- Children course history -->
+      <div class="row">
+        <!-- Course history -->
+        <h3 class="my-4">Course History</h3>
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Pathway</th>
+                <th scope="col">Course</th>
+                <th scope="col">Name</th>
+                <th scope="col">Attendance</th>
+                <th scope="col">Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% parent.students.forEach(student => { %> <%
+              student.courses.forEach(course => { %>
+              <tr>
+                <td><%= course.coursetype.learningPathway %></td>
+                <td><%= course.coursetype.level %></td>
+                <td><a href="/course/<%=course.id%>"><%= course.name %></a></td>
+                <td>attendance</td>
+                <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
+                <% }); }); %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <!-- Children info-->
       <div class="row">
         <h3 class="my-4">Purchases</h3>
@@ -88,34 +118,6 @@
                 </td>
               </tr>
               <% }); %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- Children course history -->
-      <div class="row">
-        <!-- Course history -->
-        <h3 class="my-4">Course History</h3>
-        <div class="col">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Learning Pathway</th>
-                <th scope="col">Course</th>
-                <th scope="col">Name</th>
-                <th scope="col">Completed</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% parent.students.forEach(student => { %> <%
-              student.courses.forEach(course => { %>
-              <tr>
-                <td><%= course.coursetype.learningPathway %></td>
-                <td><%= course.coursetype.level %></td>
-                <td>Todo</td>
-                <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
-                <% }); }); %>
-              </tr>
             </tbody>
           </table>
         </div>
