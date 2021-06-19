@@ -36,7 +36,7 @@ app.use(express.static('public'));
 app.use((request, response, next) => {
   request.isUserLoggedIn = false;
   if (request.cookies.session && request.cookies.userId) {
-    const hashedUser = hash(request.cookies.userId);
+    const hashedUser = saltyHash(request.cookies.userId);
     if (request.cookies.session === hashedUser) {
       request.isUserLoggedIn = true;
     }
