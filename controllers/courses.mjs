@@ -337,12 +337,28 @@ export default function initCoursesController(db) {
       console.log(id);
       console.log(inData);
 
-      const course = await db.Course.findOne({ where: { id } });
+      const course = await db.Course.findOne({
+        where: { id },
+        include: db.Session,
+      });
+      console.log(course);
+      // Create a new signup in signups table
       const newSignup = await course.createSignup({
         studentId: inData.student,
         comments: '',
         status: 'registered',
       });
+      // Create a new attendance in attendances table
+      for (const session of course.sessions) {
+        await db.Attendance.create({
+          sessionId: session.id,
+          studentId: inData.student,
+          comments: '',
+          marked: false,
+          status: 'registered',
+        });
+      }
+
       response.redirect(`/course/${id}`);
     } catch (error) {
       console.log(error);
