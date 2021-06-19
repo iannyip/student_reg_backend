@@ -43,21 +43,7 @@ export default function initCoursesController(db) {
             attributes: ['learningPathway', 'level'],
           },
           {
-            // 2nd table: sessions
-            model: db.Session,
-            attributes: ['id'],
-            //   include: {
-            //     model: db.Instructor,
-            //     attributes: ['id'],
-            //     through: { attributes: [] }, // this excludes the through table
-            //     include: {
-            //       model: db.User,
-            //       attributes: ['name'],
-            //     },
-            //   },
-          },
-          {
-            // 3rd table: signups
+            // 2nd table: signups
             model: db.Signup,
             attributes: ['id'],
           },
