@@ -243,7 +243,7 @@ module.exports = {
 
         //  add course
         const instructorOption = i % 2;
-        const instructorArrOptions = [{ id: 1, name: 'User D' }, { id: 2, name: 'User E' }];
+        const instructorArrOptions = [{ id: 1, name: 'UserD' }, { id: 2, name: 'UserE' }];
         seedCourses.push({
           name: `${randCourseType.learning_pathway} ${randCourseType.level}`,
           start_datetime: new Date(2020, cDates[i].month, cDates[i].days[0], timeHour[0], timeMin[0], 0, 0),
