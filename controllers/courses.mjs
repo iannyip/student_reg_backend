@@ -199,6 +199,9 @@ export default function initCoursesController(db) {
         courseEnd.minutes(splitTime(distinctEndTime[0])[1]);
       }
 
+      // Create blank obj for instructor columns
+      const instructorObj = { instructor: [] };
+
       // Find out which coursetype
       const coursetype = await db.Coursetype.findOne({
         where: {
@@ -213,6 +216,7 @@ export default function initCoursesController(db) {
         endDatetime: courseEnd.toDate(),
         location: formData.location,
         limit: formData.limit,
+        instructor: instructorObj,
       });
 
       // Create sessions
@@ -224,9 +228,10 @@ export default function initCoursesController(db) {
           limit: session.limit,
           isChargeable: session.isChargeable === 'on',
           sessionType: session.sessionType,
+          instructor: instructorObj,
         });
       });
-      response.send(200);
+      // response.send(200);
       response.redirect(`/course/${newCourse.id}`);
     } catch (error) {
       console.log(error);
