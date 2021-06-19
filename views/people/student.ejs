@@ -64,9 +64,10 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Learning Pathway</th>
+                <th scope="col">Pathway</th>
                 <th scope="col">Course</th>
                 <th scope="col">Name</th>
+                <th scope="col">Attendance</th>
                 <th scope="col">Completed</th>
               </tr>
             </thead>
@@ -75,7 +76,10 @@
               <tr>
                 <td><%= course.coursetype.learningPathway %></td>
                 <td><%= course.coursetype.level %></td>
-                <td>Name</td>
+                <td>
+                  <a href="/course/<%= course.id %>"><%= course.name %></a>
+                </td>
+                <td>attendance</td>
                 <td><%= moment(course.endDatetime).format('DD MMM yyyy') %></td>
               </tr>
               <% }); %>
