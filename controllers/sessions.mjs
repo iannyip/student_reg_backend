@@ -30,7 +30,7 @@ export default function initSessionsController(db) {
 
       const formMeta = {
         title: `Add session for ${course.name}`,
-        notes: '',
+        notes: 'If instructor is assigned later, leave blank',
         formAction: `/course/addSession/${id}`,
         method: 'post',
         submitVal: 'Add Session',
@@ -142,14 +142,27 @@ export default function initSessionsController(db) {
         );
       }
 
+      // Find instructor
+      const instructorObj = { instructor: [] };
+      if (formData.instructor !== '') {
+        const instructor = await db.Instructor.findOne({ where: { id: formData.instructor }, include: { model: db.User, attributes: ['name'] } });
+        if (instructor !== null) {
+          instructorObj.instructor.push({
+            id: formData.instructor,
+            name: instructor.user.name,
+          });
+        }
+      }
+
       // Create sessions
       const newSession = await course.createSession({
         startDatetime: moment(`${formData.date} ${formData.startTime}`),
         endDatetime: moment(`${formData.date} ${formData.endTime}`),
         location: formData.location,
         limit: formData.limit,
-        isChargeable: formData.isChargeable === 1,
+        isChargeable: formData.isChargeable === '1',
         sessionType: formData.sessionType,
+        instructor: instructorObj,
       });
 
       response.redirect(`/course/${id}`);
