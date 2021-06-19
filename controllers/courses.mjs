@@ -312,6 +312,13 @@ export default function initCoursesController(db) {
             placeholder: 'Select from dropdown',
             readonly: false,
           },
+          {
+            name: 'comments',
+            label: 'Comment',
+            type: 'text',
+            placeholder: 'Any additional info',
+            readonly: false,
+          },
         ],
       };
 
@@ -329,6 +336,14 @@ export default function initCoursesController(db) {
       const inData = request.body;
       console.log(id);
       console.log(inData);
+
+      const course = await db.Course.findOne({ where: { id } });
+      const newSignup = await course.createSignup({
+        studentId: inData.student,
+        comments: '',
+        status: 'registered',
+      });
+      response.redirect(`/course/${id}`);
     } catch (error) {
       console.log(error);
     }
