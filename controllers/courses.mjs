@@ -9,6 +9,11 @@ const splitTime = (timestring) => {
 export default function initCoursesController(db) {
   const index = async (request, response) => {
     try {
+      // Check if user is auth
+      if (request.isUserLoggedIn === false) {
+        console.log('not  good at all');
+        response.redirect('/login');
+      }
       // Get array of pathways for create course dropdown
       const pathways = await db.Coursetype.findAll({
         attributes: ['learningPathway'],
