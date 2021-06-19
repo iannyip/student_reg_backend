@@ -1,6 +1,6 @@
 import jsSha from 'jssha';
 
-const { SALT, USER } = process.env;
+const { SALT } = process.env;
 const saltyHash = (input) => {
   const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
   const unhashedString = `${input}-${SALT}`;
@@ -57,8 +57,6 @@ export default function initUsersController(db) {
       if (user === null || hash(password) !== user.password) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       } else {
-        console.log(SALT);
-        console.log(USER);
         response.cookie('userId', user.id);
         response.cookie('session', saltyHash(user.id));
         response.redirect('/courses');
