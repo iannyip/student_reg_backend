@@ -1,5 +1,12 @@
 import jsSha from 'jssha';
 
+const { SALT } = process.env;
+const saltyHash = (input) => {
+  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  const unhashedString = `${input}-${SALT}`;
+  shaObj.update(unhashedString);
+  return shaObj.getHash('HEX');
+};
 const hash = (input) => {
   const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
   const unhashedString = `${input}`;
@@ -51,7 +58,7 @@ export default function initUsersController(db) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       } else {
         response.cookie('userId', user.id);
-        response.cookie('session', hash(user.id));
+        response.cookie('session', saltyHash(user.id));
         response.redirect('/courses');
       }
     } catch (error) {

@@ -5,6 +5,14 @@ import methodOverride from 'method-override';
 import jsSha from 'jssha';
 import bindRoutes from './routes.mjs';
 
+const { SALT } = process.env;
+const saltyHash = (input) => {
+  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  const unhashedString = `${input}-${SALT}`;
+  shaObj.update(unhashedString);
+  return shaObj.getHash('HEX');
+};
+
 const hash = (input) => {
   const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
   const unhashedString = `${input}`;
