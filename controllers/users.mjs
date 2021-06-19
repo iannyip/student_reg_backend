@@ -50,7 +50,7 @@ export default function initUsersController(db) {
         where: { email },
       });
       console.log(user);
-      if (user === null || password !== user.password) {
+      if (user === null || hash(password) !== user.password) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       } else {
         response.cookie('userId', user.id);
