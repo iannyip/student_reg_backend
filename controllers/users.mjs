@@ -27,7 +27,6 @@ export default function initUsersController(db) {
         isAdmin: true,
         isParent: false,
       });
-      console.log(newUser);
       response.redirect('/courses');
     } catch (error) {
       console.log(error);
@@ -44,12 +43,10 @@ export default function initUsersController(db) {
 
   const verifyLogin = async (request, response) => {
     try {
-      console.log(request.body);
       const { email, password } = request.body;
       const user = await db.User.findOne({
         where: { email },
       });
-      console.log(user);
       if (user === null || hash(password) !== user.password) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       } else {
