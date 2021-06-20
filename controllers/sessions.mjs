@@ -173,10 +173,26 @@ export default function initSessionsController(db) {
     }
   };
 
+  const show = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const session = await db.Session.findOne({
+        where: { id },
+        include: [db.Student, db.Course],
+      });
+
+      // response.send(session);
+      response.render('classes/session', { session, moment });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // return all methods we define in an object
   return {
     index,
     createForm,
     create,
+    show,
   };
 }

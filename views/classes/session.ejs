@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <!-- Breadcrumbs row -->
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/courses">courses</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/course/<%= session.course.id%>"
+                ><%= session.course.name %></a
+              >
+            </li>
+            <li class="breadcrumb-item active">session</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- Buttons row -->
+      <div class="row">
+        <div class="col">
+          <a class="btn btn-secondary" href="#">Register student</a>
+          <a class="btn btn-secondary" href="#">Edit session</a>
+          <p>TODO: enable edit, attendance, cancelling, package pmt</p>
+        </div>
+      </div>
+
+      <h1><%= session.course.name %></h1>
+      <h3>
+        <%= moment(session.startDatetime).format('d MMM YYYY (dddd)') %>, <%=
+        moment(session.startDatetime).format('h.mm a')%> to <%=
+        moment(session.endDatetime).format('h.mm a')%>
+      </h3>
+      <hr class="my-4" />
+      <!-- Session meta info row -->
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th>Instructor</th>
+                <td>
+                  <% if (session.instructor.instructor.length == 0 ) { %>
+                  <span><a href="#">Add instructor</a></span>
+                  <% } else {%> <% session.instructor.instructor.forEach(int =>
+                  { %>
+                  <a href="#"><span><%= int.name %></span></a>
+                  <% }); %> <% } %>
+                </td>
+              </tr>
+              <tr>
+                <th>Location</th>
+                <td><%= session.location%></td>
+              </tr>
+              <tr>
+                <th>Class Limit</th>
+                <td><%= session.limit%></td>
+              </tr>
+              <tr>
+                <th>Chargeable?</th>
+                <td><%= session.isChargeable%></td>
+              </tr>
+              <tr>
+                <th>Comments</th>
+                <td><%= session.comments%></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Students info -->
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Student</th>
+              <th scope="col">Status</th>
+              <th scope="col">Attendance</th>
+              <th scope="col">Payment</th>
+              <th scope="col">Cancel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% session.students.forEach(student => { %>
+            <tr>
+              <td>
+                <a href="/student/<%= student.id %>"><%= student.name %></a>
+              </td>
+              <td><%= student.attendance.status %></td>
+              <td>
+                <div class="form-check form-switch">
+                  <% if (student.attendance.status === 'completed') { %>
+                  <input
+                    name="sameName"
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                  />
+                  <% } else { %>
+                  <input
+                    name="sameName"
+                    class="form-check-input"
+                    type="checkbox"
+                  />
+                  <% } %>
+                </div>
+              </td>
+              <td>
+                <% if (student.attendance.payment === null) {%>
+                <a href="">Add package</a>
+                <% } else { %>
+                <a href="#"><%= student.attendance.payment %></a>
+                <% } %>
+              </td>
+              <td><a href="#">Cancel</a></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <div class="col">
+          <button class="btn btn-secondary">Update attendance</button>
+        </div>
+      </div>
+    </div>
+    <%- include('../partial/requiredJS') %>
+  </body>
+</html>

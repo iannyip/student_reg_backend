@@ -36,8 +36,8 @@ export default function bindRoutes(app) {
 
   // define your route matchers here using app
   app.get('/', (request, response) => {
-    // response.redirect('students');
-    response.send('root page. building in progress!');
+    response.redirect('/courses');
+    // response.send('root page. building in progress!');
   });
 
   // DASHBOARD
@@ -88,6 +88,8 @@ export default function bindRoutes(app) {
 
   app.get('/course/addSession/:id', SessionsController.createForm);
   app.post('/course/addSession/:id', SessionsController.create);
+
+  app.get('/session/:id', SessionsController.show);
 
   // CREDITS
   app.get('/credits', CreditsController.index);
