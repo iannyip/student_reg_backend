@@ -102,6 +102,11 @@ export default function bindRoutes(app) {
   app.put('/credit/edit/:id', CreditsController.update);
 
   app.get('/items', ItemsController.index);
+  // app.get('/items/new', ItemsController.createForm);
+  // app.post('/items/new', ItemsController.create);
+  app.get('/item/:id', ItemsController.show);
+  // app.get('/item/edit/:id', ItemsController.show);
+  // app.put('/item/edit/:id', ItemsController.show);
 
   // LOGIN
   app.get('/login', UsersController.createLogin);

@@ -24,9 +24,23 @@ export default function initItemsController(db) {
       console.log(error);
     }
   };
+  const show = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const item = await db.Item.findOne({
+        where: { id },
+        include: db.Coursetype,
+      });
+      // response.send(item);
+      response.render('purchases/item', { item });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // return all methods we define in an object
   return {
     index,
+    show,
   };
 }

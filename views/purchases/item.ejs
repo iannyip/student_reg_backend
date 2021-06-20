@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <!-- Breadcrumb row -->
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/credits">credits</a></li>
+            <li class="breadcrumb-item"><a href="/items">credit types</a></li>
+            <li class="breadcrumb-item active"><%= item.name%></li>
+          </ol>
+        </nav>
+      </div>
+
+      <h1>All Credit Types</h1>
+      <!-- buttons row -->
+      <div class="row">
+        <div class="col">
+          <a href="/items/new" class="btn btn-secondary">Edit</a>
+          <a href="/items/new" class="btn btn-secondary"
+            >Add applicable course type</a
+          >
+        </div>
+      </div>
+      <hr class="my-4" />
+
+      <!-- credits meta info -->
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th>Credits in Package</th>
+                <td><%= item.creditCount %></td>
+              </tr>
+              <tr>
+                <th>Price</th>
+                <td>$ <%= item.price %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Applicable sessions -->
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Learning Pathway</th>
+                <th>Level</th>
+                <th>Order</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% item.coursetypes.forEach(coursetype => { %>
+              <tr>
+                <td><%= coursetype.learningPathway%></td>
+                <td><%= coursetype.level%></td>
+                <td><%= coursetype.order%></td>
+                <td>
+                  <a href="#"><i class="bi bi-trash-fill"></i></a>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%- include('../partial/requiredJS') %>
+  </body>
+</html>
