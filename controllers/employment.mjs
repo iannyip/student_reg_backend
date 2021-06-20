@@ -65,11 +65,83 @@ export default function initEmploymentController(db) {
       console.log(error);
     }
   };
+  const edit = async (request, response) => {
+    try {
+      const { id } = request.params;
+
+      const employment = await db.Employment.findOne({
+        where: { id },
+      });
+
+      const formMeta = {
+        title: `Edit employment: ${employment.type} - ${employment.name}`,
+        notes: 'Only future assignments will be affected by this change',
+        formAction: `/employment/edit/${id}?_method=PUT`,
+        method: 'post',
+        submitVal: 'Update',
+        cancelVal: 'Cancel',
+        onCancel: '/employment',
+        breadcrumbs: [
+          { text: 'instructors', href: '/instructors' },
+          { text: 'employment', href: '/employment' },
+          { text: 'edit employment type', href: '' },
+        ],
+        fields: [
+          {
+            name: 'type',
+            label: 'Type',
+            type: 'text',
+            placeholder: 'Full Time / Part Time',
+            value: employment.type,
+          },
+          {
+            name: 'name',
+            label: 'name',
+            type: 'text',
+            placeholder: 'Scheme name',
+            value: employment.name,
+          },
+          {
+            name: 'rate',
+            label: 'Rate',
+            type: 'number',
+            placeholder: '',
+            value: employment.rate,
+          },
+        ],
+      };
+      // response.send(employment);
+      // response.send(formMeta);
+      response.render('partial/formTemplate', { form: formMeta });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const update = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const inData = request.body;
+      await db.Employment.update(
+        {
+          type: inData.type,
+          name: inData.name,
+          rate: inData.rate,
+        },
+        { where: { id } },
+      );
+      response.redirect('/employment');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // return all methods we define in an object
   return {
     index,
     createForm,
     create,
+    edit,
+    update,
   };
 }

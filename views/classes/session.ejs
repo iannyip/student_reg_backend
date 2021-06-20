@@ -48,10 +48,9 @@
                 <td>
                   <% if (session.instructor.instructor.length == 0 ) { %>
                   <span><a href="#">Add instructor</a></span>
-                  <% } else {%> <% session.instructor.instructor.forEach(int =>
-                  { %>
+                  <% } else { session.instructor.instructor.forEach(int => { %>
                   <a href="#"><span><%= int.name %></span></a>
-                  <% }); %> <% } %>
+                  <% }); } %>
                 </td>
               </tr>
               <tr>
