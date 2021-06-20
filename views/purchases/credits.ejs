@@ -6,6 +6,7 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <!-- Breadcrumb row -->
       <div class="row">
         <nav>
           <ol class="breadcrumb">
@@ -15,14 +16,17 @@
       </div>
 
       <h1>All Credits</h1>
-
+      <!-- buttons row -->
       <div class="row">
         <div class="col">
           <a href="/credits/new" class="btn btn-primary">Add new purchase</a>
+          <a href="/items" class="btn btn-primary">Package types</a>
           <p>TODO: button for package types: view, create, update</p>
         </div>
       </div>
       <hr class="my-4" />
+
+      <!-- credits table row -->
       <div class="row">
         <div class="col">
           <table class="table">

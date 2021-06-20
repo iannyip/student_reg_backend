@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <!-- Breadcrumb row -->
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/credits">credits</a></li>
+            <li class="breadcrumb-item active">credit types</li>
+          </ol>
+        </nav>
+      </div>
+
+      <h1>All Credit Types</h1>
+      <!-- buttons row -->
+      <div class="row">
+        <div class="col">
+          <a href="/items/new" class="btn btn-secondary">Add new credit type</a>
+        </div>
+      </div>
+      <hr class="my-4" />
+
+      <!-- credits table row -->
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Credits</th>
+                <th scope="col">Price</th>
+                <th scope="col">Validity</th>
+                <th scope="col">Applicable pathways</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% allItems.forEach(item => { %>
+              <tr>
+                <td><%= item.name%></td>
+                <td><%= item.creditCount %></td>
+                <td>$ <%= item.price %></td>
+                <td>To add</td>
+                <td>
+                  <% item.dataValues.coursetypesArr.forEach(item =>{ %>
+                  <span><%= item %>, </span>
+                  <%});%>
+                </td>
+                <td>
+                  <a href="#"><i class="bi bi-pencil-fill"></i></a>
+                </td>
+              </tr>
+
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%- include('../partial/requiredJS') %>
+  </body>
+</html>
