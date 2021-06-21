@@ -103,6 +103,77 @@ export default function initItemsController(db) {
       console.log(error);
     }
   };
+  const edit = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const item = await db.Item.findOne({ where: { id } });
+      const formMeta = {
+        title: 'Edit Credit Type',
+        notes: 'Changes will only apply to subsequent purchases',
+        formAction: `/item/edit/${item.id}?_method=PUT`,
+        method: 'post',
+        submitVal: 'Update',
+        cancelVal: 'Cancel',
+        onCancel: `/item/${item.id}`,
+        breadcrumbs: [
+          { text: 'credits', href: '/credits' },
+          { text: 'credit types', href: '/items' },
+          { text: `${item.name}`, href: `item/${item.id}` },
+          { text: 'edit', href: '' },
+        ],
+        fields: [
+          {
+            name: 'name',
+            label: 'Name',
+            type: 'text',
+            placeholder: '4-session package',
+            value: item.name,
+          },
+          {
+            name: 'creditCount',
+            label: 'No. of Credits',
+            type: 'number',
+            placeholder: '',
+            value: item.creditCount,
+          },
+          {
+            name: 'price',
+            label: 'Price ($)',
+            type: 'number',
+            placeholder: '',
+            value: item.price,
+          },
+          {
+            name: 'validity',
+            label: 'Validity (years)',
+            type: 'number',
+            placeholder: 'in years',
+            value: '',
+          },
+        ],
+      };
+      response.render('partial/formTemplate', { form: formMeta });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const update = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const inData = request.body;
+      await db.Item.update(
+        {
+          name: inData.name,
+          creditCount: inData.creditCount,
+          price: inData.price,
+        },
+        { where: { id } },
+      );
+      response.redirect(`/item/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // return all methods we define in an object
   return {
@@ -110,5 +181,7 @@ export default function initItemsController(db) {
     show,
     createForm,
     create,
+    edit,
+    update,
   };
 }
