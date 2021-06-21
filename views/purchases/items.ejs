@@ -44,7 +44,7 @@
                 <td><a href="/item/<%= item.id %>"><%= item.name%></a></td>
                 <td><%= item.creditCount %></td>
                 <td>$ <%= item.price %></td>
-                <td>To add</td>
+                <td><%= item.validity %> months</td>
                 <td>
                   <% item.dataValues.coursetypesArr.forEach(item =>{ %>
                   <span><%= item %>, </span>

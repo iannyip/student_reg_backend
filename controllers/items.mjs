@@ -76,9 +76,9 @@ export default function initItemsController(db) {
           },
           {
             name: 'validity',
-            label: 'Validity (years)',
+            label: 'Validity (months)',
             type: 'number',
-            placeholder: 'in years',
+            placeholder: 'in months',
             value: '',
           },
         ],
@@ -97,6 +97,7 @@ export default function initItemsController(db) {
         name: formData.name,
         creditCount: formData.creditCount,
         price: formData.price,
+        validity: formData.validity,
       });
       response.redirect(`/item/${newItem.id}`);
     } catch (error) {
@@ -145,10 +146,10 @@ export default function initItemsController(db) {
           },
           {
             name: 'validity',
-            label: 'Validity (years)',
+            label: 'Validity (months)',
             type: 'number',
-            placeholder: 'in years',
-            value: '',
+            placeholder: 'in months',
+            value: item.validity,
           },
         ],
       };
@@ -166,6 +167,7 @@ export default function initItemsController(db) {
           name: inData.name,
           creditCount: inData.creditCount,
           price: inData.price,
+          validity: inData.validity,
         },
         { where: { id } },
       );
