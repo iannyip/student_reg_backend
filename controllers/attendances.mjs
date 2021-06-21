@@ -11,6 +11,7 @@ export default function initAttendancesController(db) {
 
   const pmtForm = async (request, response) => {
     try {
+      // this id is the ATTENDANCE ID
       const { id } = request.params;
 
       // Find all credits associated parent of student

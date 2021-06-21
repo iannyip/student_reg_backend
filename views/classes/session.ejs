@@ -114,9 +114,7 @@
               </td>
               <td>
                 <% if (att.payment === null) {%>
-                <a href="/attendance/payment/<%= att.student.id%>"
-                  >Add package</a
-                >
+                <a href="/attendance/payment/<%= att.id%>">Add package</a>
                 <% } else { %>
                 <a href="/credit/<%= att.credit.id%>"><%= att.credit.code %></a>
                 <% } %>
