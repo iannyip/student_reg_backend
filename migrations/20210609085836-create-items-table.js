@@ -52,6 +52,9 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER,
       },
+      validity: {
+        type: Sequelize.FLOAT,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -169,6 +172,9 @@ module.exports = {
       },
       credit_total: {
         type: Sequelize.INTEGER,
+      },
+      purchase_date: {
+        type: Sequelize.DATE,
       },
       expiry: {
         type: Sequelize.DATE,

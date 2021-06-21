@@ -17,6 +17,9 @@ export default function initItemModel(sequelize, DataTypes) {
       price: {
         type: DataTypes.INTEGER,
       },
+      validity: {
+        type: DataTypes.FLOAT,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -28,6 +31,6 @@ export default function initItemModel(sequelize, DataTypes) {
     },
     {
       underscored: true,
-    }
+    },
   );
-};
+}

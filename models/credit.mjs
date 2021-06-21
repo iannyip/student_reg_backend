@@ -24,6 +24,9 @@ export default function initCreditModel(sequelize, DataTypes) {
       creditTotal: {
         type: DataTypes.INTEGER,
       },
+      purchaseDate: {
+        type: DataTypes.DATE,
+      },
       expiry: {
         type: DataTypes.DATE,
       },

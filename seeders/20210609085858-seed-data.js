@@ -32,22 +32,22 @@ module.exports = {
       // Seed items
       const seedItems = [
         {
-          name: '1-session package', credit_count: 1, price: 110, created_at: new Date(), updated_at: new Date(),
+          name: '1-session package', credit_count: 1, price: 110, validity: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: '4-session package', credit_count: 4, price: 380, created_at: new Date(), updated_at: new Date(),
+          name: '4-session package', credit_count: 4, price: 380, validity: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: '8-session package', credit_count: 8, price: 700, created_at: new Date(), updated_at: new Date(),
+          name: '8-session package', credit_count: 8, price: 700, validity: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: '24-session package', credit_count: 24, price: 1980, created_at: new Date(), updated_at: new Date(),
+          name: '24-session package', credit_count: 24, price: 1980, validity: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'WeDo package', credit_count: 4, price: 300, created_at: new Date(), updated_at: new Date(),
+          name: 'WeDo package', credit_count: 4, price: 300, validity: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Generic Proficiency Test', credit_count: 1, price: 50, created_at: new Date(), updated_at: new Date(),
+          name: 'Generic Proficiency Test', credit_count: 1, price: 50, validity: 2, created_at: new Date(), updated_at: new Date(),
         },
       ];
       const seededItemsArr = await queryInterface.bulkInsert('items', seedItems, { returning: true });
@@ -112,46 +112,46 @@ module.exports = {
       // seed credits data
       const seedCredits = [
         {
-          code: 'A0001', parent_id: parentA.id, value: 700, credit_total: 8, expiry: new Date('2021/07/30'), item_id: 3, created_at: new Date(), updated_at: new Date(),
+          code: 'A0001', parent_id: parentA.id, value: 700, credit_total: 8, purchase_date: new Date('2019/07/30'), expiry: new Date('2021/07/30'), item_id: 3, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'A0002', parent_id: parentA.id, value: 380, credit_total: 4, expiry: new Date('2021/08/10'), item_id: 2, created_at: new Date(), updated_at: new Date(),
+          code: 'A0002', parent_id: parentA.id, value: 380, credit_total: 4, purchase_date: new Date('2019/08/10'), expiry: new Date('2021/08/10'), item_id: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'A0003', parent_id: parentA.id, value: 700, credit_total: 8, expiry: new Date('2021/12/31'), item_id: 3, created_at: new Date(), updated_at: new Date(),
+          code: 'A0003', parent_id: parentA.id, value: 700, credit_total: 8, purchase_date: new Date('2019/12/31'), expiry: new Date('2021/12/31'), item_id: 3, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'A0004', parent_id: parentA.id, value: 380, credit_total: 4, expiry: new Date('2021/12/31'), item_id: 2, created_at: new Date(), updated_at: new Date(),
+          code: 'A0004', parent_id: parentA.id, value: 380, credit_total: 4, purchase_date: new Date('2019/12/31'), expiry: new Date('2021/12/31'), item_id: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0001', parent_id: parentB.id, value: 380, credit_total: 4, expiry: new Date('2021/06/30'), item_id: 2, created_at: new Date(), updated_at: new Date(),
+          code: 'B0001', parent_id: parentB.id, value: 380, credit_total: 4, purchase_date: new Date('2019/06/30'), expiry: new Date('2021/06/30'), item_id: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0002', parent_id: parentB.id, value: 380, credit_total: 4, expiry: new Date('2021/12/31'), item_id: 2, created_at: new Date(), updated_at: new Date(),
+          code: 'B0002', parent_id: parentB.id, value: 380, credit_total: 4, purchase_date: new Date('2021/12/31'), expiry: new Date('2021/12/31'), item_id: 2, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0003', parent_id: parentB.id, value: 1980, credit_total: 24, expiry: new Date('2022/06/01'), item_id: 4, created_at: new Date(), updated_at: new Date(),
+          code: 'B0003', parent_id: parentB.id, value: 1980, credit_total: 24, purchase_date: new Date('2020/06/01'), expiry: new Date('2022/06/01'), item_id: 4, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0004', parent_id: parentB.id, value: 380, credit_total: 8, expiry: new Date('2022/06/01'), item_id: 3, created_at: new Date(), updated_at: new Date(),
+          code: 'B0004', parent_id: parentB.id, value: 380, credit_total: 8, purchase_date: new Date('2020/06/01'), expiry: new Date('2022/06/01'), item_id: 3, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0005', parent_id: parentB.id, value: 380, credit_total: 8, expiry: new Date('2022/06/01'), item_id: 3, created_at: new Date(), updated_at: new Date(),
+          code: 'B0005', parent_id: parentB.id, value: 380, credit_total: 8, purchase_date: new Date('2020/06/01'), expiry: new Date('2022/06/01'), item_id: 3, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0006', parent_id: parentB.id, value: 300, credit_total: 4, expiry: new Date('2022/06/01'), item_id: 5, created_at: new Date(), updated_at: new Date(),
+          code: 'B0006', parent_id: parentB.id, value: 300, credit_total: 4, purchase_date: new Date('2020/06/01'), expiry: new Date('2022/06/01'), item_id: 5, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0007', parent_id: parentB.id, value: 300, credit_total: 4, expiry: new Date('2022/06/01'), item_id: 5, created_at: new Date(), updated_at: new Date(),
+          code: 'B0007', parent_id: parentB.id, value: 300, credit_total: 4, purchase_date: new Date('2020/06/01'), expiry: new Date('2022/06/01'), item_id: 5, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'B0008', parent_id: parentB.id, value: 300, credit_total: 4, expiry: new Date('2022/06/01'), item_id: 5, created_at: new Date(), updated_at: new Date(),
+          code: 'B0008', parent_id: parentB.id, value: 300, credit_total: 4, purchase_date: new Date('2022/06/01'), expiry: new Date('2022/06/01'), item_id: 5, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'C0001', parent_id: parentC.id, value: 1980, credit_total: 24, expiry: new Date('2021/10/01'), item_id: 4, created_at: new Date(), updated_at: new Date(),
+          code: 'C0001', parent_id: parentC.id, value: 1980, credit_total: 24, purchase_date: new Date('2019/10/01'), expiry: new Date('2021/10/01'), item_id: 4, created_at: new Date(), updated_at: new Date(),
         },
         {
-          code: 'C0002', parent_id: parentC.id, value: 380, credit_total: 8, expiry: new Date('2021/12/31'), item_id: 3, created_at: new Date(), updated_at: new Date(),
+          code: 'C0002', parent_id: parentC.id, value: 380, credit_total: 8, purchase_date: new Date('2019/12/31'), expiry: new Date('2021/12/31'), item_id: 3, created_at: new Date(), updated_at: new Date(),
         },
       ];
       const seededCredits = await queryInterface.bulkInsert('credits', seedCredits, { returning: true });
