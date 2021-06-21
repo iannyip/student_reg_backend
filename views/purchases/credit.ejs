@@ -57,7 +57,7 @@
               <tr>
                 <th>Usage</th>
                 <td>
-                  <%= credit.sessions.length %> / <%= credit.creditTotal %>
+                  <%= credit.attendances.length %> / <%= credit.creditTotal %>
                 </td>
               </tr>
             </tbody>
@@ -70,19 +70,32 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Learning Pathway</th>
-                <th scope="col">Level</th>
-                <th scope="col">Student</th>
                 <th scope="col">Date</th>
+                <th scope="col">Pathway</th>
+                <th scope="col">Course</th>
+                <th scope="col">Student</th>
               </tr>
             </thead>
             <tbody>
-              <% credit.sessions.forEach(session => { %>
+              <% credit.attendances.forEach(att => { %>
               <tr>
-                <td>Learning Pathway</td>
-                <td>Level</td>
-                <td>Student</td>
-                <td>Date</td>
+                <td>
+                  <a href="/session/<%= att.session.id%>"
+                    ><%= moment(att.session.startDatetime).format('DD/MM/YYYY')
+                    %></a
+                  >
+                </td>
+                <td><%= att.session.course.coursetype.learningPathway%></td>
+                <td>
+                  <a href="/course/<%= att.session.course.id%>"
+                    ><%= att.session.course.name %></a
+                  >
+                </td>
+                <td>
+                  <a href="/student/<%= att.student.id%>"
+                    ><%= att.student.name%></a
+                  >
+                </td>
               </tr>
               <% }); %>
             </tbody>

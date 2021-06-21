@@ -26,8 +26,26 @@ export default function initCreditsController(db) {
       const credit = await db.Credit.findOne({
         where: { id },
         include: [
-          { model: db.Session },
           { model: db.Item },
+          {
+            model: db.Attendance,
+            include: [{
+              model: db.Session,
+              attributes: ['id', 'startDatetime', 'courseId'],
+              include: {
+                model: db.Course,
+                attributes: ['id', 'name', 'coursetypeId'],
+                include: {
+                  model: db.Coursetype,
+                  attributes: ['id', 'learningPathway'],
+                },
+              },
+            },
+            {
+              model: db.Student,
+              attributes: ['id', 'name'],
+            }],
+          },
           {
             model: db.User,
             attributes: ['id', 'name'],
