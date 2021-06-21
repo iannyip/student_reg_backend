@@ -32,22 +32,22 @@ module.exports = {
       // Seed items
       const seedItems = [
         {
-          name: '1-session package', credit_count: 1, price: 110, validity: 2, created_at: new Date(), updated_at: new Date(),
+          name: '1-session package', credit_count: 1, price: 110, validity: 24, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: '4-session package', credit_count: 4, price: 380, validity: 2, created_at: new Date(), updated_at: new Date(),
+          name: '4-session package', credit_count: 4, price: 380, validity: 24, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: '8-session package', credit_count: 8, price: 700, validity: 2, created_at: new Date(), updated_at: new Date(),
+          name: '8-session package', credit_count: 8, price: 700, validity: 24, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: '24-session package', credit_count: 24, price: 1980, validity: 2, created_at: new Date(), updated_at: new Date(),
+          name: '24-session package', credit_count: 24, price: 1980, validity: 24, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'WeDo package', credit_count: 4, price: 300, validity: 2, created_at: new Date(), updated_at: new Date(),
+          name: 'WeDo package', credit_count: 4, price: 300, validity: 24, created_at: new Date(), updated_at: new Date(),
         },
         {
-          name: 'Generic Proficiency Test', credit_count: 1, price: 50, validity: 2, created_at: new Date(), updated_at: new Date(),
+          name: 'Generic Proficiency Test', credit_count: 1, price: 50, validity: 24, created_at: new Date(), updated_at: new Date(),
         },
       ];
       const seededItemsArr = await queryInterface.bulkInsert('items', seedItems, { returning: true });

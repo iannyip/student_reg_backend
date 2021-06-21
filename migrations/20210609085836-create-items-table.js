@@ -53,7 +53,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       validity: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,

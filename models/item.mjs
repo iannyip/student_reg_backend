@@ -18,7 +18,7 @@ export default function initItemModel(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
       },
       validity: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
       },
       createdAt: {
         allowNull: false,
