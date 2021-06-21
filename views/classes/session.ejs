@@ -86,15 +86,17 @@
             </tr>
           </thead>
           <tbody>
-            <% session.students.forEach(student => { %>
+            <% session.attendances.forEach(att => { %>
             <tr>
               <td>
-                <a href="/student/<%= student.id %>"><%= student.name %></a>
+                <a href="/student/<%= att.studentId %>"
+                  ><%= att.student.name %></a
+                >
               </td>
-              <td><%= student.attendance.status %></td>
+              <td><%= att.status %></td>
               <td>
                 <div class="form-check form-switch">
-                  <% if (student.attendance.status === 'completed') { %>
+                  <% if (att.status === 'completed') { %>
                   <input
                     name="sameName"
                     class="form-check-input"
@@ -111,12 +113,12 @@
                 </div>
               </td>
               <td>
-                <% if (student.attendance.payment === null) {%>
+                <% if (att.payment === null) {%>
                 <a href="/attendance/payment/<%= student.attendance.id%>"
                   >Add package</a
                 >
                 <% } else { %>
-                <a href="#"><%= student.attendance.payment %></a>
+                <a href="/credit/<%= att.credit.id%>"><%= att.credit.code %></a>
                 <% } %>
               </td>
               <td><a href="#">Cancel</a></td>

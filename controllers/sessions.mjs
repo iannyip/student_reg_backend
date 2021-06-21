@@ -178,7 +178,11 @@ export default function initSessionsController(db) {
       const { id } = request.params;
       const session = await db.Session.findOne({
         where: { id },
-        include: [db.Student, db.Course],
+        include: [db.Course,
+          {
+            model: db.Attendance,
+            include: [db.Student, db.Credit],
+          }],
       });
 
       // response.send(session);
