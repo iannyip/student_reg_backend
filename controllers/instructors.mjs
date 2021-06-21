@@ -47,7 +47,11 @@ export default function initInstructorsController(db) {
           },
           {
             model: db.Session,
-            attributes: ['id', 'startDatetime', 'endDatetime', 'location', 'courseId'],
+            attributes: ['id', 'startDatetime', 'endDatetime', 'location', 'courseId', 'sessionType'],
+            include: {
+              model: db.Course,
+              attributes: ['id', 'name'],
+            },
           },
         ],
       });

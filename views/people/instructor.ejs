@@ -71,8 +71,16 @@
               <% for (let i = 0; i < instructor.sessions.length; i += 1) { %>
               <tr>
                 <td><%= i + 1 %></td>
-                <td><%= instructor.sessions[i].dataValues.formattedDate %></td>
-                <td>Course name</td>
+                <td>
+                  <a href="/session/<%= instructor.sessions[i].id %>"
+                    ><%= instructor.sessions[i].dataValues.formattedDate %></a
+                  >
+                </td>
+                <td>
+                  <a href="/course/<%= instructor.sessions[i].course.id %>"
+                    ><%= instructor.sessions[i].course.name %></a
+                  >
+                </td>
                 <td><%= instructor.sessions[i].dataValues.duration %></td>
               </tr>
               <% }; %>
