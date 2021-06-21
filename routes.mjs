@@ -108,6 +108,12 @@ export default function bindRoutes(app) {
   app.get('/item/edit/:id', ItemsController.edit);
   app.put('/item/edit/:id', ItemsController.update);
 
+  // ATTENDANCE
+  app.get('/attendance/payment/:id', AttendancesController.pmtForm);
+  app.put('/attendance/payment/:id', AttendancesController.pmtUpdate);
+  // app.get('/attendance/payment/:id', AttendancesController.statusForm);
+  // app.put('/attendance/payment/:id', AttendancesController.statysUpdate);
+
   // LOGIN
   app.get('/login', UsersController.createLogin);
   app.post('/login', UsersController.verifyLogin);

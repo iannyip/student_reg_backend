@@ -112,7 +112,9 @@
               </td>
               <td>
                 <% if (student.attendance.payment === null) {%>
-                <a href="">Add package</a>
+                <a href="/attendance/payment/<%= student.attendance.id%>"
+                  >Add package</a
+                >
                 <% } else { %>
                 <a href="#"><%= student.attendance.payment %></a>
                 <% } %>
