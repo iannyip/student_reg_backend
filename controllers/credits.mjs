@@ -46,7 +46,7 @@ export default function initCreditsController(db) {
 
   const createForm = async (request, response) => {
     try {
-      const today = moment(new Date()).add(2, 'years');
+      const today = moment(new Date());
       const itemsList = await db.Item.findAll({
         attributes: ['id', 'name'],
       });
@@ -91,8 +91,8 @@ export default function initCreditsController(db) {
             value: '',
           },
           {
-            name: 'expiry',
-            label: 'Expiry',
+            name: 'purchaseDate',
+            label: 'Purchase Date',
             type: 'date',
             placeholder: '',
             value: moment(today).format('YYYY-MM-DD'),
@@ -117,7 +117,8 @@ export default function initCreditsController(db) {
         parentId: formData.parentName,
         value: item.price,
         creditTotal: item.creditCount,
-        expiry: formData.expiry,
+        purchaseDate: formData.purchaseDate,
+        expiry: moment(formData.purchaseDate).add(item.validity, 'months'),
         itemId: formData.packageType,
       });
       response.redirect(`/credit/${newCredit.id}`);
@@ -198,6 +199,13 @@ export default function initCreditsController(db) {
             value: credit.item.name,
           },
           {
+            name: 'purchaseDate',
+            label: 'Purchase Date',
+            type: 'date',
+            placeholder: '',
+            value: moment(credit.purchaseDate).format('YYYY-MM-DD'),
+          },
+          {
             name: 'expiry',
             label: 'Expiry',
             type: 'date',
@@ -225,6 +233,7 @@ export default function initCreditsController(db) {
           parentId: inData.parentName,
           value: inData.value,
           creditTotal: inData.creditTotal,
+          purchaseDate: inData.purchaseDate,
           expiry: inData.expiry,
           itemId: inData.itemId,
         },
