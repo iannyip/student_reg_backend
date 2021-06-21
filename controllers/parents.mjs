@@ -26,7 +26,8 @@ export default function initParentsController(db) {
           },
           {
             model: db.Credit,
-            include: db.Attendance,
+            include: [db.Attendance,
+              { model: db.Item, attributes: ['id', 'name'] }],
           },
         ],
       });

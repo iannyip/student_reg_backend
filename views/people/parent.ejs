@@ -77,20 +77,24 @@
                 <th scope="col">Pathway</th>
                 <th scope="col">Course</th>
                 <th scope="col">Name</th>
+                <th scope="col">Student</th>
                 <th scope="col">Attendance</th>
                 <th scope="col">Completed</th>
               </tr>
             </thead>
             <tbody>
-              <% parent.students.forEach(student => { %> <%
+              <% parent.students.forEach(student => {
               student.courses.forEach(course => { %>
               <tr>
                 <td><%= course.coursetype.learningPathway %></td>
                 <td><%= course.coursetype.level %></td>
-                <td><a href="/course/<%=course.id%>"><%= course.name %></a></td>
+                <td>
+                  <a href="/course/<%=course.id%>"> <%= course.name %> </a>
+                </td>
+                <td><%= student.name %></td>
                 <td>attendance</td>
                 <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
-                <% }); }); %>
+                <% })}); %>
               </tr>
             </tbody>
           </table>
@@ -104,15 +108,23 @@
             <thead>
               <tr>
                 <th scope="col">Code</th>
+                <th scope="col">Package Type</th>
                 <th scope="col">Purchase Date</th>
+                <th scope="col">Expiry Date</th>
                 <th scope="col">Usage</th>
               </tr>
             </thead>
             <tbody>
               <% parent.credits.forEach(package => { %>
               <tr>
-                <th><%= package.code %></th>
-                <td>to include</td>
+                <td>
+                  <a href="/credit/<%= package.id %>"><%= package.code %></a>
+                </td>
+                <td><%= package.item.name %></td>
+                <td>
+                  <%= moment(package.purchaseDate).format("DD/MM/YYYY") %>
+                </td>
+                <td><%= moment(package.expiry).format("DD/MM/YYYY") %></td>
                 <td>
                   <%= package.attendances.length %> / <%= package.creditTotal %>
                 </td>
