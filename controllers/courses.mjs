@@ -223,7 +223,7 @@ export default function initCoursesController(db) {
       sessionsArr.forEach(async (session) => {
         const newSession = await newCourse.createSession({
           startDatetime: session.startDatetime,
-          endDatetime: session.startDatetime,
+          endDatetime: session.endDatetime,
           location: 'EAST',
           limit: session.limit,
           isChargeable: session.isChargeable === 'on',
