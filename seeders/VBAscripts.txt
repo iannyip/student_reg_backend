@@ -1,0 +1,32 @@
+// Sub credittypesitems()
+// startRow = 14
+// For i = 14 To 49:
+//     For j = 3 To 6:
+//         Cells(startRow, 2).Value = Cells(i, 5).Value
+//         Cells(startRow, 3).Value = Cells(j, 5).Value
+//         startRow = startRow + 1
+//     Next j
+// Next i
+
+// End Sub
+
+// Sub populateCourse()
+
+// Dim wsC As Worksheet
+// Dim wsS As Worksheet
+
+// Set wsC = Worksheets("COURSES")
+// Set wsS = Worksheets("SESSIONS")
+
+// For i = 2 To 75:
+//     Set firstRow = wsS.Range("O1:O347").Find(wsC.Cells(i, 1).Value, , xlValues, xlWhole, xlByColumns, xlNext)
+//     Set lastRow = wsS.Range("O1:O347").Find(wsC.Cells(i, 1).Value, , xlValues, xlWhole, xlByColumns, xlPrevious)
+
+//     wsC.Cells(i, 3).Value = wsS.Cells(firstRow.Row, 2).Value
+//     wsC.Cells(i, 4).Value = wsS.Cells(lastRow.Row, 3).Value
+//     wsC.Cells(i, 5).Value = wsS.Cells(firstRow.Row, 6).Value
+//     wsC.Cells(i, 8).Value = wsS.Cells(firstRow.Row, 5).Value
+
+// Next i
+
+// End Sub
