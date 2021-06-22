@@ -114,6 +114,10 @@ export default function bindRoutes(app) {
   // app.get('/attendance/payment/:id', AttendancesController.statusForm);
   // app.put('/attendance/payment/:id', AttendancesController.statysUpdate);
 
+  // ASSIGNMENTS
+  app.get('/assignment/new/:courseId', AssignmentsController.courseIntForm);
+  app.post('/assignment/new/:courseId', AssignmentsController.courseIntCreate);
+
   // LOGIN
   app.get('/login', UsersController.createLogin);
   app.post('/login', UsersController.verifyLogin);

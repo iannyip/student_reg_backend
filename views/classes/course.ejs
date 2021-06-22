@@ -19,6 +19,9 @@
       <a class="btn btn-primary" href="/course/register/<%= course.id %>"
         >Register student</a
       >
+      <a class="btn btn-primary" href="/assignment/new/<%= course.id %>"
+        >Assign instructor</a
+      >
       <a class="btn btn-secondary" href="#">Edit course</a>
       <p>TODO: enable edit of course meta info</p>
       <h1><%= course.name %></h1>
@@ -57,6 +60,18 @@
               <tr>
                 <th>Class Limit</th>
                 <td><%= course.limit%></td>
+              </tr>
+              <tr>
+                <th>Instructors</th>
+                <td>
+                  <% if (course.instructor.instructor.length == 0) { %>
+                  <a href="/assignment/new/<%= course.id %>"
+                    >Assign Instructor</a
+                  >
+                  <% } else { course.instructor.instructor.map((person) => { %>
+                  <a href="/instructor/<%= person.id%>"><%= person.name %> </a>
+                  <% })} %>
+                </td>
               </tr>
             </tbody>
           </table>

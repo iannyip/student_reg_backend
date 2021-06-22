@@ -76,7 +76,7 @@
                 <td><%= course.signups.length %> / <%= course.limit %></td>
                 <td>
                   <% if (course.instructor.instructor.length === 0) { %>
-                  <span>Unassigned</span>
+                  <a href="#">Unassigned</a>
                   <% } else { course.instructor.instructor.map((person) => { %>
                   <a href="/instructor/<%= person.id%>"><%= person.name %> </a>
                   <% })} %>
