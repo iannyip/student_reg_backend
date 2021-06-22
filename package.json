@@ -27,10 +27,10 @@
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
     "pg": "^8.6.0",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "csv-parse": "^4.16.0"
   },
   "devDependencies": {
-    "csv-parse": "^4.16.0",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
