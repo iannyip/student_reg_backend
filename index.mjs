@@ -35,13 +35,19 @@ app.use(express.static('public'));
 // Custom Middleware to verify hash and set request flag
 app.use((request, response, next) => {
   request.isUserLoggedIn = false;
+  if (request.path === '/login') {
+    next();
+    return;
+  }
   if (request.cookies.session && request.cookies.userId) {
     const hashedUser = saltyHash(request.cookies.userId);
     if (request.cookies.session === hashedUser) {
       request.isUserLoggedIn = true;
+      next();
+      return;
     }
   }
-  next();
+  response.redirect('/login');
 });
 
 // Bind route definitions to the Express application
