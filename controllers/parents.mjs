@@ -3,8 +3,30 @@ import moment from 'moment';
 export default function initParentsController(db) {
   const index = async (request, response) => {
     try {
-      const allParents = await db.Parents.findAll();
-      response.send(allParents);
+      // navtabs
+      const navtabs = [
+        {
+          text: 'Students',
+          link: '/students',
+          active: false,
+        },
+        {
+          text: 'Parents',
+          link: '#',
+          active: true,
+        },
+      ];
+      const allParents = await db.Parent.findAll({
+        attributes: ['id'],
+        include: {
+          model: db.User,
+          attributes: ['id', 'name', 'mobile', 'email'],
+          include: { model: db.Student, attributes: ['id', 'name'] },
+        },
+      });
+      // response.send(allParents);
+      // console.log(allParents);
+      response.render('people/parents', { allParents, moment, navtabs });
     } catch (error) {
       console.log(error);
     }

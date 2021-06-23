@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <div class="row">
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">students</li>
+          </ol>
+        </nav>
+      </div>
+      <h1>Clients</h1>
+      <hr class="my-4" />
+      <!-- buttons row -->
+      <div class="row">
+        <div class="col">
+          <a class="btn btn-primary" href="/students/new">Add a new student</a>
+          <a class="btn btn-primary" href="/parents/new">Add a new parent</a>
+        </div>
+      </div>
+      <!-- Filters row -->
+      <div class="row">
+        <p>TODO: put search bars and filters here</p>
+        <p>TODO: create view for list of all parents</p>
+      </div>
+      <!-- Tabs row -->
+      <div class='row px-4'>
+        <%- include ('../partial/tabs', {tabs: navtabs}) %>
+      </div>
+      <!-- Table row -->
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Email</th>
+                <th scope="col">Children</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% allParents.forEach(parent => { %>
+              <tr>
+                <td scope="row">
+                  <a href="/parent/<%= parent.id %>"><%= parent.user.name %></a>
+                </td>
+                <td><%= parent.user.mobile %></td>
+                <td><%= parent.user.email %></td>
+                <td>
+                  <% parent.user.students.forEach(student => { %>
+                    <a href="/student/<%= student.id %>"><%= student.name %></a>
+                  <% }); %>
+                </td>
+              </tr>
+
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%- include('../partial/requiredJS') %>
+  </body>
+</html>
