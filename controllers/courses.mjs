@@ -1,4 +1,7 @@
 import moment from 'moment';
+import pkg from 'sequelize';
+
+const { Op } = pkg;
 // import { Sequelize } from 'sequelize';
 const splitTime = (timestring) => {
   const hours = timestring.substring(0, 2);
@@ -23,12 +26,12 @@ export default function initCoursesController(db) {
         },
         {
           text: 'Upcoming',
-          link: '#',
+          link: '/courses/upcoming',
           active: false,
         },
         {
           text: 'Past',
-          link: '#',
+          link: '/courses/past',
           active: false,
         },
       ];
@@ -81,24 +84,23 @@ export default function initCoursesController(db) {
     try {
       // Check if user is auth
       if (request.isUserLoggedIn === false) {
-        console.log('not  good at all');
         response.redirect('/login');
       }
       // navtabs
       const navtabs = [
         {
           text: 'All',
+          link: '/courses',
+          active: false,
+        },
+        {
+          text: 'Upcoming',
           link: '#',
           active: true,
         },
         {
-          text: 'Upcoming',
-          link: '/courses/upcoming',
-          active: false,
-        },
-        {
           text: 'Past',
-          link: '#',
+          link: '/courses/past',
           active: false,
         },
       ];
@@ -115,6 +117,7 @@ export default function initCoursesController(db) {
       });
 
       // Find a list of all courses and their relevant info
+      const today = new Date();
       const allCourses = await db.Course.findAll({
         attributes: [
           'id',
@@ -137,6 +140,11 @@ export default function initCoursesController(db) {
             attributes: ['id'],
           },
         ],
+        where: {
+          endDatetime: {
+            [Op.gte]: moment(today),
+          },
+        },
       });
       // response.send(allCourses);
       response.render('classes/courses', {
@@ -151,15 +159,14 @@ export default function initCoursesController(db) {
     try {
       // Check if user is auth
       if (request.isUserLoggedIn === false) {
-        console.log('not  good at all');
         response.redirect('/login');
       }
       // navtabs
       const navtabs = [
         {
           text: 'All',
-          link: '#',
-          active: true,
+          link: '/courses',
+          active: false,
         },
         {
           text: 'Upcoming',
@@ -169,7 +176,7 @@ export default function initCoursesController(db) {
         {
           text: 'Past',
           link: '#',
-          active: false,
+          active: true,
         },
       ];
 
@@ -185,6 +192,7 @@ export default function initCoursesController(db) {
       });
 
       // Find a list of all courses and their relevant info
+      const today = new Date();
       const allCourses = await db.Course.findAll({
         attributes: [
           'id',
@@ -207,6 +215,11 @@ export default function initCoursesController(db) {
             attributes: ['id'],
           },
         ],
+        where: {
+          endDatetime: {
+            [Op.lt]: moment(today),
+          },
+        },
       });
       // response.send(allCourses);
       response.render('classes/courses', {

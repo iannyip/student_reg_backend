@@ -75,6 +75,8 @@ export default function bindRoutes(app) {
 
   // COURSES
   app.get('/courses', CoursesController.index);
+  app.get('/courses/upcoming', CoursesController.indexUpcoming);
+  app.get('/courses/past', CoursesController.indexPast);
   app.get('/course/:id', CoursesController.show);
   app.get('/courses/new/:pathwayName', CoursesController.createForm);
   app.post('/courses/new', CoursesController.create);
