@@ -35,26 +35,29 @@ export default function initParentsController(db) {
   const show = async (request, response) => {
     try {
       const { id } = request.params;
-      const parent = await db.User.findOne({
+      const parent = await db.Parent.findOne({
         where: { id },
-        include: [
-          { model: db.Parent },
-          {
-            model: db.Student,
-            include: {
-              model: db.Course,
-              include: db.Coursetype,
+        include: {
+          model: db.User,
+          attributes: ['id', 'name', 'mobile', 'email'],
+          include: [
+            {
+              model: db.Student,
+              include: {
+                model: db.Course,
+                include: db.Coursetype,
+              },
             },
-          },
-          {
-            model: db.Credit,
-            include: [db.Attendance,
-              { model: db.Item, attributes: ['id', 'name'] }],
-          },
-        ],
+            {
+              model: db.Credit,
+              include: [db.Attendance,
+                { model: db.Item, attributes: ['id', 'name'] }],
+            },
+          ],
+        },
       });
 
-      parent.students.forEach((student) => {
+      parent.user.students.forEach((student) => {
         const learningpathwaysArr = [];
         student.courses.forEach((course) => {
           if (!learningpathwaysArr.includes(course.coursetype.learningPathway)) {
@@ -63,6 +66,7 @@ export default function initParentsController(db) {
         });
         student.dataValues.learningPathways = learningpathwaysArr;
       });
+
       // response.send(parent);
       response.render('people/parent', { parent, moment });
     } catch (error) {

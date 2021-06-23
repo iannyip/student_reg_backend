@@ -6,50 +6,58 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <!-- Breadcrumbs row -->
       <div class="row">
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/students">parents</a>
+              <a href="/students">clients</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/parents">parents</a>
             </li>
             <li class="breadcrumb-item active"><%= parent.name %></li>
           </ol>
         </nav>
       </div>
-
-      <a class="btn btn-primary" href="/parent/edit/<%= parent.id %>"
-        >Edit parent</a
-      >
-      <a class="btn btn-secondary" href="#">Add student</a>
-      <h1><%= parent.name %></h1>
+      <!-- Buttons row -->
+      <div class='row'>
+        <div class='col'>
+          <a class="btn btn-primary" href="/parent/edit/<%= parent.id %>">Edit parent</a>
+          <a class="btn btn-secondary" href="#">Add student</a>
+        </div>
+        
+      </div>
+      
+      <h1><%= parent.user.name %></h1>
       <i>parent</i>
       <hr class="my-4" />
-      <!-- Parent info -->
+      <!-- Parent info Row -->
       <div class="row">
         <div class="col-md-6">
           <table class="table table-borderless">
             <tbody>
               <tr>
                 <th>Email</th>
-                <td><%= parent.email %></td>
+                <td><%= parent.user.email %></td>
               </tr>
               <tr>
                 <th>Mobile</th>
-                <td><%= parent.mobile %></td>
+                <td><%= parent.user.mobile %></td>
               </tr>
               <tr>
                 <th>Address</th>
-                <td><%= parent.parent.address %></td>
+                <td><%= parent.address %></td>
               </tr>
               <tr>
                 <th>Postal Code</th>
-                <td><%= parent.parent.postalCode %></td>
+                <td><%= parent.postalCode %></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="col-md-6 row mb-auto">
-          <% parent.students.forEach(student => { %>
+          <% parent.user.students.forEach(student => { %>
           <div class="card mx-2" style="width: 10rem">
             <div class="card-body">
               <h5 class="card-title">
@@ -66,7 +74,7 @@
           <% }); %>
         </div>
       </div>
-      <!-- Children course history -->
+      <!-- Children history row -->
       <div class="row">
         <!-- Course history -->
         <h3 class="my-4">Course History</h3>
@@ -83,7 +91,7 @@
               </tr>
             </thead>
             <tbody>
-              <% parent.students.forEach(student => {
+              <% parent.user.students.forEach(student => {
               student.courses.forEach(course => { %>
               <tr>
                 <td><%= course.coursetype.learningPathway %></td>
@@ -94,8 +102,8 @@
                 <td><%= student.name %></td>
                 <td>attendance</td>
                 <td><%= moment(course.endDatetime).format('MMM yyyy') %></td>
-                <% })}); %>
               </tr>
+              <% })}); %>
             </tbody>
           </table>
         </div>
@@ -115,7 +123,7 @@
               </tr>
             </thead>
             <tbody>
-              <% parent.credits.forEach(package => { %>
+              <% parent.user.credits.forEach(package => { %>
               <tr>
                 <td>
                   <a href="/credit/<%= package.id %>"><%= package.code %></a>
