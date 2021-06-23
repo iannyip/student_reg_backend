@@ -3,6 +3,19 @@ import moment from 'moment';
 export default function initStudentsController(db) {
   const index = async (request, response) => {
     try {
+      // navtabs
+      const navtabs = [
+        {
+          text: 'Students',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Parents',
+          link: '/parents',
+          active: false,
+        },
+      ];
       const allStudents = await db.Student.findAll({
         attributes: ['id', 'name', 'dob', 'parentId'],
         include: {
@@ -13,7 +26,7 @@ export default function initStudentsController(db) {
       });
       // response.send(allStudents);
       // console.log(allStudents);
-      response.render('people/students', { allStudents, moment });
+      response.render('people/students', { allStudents, moment, navtabs });
     } catch (error) {
       console.log(error);
     }

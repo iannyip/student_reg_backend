@@ -13,18 +13,25 @@
           </ol>
         </nav>
       </div>
-      <h1>All students</h1>
+      <h1>Clients</h1>
       <hr class="my-4" />
+      <!-- buttons row -->
       <div class="row">
         <div class="col">
           <a class="btn btn-primary" href="/students/new">Add a new student</a>
           <a class="btn btn-primary" href="/parents/new">Add a new parent</a>
         </div>
       </div>
+      <!-- Filters row -->
       <div class="row">
         <p>TODO: put search bars and filters here</p>
         <p>TODO: create view for list of all parents</p>
       </div>
+      <!-- Tabs row -->
+      <div class='row px-4'>
+        <%- include ('../partial/tabs', {tabs: navtabs}) %>
+      </div>
+      <!-- Table row -->
       <div class="row">
         <div class="col">
           <table class="table">
