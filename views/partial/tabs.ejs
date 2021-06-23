@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs">
+  <% tabs.forEach(tab => { %>
+    <% if (tab.active) { %>
+    <li>
+      <a href="<%= tab.link%>" class="nav-link active"><%= tab.text %></a>
+    </li>
+    <% } else { %>
+    <li>
+      <a href="<%= tab.link%>" class="nav-link"><%= tab.text %></a>
+    </li>
+    <% } %>
+  <% }); %>
+</ul>
