@@ -1,24 +1,15 @@
-import jsSha from 'jssha';
+import bcrypt from 'bcrypt';
 
-const { SALT } = process.env;
-const saltyHash = (input) => {
-  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
-  const unhashedString = `${input}-${SALT}`;
-  shaObj.update(unhashedString);
-  return shaObj.getHash('HEX');
-};
-const hash = (input) => {
-  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
-  const unhashedString = `${input}`;
-  shaObj.update(unhashedString);
-  return shaObj.getHash('HEX');
+const bcryptHasher = async (input) => {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(input, salt);
+  return hash;
 };
 
 export default function initUsersController(db) {
   const index = async (request, response) => {
     try {
-      const allUsers = await db.User.findAll();
-      response.send(allUsers);
+      response.redirect('/courses');
     } catch (error) {
       console.log(error);
     }
@@ -26,14 +17,6 @@ export default function initUsersController(db) {
 
   const create = async (request, response) => {
     try {
-      const newUser = await db.User.create({
-        name: 'ian',
-        mobile: '98765432',
-        email: 'ian@email.com',
-        password: 'qwerty',
-        isAdmin: true,
-        isParent: false,
-      });
       response.redirect('/courses');
     } catch (error) {
       console.log(error);
@@ -51,20 +34,21 @@ export default function initUsersController(db) {
   const verifyLogin = async (request, response) => {
     try {
       const { email, password } = request.body;
-      console.log(email);
-      console.log(password);
       const user = await db.User.findOne({
         where: { email },
       });
-      console.log(user);
-      if (user === null || hash(password) !== user.password) {
-        console.log(hash(hash(password)));
+      if (user === null) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
-      } else {
-        response.cookie('userId', user.id);
-        response.cookie('session', saltyHash(user.id));
-        response.redirect('/courses');
       }
+      bcrypt.compare(password, user.password, async (err, result) => {
+        if (result) {
+          response.cookie('userId', user.id);
+          response.cookie('session', await bcryptHasher(`${user.id}`));
+          response.redirect('/courses');
+        } else {
+          response.render('auth/createLogin', { errorClass: 'd-block' });
+        }
+      });
     } catch (error) {
       console.log(error);
     }

@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 
 import jsSha from 'jssha';
+import bcrypt from 'bcrypt';
 import bindRoutes from './routes.mjs';
 
 const { SALT } = process.env;
@@ -40,14 +41,17 @@ app.use((request, response, next) => {
     return;
   }
   if (request.cookies.session && request.cookies.userId) {
-    const hashedUser = saltyHash(request.cookies.userId);
-    if (request.cookies.session === hashedUser) {
-      request.isUserLoggedIn = true;
-      next();
-      return;
-    }
+    bcrypt.compare(request.cookies.userId, request.cookies.session, (err, result) => {
+      if (result) {
+        request.isUserLoggedIn = true;
+        next();
+      } else {
+        response.clearCookie('userId');
+        response.clearCookie('session');
+        response.redirect('/login');
+      }
+    });
   }
-  response.redirect('/login');
 });
 
 // Bind route definitions to the Express application
