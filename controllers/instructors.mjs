@@ -3,6 +3,24 @@ import moment from 'moment';
 export default function initInstructorsController(db) {
   const index = async (request, response) => {
     try {
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Current month',
+          link: '/courses/upcoming',
+          active: false,
+        },
+        {
+          text: 'Unassigned courses',
+          link: '/courses/past',
+          active: false,
+        },
+      ];
       const allInstructors = await db.Instructor.findAll({
         include: [
           {
@@ -28,7 +46,7 @@ export default function initInstructorsController(db) {
         instructor.dataValues.hours = sumHours;
       });
       // response.send(allInstructors);
-      response.render('people/instructors', { allInstructors });
+      response.render('people/instructors', { allInstructors, navtabs });
     } catch (error) {
       console.log(error);
     }
@@ -37,6 +55,7 @@ export default function initInstructorsController(db) {
   const show = async (request, response) => {
     try {
       const { id } = request.params;
+
       const instructor = await db.Instructor.findOne({
         where: { id },
         include: [

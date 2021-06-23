@@ -6,6 +6,7 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <!-- Breadcrumbs row -->
       <div class="row">
         <nav>
           <ol class="breadcrumb">
@@ -15,6 +16,7 @@
       </div>
       <h1>All Instructors</h1>
       <hr class="my-4" />
+      <!-- Buttons row -->
       <div class="row">
         <div class="col">
           <a href="/employment" class="btn btn-primary"
@@ -25,11 +27,17 @@
         </div>
       </div>
       <hr class="my-4" />
+      <!-- Nav tabs row -->
+      <div class='row px-4'>
+        <%- include ('../partial/tabs', {tabs: navtabs}) %>
+      </div>
+      <!-- Unassigned courses row -->
       <div class="row">
         <h3>Unassigned courses</h3>
         <p>TODO: table for unassigned courses</p>
       </div>
       <hr class="my-4" />
+      <!-- Assignments row -->
       <div class="row">
         <h3>Assignments for (month)</h3>
         <p>TODO: search for a given month only</p>
