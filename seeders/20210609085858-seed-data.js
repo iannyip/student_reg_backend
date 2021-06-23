@@ -1,13 +1,13 @@
 const moment = require('moment');
-const jsSha = require('jssha');
+const bcrypt = require('bcrypt');
 const readCsvFn = require('./csv-data.js');
 
-const hash = (input) => {
-  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
-  const unhashedString = `${input}`;
-  shaObj.update(unhashedString);
-  return shaObj.getHash('HEX');
+const bcryptHasher = async (input) => {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(input, salt);
+  return hash;
 };
+
 module.exports = {
   up: async (queryInterface) => {
     try {
@@ -31,12 +31,12 @@ module.exports = {
       const seedAssignments = [];
 
       console.log(' ======= CREATING SEED ARRAYS =======');
-
       // 1. USERS
-      for (let i = 1; i < importedData.users.length; i += 1) {
-      // for (let i = 1; i < 8; i += 1) {
-        // console.log(`SeedUser ${i}: ${importedData.users[i]}`);
-        const [id, name, mobile, email, password, is_admin, is_parent] = importedData.users[i];
+      // note for users that we will need to use for ... in ... syntax
+      // to handle aysnchronous bcryptHasher
+      importedData.users.shift();
+      for (idx in importedData.users) {
+        const [id, name, mobile, email, password, is_admin, is_parent] = importedData.users[idx];
         seedUsers.push({
           id,
           name,
@@ -44,7 +44,7 @@ module.exports = {
           email,
           is_admin,
           is_parent,
-          password: hash(password.password),
+          password: await bcryptHasher(password),
           created_at: new Date(),
           updated_at: new Date(),
         });

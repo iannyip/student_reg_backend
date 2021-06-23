@@ -1,13 +1,3 @@
-import jsSha from 'jssha';
-// const jsSha = require('jssha');
-
-const hasher = (input) => {
-  const shaObj = new jsSha('SHA-512', 'TEXT', { encoding: 'UTF8' });
-  const unhashedString = `${input}`;
-  shaObj.update(unhashedString);
-  return shaObj.getHash('HEX');
-};
-
 export default function initUserModel(sequelize, DataTypes) {
   return sequelize.define(
     'user',
@@ -29,9 +19,6 @@ export default function initUserModel(sequelize, DataTypes) {
       },
       password: {
         type: DataTypes.STRING,
-        set(value) {
-          this.setDataValue('password', hasher(value));
-        },
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
