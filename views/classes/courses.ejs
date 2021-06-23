@@ -15,6 +15,7 @@
         </nav>
       </div>
       <h1>All Courses</h1>
+      <!-- Buttons row -->
       <div class="row">
         <div class="col">
           <a href="/coursetypes" class="btn btn-primary">View Coursetypes</a>
@@ -39,10 +40,16 @@
           </div>
         </div>
       </div>
+      <!-- Search bar row -->
       <div class="row">
         <p>TODO: put search bars and filters here</p>
       </div>
       <hr class="my-4" />
+      
+      <div class='row px-4'>
+        <%- include ('../partial/tabs', {tabs: navtabs}) %>
+      </div>
+      <!-- Table row -->
       <div class="row">
         <div class="col">
           <table class="table">

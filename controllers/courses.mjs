@@ -14,6 +14,25 @@ export default function initCoursesController(db) {
         console.log('not  good at all');
         response.redirect('/login');
       }
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Upcoming',
+          link: '#',
+          active: false,
+        },
+        {
+          text: 'Past',
+          link: '#',
+          active: false,
+        },
+      ];
+
       // Get array of pathways for create course dropdown
       const pathways = await db.Coursetype.findAll({
         attributes: ['learningPathway'],
@@ -50,7 +69,149 @@ export default function initCoursesController(db) {
         ],
       });
       // response.send(allCourses);
-      response.render('classes/courses', { allCourses, pathwaysArr, moment });
+      response.render('classes/courses', {
+        allCourses, pathwaysArr, moment, navtabs,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const indexUpcoming = async (request, response) => {
+    try {
+      // Check if user is auth
+      if (request.isUserLoggedIn === false) {
+        console.log('not  good at all');
+        response.redirect('/login');
+      }
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Upcoming',
+          link: '/courses/upcoming',
+          active: false,
+        },
+        {
+          text: 'Past',
+          link: '#',
+          active: false,
+        },
+      ];
+
+      // Get array of pathways for create course dropdown
+      const pathways = await db.Coursetype.findAll({
+        attributes: ['learningPathway'],
+      });
+      const pathwaysArr = [];
+      pathways.forEach((item) => {
+        if (!pathwaysArr.includes(item.learningPathway)) {
+          pathwaysArr.push(item.learningPathway);
+        }
+      });
+
+      // Find a list of all courses and their relevant info
+      const allCourses = await db.Course.findAll({
+        attributes: [
+          'id',
+          'name',
+          'startDatetime',
+          'endDatetime',
+          'location',
+          'limit',
+          'instructor',
+        ],
+        include: [
+          {
+            // 1st table: coursetypes
+            model: db.Coursetype,
+            attributes: ['learningPathway', 'level'],
+          },
+          {
+            // 2nd table: signups
+            model: db.Signup,
+            attributes: ['id'],
+          },
+        ],
+      });
+      // response.send(allCourses);
+      response.render('classes/courses', {
+        allCourses, pathwaysArr, moment, navtabs,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const indexPast = async (request, response) => {
+    try {
+      // Check if user is auth
+      if (request.isUserLoggedIn === false) {
+        console.log('not  good at all');
+        response.redirect('/login');
+      }
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Upcoming',
+          link: '/courses/upcoming',
+          active: false,
+        },
+        {
+          text: 'Past',
+          link: '#',
+          active: false,
+        },
+      ];
+
+      // Get array of pathways for create course dropdown
+      const pathways = await db.Coursetype.findAll({
+        attributes: ['learningPathway'],
+      });
+      const pathwaysArr = [];
+      pathways.forEach((item) => {
+        if (!pathwaysArr.includes(item.learningPathway)) {
+          pathwaysArr.push(item.learningPathway);
+        }
+      });
+
+      // Find a list of all courses and their relevant info
+      const allCourses = await db.Course.findAll({
+        attributes: [
+          'id',
+          'name',
+          'startDatetime',
+          'endDatetime',
+          'location',
+          'limit',
+          'instructor',
+        ],
+        include: [
+          {
+            // 1st table: coursetypes
+            model: db.Coursetype,
+            attributes: ['learningPathway', 'level'],
+          },
+          {
+            // 2nd table: signups
+            model: db.Signup,
+            attributes: ['id'],
+          },
+        ],
+      });
+      // response.send(allCourses);
+      response.render('classes/courses', {
+        allCourses, pathwaysArr, moment, navtabs,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -370,6 +531,8 @@ export default function initCoursesController(db) {
   // return all methods we define in an object
   return {
     index,
+    indexUpcoming,
+    indexPast,
     show,
     dashboard,
     createForm,
