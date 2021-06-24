@@ -43,7 +43,7 @@ export default function initInstructorsController(db) {
           const duration = moment(session.endDatetime).diff(moment(session.startDatetime), 'hours', true);
           sumHours += duration;
         });
-        instructor.dataValues.hours = sumHours;
+        instructor.dataValues.hours = sumHours.toFixed(2);
       });
       // response.send(allInstructors);
       response.render('people/instructors', { allInstructors, navtabs });
@@ -78,7 +78,7 @@ export default function initInstructorsController(db) {
       instructor.sessions.forEach((session) => {
         const duration = moment(session.endDatetime).diff(moment(session.startDatetime), 'hours', true);
         session.dataValues.formattedDate = moment(session.startDatetime).format('DD MMM YYYY');
-        session.dataValues.duration = duration;
+        session.dataValues.duration = duration.toFixed(2);
       });
       // response.send(instructor);
       response.render('people/instructor', { instructor, moment });
