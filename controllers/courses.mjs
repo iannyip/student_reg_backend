@@ -251,14 +251,6 @@ export default function initCoursesController(db) {
     }
   };
 
-  const dashboard = async (request, response) => {
-    try {
-      response.render('classes/dashboard');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const createForm = async (request, response) => {
     try {
       const { pathwayName } = request.params;
@@ -536,16 +528,41 @@ export default function initCoursesController(db) {
     }
   };
 
+  const dashboard = async (request, response) => {
+    try {
+      const year = moment().year();
+      const month = moment().month();
+      const date = moment().date();
+      response.redirect(`/dashboard/day/${year}/${month}/${date}`);
+      // response.render('classes/dashboard');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dashboardDay = async (request, response) => {
+    try {
+      const { year, month, day } = request.params;
+      const today = moment([year, month, day]);
+
+      // response.send(`The date is: ${today}`);
+      response.render('dashboards/day', { today, moment });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // return all methods we define in an object
   return {
     index,
     indexUpcoming,
     indexPast,
     show,
-    dashboard,
     createForm,
     create,
     registerForm,
     register,
+    dashboard,
+    dashboardDay,
   };
 }

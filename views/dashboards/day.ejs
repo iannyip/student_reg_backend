@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/header') %>
+  </head>
+  <body>
+    <%- include('../partial/navbar') %>
+    <div class="container mt-4">
+      <div class="row">
+        <h1><%= moment(today).format("dddd, MMMM Do YYYY") %></h1>
+      </div>
+    </div>
+
+    <%- include('../partial/requiredJS') %>
+  </body>
+</html>
