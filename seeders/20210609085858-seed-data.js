@@ -166,8 +166,8 @@ module.exports = {
         seedCourses.push({
           id,
           name,
-          start_datetime: moment(start_datetime, 'DD/MM/YYYY').toDate(),
-          end_datetime: moment(end_datetime, 'DD/MM/YYYY').toDate(),
+          start_datetime: moment(start_datetime, 'DD/MM/YYYY HH:mm').toDate(),
+          end_datetime: moment(end_datetime, 'DD/MM/YYYY HH:mm').toDate(),
           location,
           instructor: JSON.stringify({ instructor: [] }),
           notes: JSON.stringify({ notes: [] }),
@@ -182,8 +182,8 @@ module.exports = {
         const [id, start_datetime, end_datetime, comments, limit, location, instructor, notes, is_chargeable, course_id, session_type] = importedData.sessions[i];
         seedSessions.push({
           id,
-          start_datetime: moment(start_datetime, 'DD/MM/YYYY').toDate(),
-          end_datetime: moment(end_datetime, 'DD/MM/YYYY').toDate(),
+          start_datetime: moment(start_datetime, 'DD/MM/YYYY HH:mm').toDate(),
+          end_datetime: moment(end_datetime, 'DD/MM/YYYY HH:mm').toDate(),
           comments,
           limit,
           location,
