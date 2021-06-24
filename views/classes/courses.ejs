@@ -44,7 +44,6 @@
       <div class="row">
         <p>TODO: put search bars and filters here</p>
       </div>
-      <hr class="my-4" />
 
       <div class="row px-4">
         <%- include ('../partial/tabs', {tabs: navtabs}) %>
@@ -84,6 +83,8 @@
                 <td>
                   <% if (course.instructor.instructor.length === 0) { %>
                   <a href="#">Unassigned</a>
+                  <% } else if (course.instructor.instructor.length > 2) {%>
+                  <span>Multiple</span>
                   <% } else { course.instructor.instructor.map((person) => { %>
                   <a href="/instructor/<%= person.id%>"><%= person.name %> </a>
                   <% })} %>
