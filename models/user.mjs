@@ -12,7 +12,7 @@ export default function initUserModel(sequelize, DataTypes) {
         type: DataTypes.STRING,
       },
       mobile: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
       email: {
         type: DataTypes.STRING,
