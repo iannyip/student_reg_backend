@@ -126,4 +126,7 @@ export default function bindRoutes(app) {
   app.get('/login', UsersController.createLogin);
   app.post('/login', UsersController.verifyLogin);
   app.delete('/logout', UsersController.logout);
+
+  // ADMINISTRATIVE
+  app.get('/updateInstMigration', CoursesController.updateInstMigration);
 }
