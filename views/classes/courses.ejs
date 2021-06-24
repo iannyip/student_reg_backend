@@ -4,7 +4,7 @@
     <%- include('../partial/header') %>
   </head>
   <body>
-    <%- include('../partial/navbar') %>
+    <%- include('../partial/navbar', {active: 'courses'}) %>
     <div class="container mt-4">
       <!-- Breadcrumb row -->
       <div class="row">
@@ -45,8 +45,8 @@
         <p>TODO: put search bars and filters here</p>
       </div>
       <hr class="my-4" />
-      
-      <div class='row px-4'>
+
+      <div class="row px-4">
         <%- include ('../partial/tabs', {tabs: navtabs}) %>
       </div>
       <!-- Table row -->

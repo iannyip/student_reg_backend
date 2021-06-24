@@ -4,7 +4,7 @@
     <%- include('../partial/header') %>
   </head>
   <body>
-    <%- include('../partial/navbar') %>
+    <%- include('../partial/navbar', {active: 'clients'}) %>
     <div class="container mt-4">
       <!-- Breadcrumbs row -->
       <div class="row">
@@ -19,14 +19,15 @@
         </nav>
       </div>
       <!-- Buttons row -->
-      <div class='row'>
-        <div class='col'>
-          <a class="btn btn-primary" href="/parent/edit/<%= parent.id %>">Edit parent</a>
+      <div class="row">
+        <div class="col">
+          <a class="btn btn-primary" href="/parent/edit/<%= parent.id %>"
+            >Edit parent</a
+          >
           <a class="btn btn-secondary" href="#">Add student</a>
         </div>
-        
       </div>
-      
+
       <h1><%= parent.user.name %></h1>
       <i>parent</i>
       <hr class="my-4" />

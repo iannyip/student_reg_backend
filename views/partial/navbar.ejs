@@ -19,22 +19,58 @@
     <!-- Items in navbar -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Dashboard -->
+        <% if (active === 'dashboard'){ %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/dashboard">Dashboard</a>
+        </li>
+        <% } else {%>
         <li class="nav-item">
           <a class="nav-link" href="/dashboard">Dashboard</a>
         </li>
+        <% } %>
+        <!-- Courses -->
+        <% if (active === 'courses'){ %>
         <li class="nav-item">
-          <a class="nav-link" href="/courses">Schedule</a>
+          <a class="nav-link active" href="/courses">Courses</a>
         </li>
+        <% } else {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/courses">Courses</a>
+        </li>
+        <% } %>
+        <!-- Clients -->
+        <% if (active === 'clients'){ %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/students">Clients</a>
+        </li>
+        <% } else {%>
         <li class="nav-item">
           <a class="nav-link" href="/students">Clients</a>
         </li>
+        <% } %>
+        <!-- Credits -->
+        <% if (active === 'credits'){ %>
         <li class="nav-item">
-          <a class="nav-link" href="/credits">Packages</a>
+          <a class="nav-link active" href="/credits">Credits</a>
         </li>
+        <% } else {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/credits">Credits</a>
+        </li>
+        <% } %>
+        <!-- Instructors -->
+        <% if (active === 'instructors'){ %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/instructors">Instructors</a>
+        </li>
+        <% } else {%>
         <li class="nav-item">
           <a class="nav-link" href="/instructors">Instructors</a>
         </li>
+        <% } %>
       </ul>
+      <!-- Other section -->
       <ul class="navbar-nav w-75 justify-content-end">
         <li class="nav-item">
           <a class="nav-link d-flex align-bottom" href="/help"
