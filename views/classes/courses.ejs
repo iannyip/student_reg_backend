@@ -56,7 +56,7 @@
               <tr>
                 <th scope="col">Course</th>
                 <th scope="col">Pathway</th>
-                <th scope="col">Level</th>
+                <!-- <th scope="col">Level</th> -->
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Location</th>
@@ -69,7 +69,7 @@
               <tr>
                 <td><a href="/course/<%=course.id%>"><%= course.name %></a></td>
                 <td><%= course.coursetype.learningPathway %></td>
-                <td><%= course.coursetype.level %></td>
+                <!-- <td><%= course.coursetype.level %></td> -->
                 <td>
                   <%= moment(course.startDatetime).format('DD/MM/YYYY') %>-<%=
                   moment(course.endDatetime).format('DD/MM/YYYY') %>
