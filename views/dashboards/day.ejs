@@ -6,9 +6,61 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="container mt-4">
+      <!-- header row -->
       <div class="row">
         <h1><%= moment(today).format("dddd, MMMM Do YYYY") %></h1>
       </div>
+      <div class='row my-4'>
+        <form action="/dashboard/query/day" method='POST'>
+          <div class='row'>
+            <div class='col-md-1 text-md-end d-flex align-items-center'>
+              <span>Search</span>
+            </div>
+            <div class='col-md-3'>
+              <input name="date" type="date" class='form-control'>
+            </div>
+            <div class='col-md-3'>
+              <button type="submit" class='btn btn-primary'>Go</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Sessions row -->
+      <div class="row">
+        <% sessions.forEach((sess) => {%>
+        <div class="card m-2" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title"><a href="/course/<%= sess.course.id %>"><%= sess.course.name %></a></h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <%= moment(sess.startDatetime).format("HH:mm")%> - <%=
+              moment(sess.endDatetime).format("HH:mm")%>
+            </h6>
+            <p class="card-text">
+              <ul class='list-group'>
+                <% sess.students.forEach((stu) => {%>
+                  <li class='list-group-item border-0 p-0'><%= stu.name%></li>
+                <% }); %>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <!-- <div class="row">
+        <table class="table">
+          <tbody class="timetable">
+            <% timeArr.forEach((time) => { %>
+            <tr>
+              <th><%= time %></th>
+              <% sessions.forEach((sess) => { if
+              (moment(sess.startDatetime).format('HH:mm') === time) { %>
+              <td colspan="2"><%= sess.id%></td>
+              <% }}); %>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div> -->
     </div>
 
     <%- include('../partial/requiredJS') %>

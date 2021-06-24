@@ -77,10 +77,6 @@ export default function initCoursesController(db) {
 
   const indexUpcoming = async (request, response) => {
     try {
-      // Check if user is auth
-      if (request.isUserLoggedIn === false) {
-        response.redirect('/login');
-      }
       // navtabs
       const navtabs = [
         {
@@ -544,9 +540,61 @@ export default function initCoursesController(db) {
     try {
       const { year, month, day } = request.params;
       const today = moment([year, month, day]);
+      const tmr = moment([year, month, day]).add(1, 'days');
 
-      // response.send(`The date is: ${today}`);
-      response.render('dashboards/day', { today, moment });
+      const sessions = await db.Session.findAll({
+        where: {
+          startDatetime: {
+            [Op.between]: [today.toDate(), tmr.toDate()],
+          },
+        },
+        include: [{
+          model: db.Course,
+          attributes: ['id', 'name'],
+        },
+        {
+          model: db.Student,
+          attributes: ['id', 'name'],
+          through: {
+            model: db.Attendance,
+            attributes: [],
+          },
+        }],
+      });
+
+      const minArr = ['00', '30'];
+      const timeArr = [];
+      for (let i = 8; i < 22; i += 1) {
+        minArr.forEach((min) => {
+          timeArr.push(`${(`0${i}`).slice(-2)}:${min}`);
+        });
+      }
+      sessions.forEach((session) => {
+        console.log(`${moment(session.startDatetime)} to ${moment(session.endDatetime)}`);
+        console.log(moment(session.endDatetime).diff(moment(session.startDatetime), 'hours', true));
+      });
+      // response.send({
+      //   today, tmr, sessions, timeArr,
+      // });
+      response.render('dashboards/day', {
+        today, timeArr, sessions, moment,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dashboardDayQuery = async (request, response) => {
+    try {
+      const query = request.body.date;
+      console.log(query);
+      if (query === '') {
+        response.redirect('/dashboard');
+      }
+      const year = moment(query).year();
+      const month = moment(query).month();
+      const date = moment(query).date();
+      response.redirect(`/dashboard/day/${year}/${month}/${date}`);
     } catch (error) {
       console.log(error);
     }
@@ -564,5 +612,6 @@ export default function initCoursesController(db) {
     register,
     dashboard,
     dashboardDay,
+    dashboardDayQuery,
   };
 }

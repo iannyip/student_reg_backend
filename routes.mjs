@@ -43,6 +43,7 @@ export default function bindRoutes(app) {
   // DASHBOARD
   app.get('/dashboard', CoursesController.dashboard);
   app.get('/dashboard/day/:year/:month/:day', CoursesController.dashboardDay);
+  app.post('/dashboard/query/day', CoursesController.dashboardDayQuery);
 
   // PEOPLE
   app.get('/users', UsersController.index);
