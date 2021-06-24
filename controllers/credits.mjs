@@ -1,8 +1,26 @@
 import moment from 'moment';
 
 export default function initCreditsController(db) {
-  const index = async (request, response) => {
+  const indexAll = async (request, response) => {
     try {
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Unused',
+          link: '/credits/unused',
+          active: false,
+        },
+        {
+          text: 'Used',
+          link: '/credits/used',
+          active: false,
+        },
+      ];
       const allCredits = await db.Credit.findAll({
         include: [{
           model: db.User,
@@ -14,7 +32,95 @@ export default function initCreditsController(db) {
         }],
       });
       // response.send(allCredits);
-      response.render('purchases/credits', { allCredits, moment });
+      response.render('purchases/credits', { credits: allCredits, moment, navtabs });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const indexUnused = async (request, response) => {
+    try {
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '/credits',
+          active: false,
+        },
+        {
+          text: 'Unused',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Used',
+          link: '/credits/used',
+          active: false,
+        },
+      ];
+      const allCredits = await db.Credit.findAll({
+        include: [{
+          model: db.User,
+          attributes: ['id', 'name'],
+          include: { model: db.Parent, attributes: ['id'] },
+        },
+        {
+          model: db.Attendance,
+        }],
+      });
+
+      const unusedCredits = [];
+      allCredits.forEach((credit) => {
+        if (credit.creditTotal > credit.attendances.length) {
+          unusedCredits.push(credit);
+        }
+      });
+
+      // response.send(unusedCredits);
+      response.render('purchases/credits', { credits: unusedCredits, moment, navtabs });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const indexUsed = async (request, response) => {
+    try {
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '/credits',
+          active: false,
+        },
+        {
+          text: 'Unused',
+          link: '/credits/unused',
+          active: false,
+        },
+        {
+          text: 'Used',
+          link: '#',
+          active: true,
+        },
+      ];
+      const allCredits = await db.Credit.findAll({
+        include: [{
+          model: db.User,
+          attributes: ['id', 'name'],
+          include: { model: db.Parent, attributes: ['id'] },
+        },
+        {
+          model: db.Attendance,
+        }],
+      });
+      const usedCredits = [];
+      allCredits.forEach((credit) => {
+        if (credit.creditTotal <= credit.attendances.length) {
+          usedCredits.push(credit);
+        }
+      });
+      // response.send(allCredits);
+      response.render('purchases/credits', { credits: usedCredits, moment, navtabs });
     } catch (error) {
       console.log(error);
     }
@@ -265,7 +371,9 @@ export default function initCreditsController(db) {
 
   // return all methods we define in an object
   return {
-    index,
+    indexAll,
+    indexUnused,
+    indexUsed,
     show,
     createForm,
     create,

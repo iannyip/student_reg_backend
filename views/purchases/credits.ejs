@@ -18,14 +18,15 @@
       <h1>All Credits</h1>
       <!-- buttons row -->
       <div class="row">
-        <div class="col">
+        <div class="col text-end">
           <a href="/credits/new" class="btn btn-primary">Add new purchase</a>
           <a href="/items" class="btn btn-primary">Credit types</a>
-          <p>TODO: button for credit types: view, create, update</p>
         </div>
       </div>
-      <hr class="my-4" />
-
+      <!-- nav tabs row -->
+      <div class="row px-4 mt-4">
+        <%- include ('../partial/tabs', {tabs: navtabs}) %>
+      </div>
       <!-- credits table row -->
       <div class="row">
         <div class="col">
@@ -40,7 +41,7 @@
               </tr>
             </thead>
             <tbody>
-              <% allCredits.forEach(package => { %>
+              <% credits.forEach(package => { %>
               <tr>
                 <td>
                   <a href="/parent/<%=package.user.parent.id%>"

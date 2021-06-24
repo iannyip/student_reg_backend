@@ -100,7 +100,10 @@ export default function bindRoutes(app) {
   app.get('/session/:id', SessionsController.show);
 
   // CREDITS
-  app.get('/credits', CreditsController.index);
+  app.get('/credits', CreditsController.indexAll);
+  app.get('/credits/unused', CreditsController.indexUnused);
+  app.get('/credits/used', CreditsController.indexUsed);
+
   app.get('/credit/:id', CreditsController.show);
   app.get('/credits/new', CreditsController.createForm);
   app.post('/credits/new', CreditsController.create);
