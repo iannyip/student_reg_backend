@@ -51,6 +51,10 @@ app.use((request, response, next) => {
         response.redirect('/login');
       }
     });
+  } else {
+    response.clearCookie('userId');
+    response.clearCookie('session');
+    response.redirect('/login');
   }
 });
 
