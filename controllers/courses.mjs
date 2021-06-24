@@ -587,7 +587,6 @@ export default function initCoursesController(db) {
   const dashboardDayQuery = async (request, response) => {
     try {
       const query = request.body.date;
-      console.log(query);
       if (query === '') {
         response.redirect('/dashboard');
       }
