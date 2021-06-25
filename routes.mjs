@@ -45,38 +45,6 @@ export default function bindRoutes(app) {
   app.get('/dashboard/day/:year/:month/:day', CoursesController.dashboardDay);
   app.post('/dashboard/query/day', CoursesController.dashboardDayQuery);
 
-  // PEOPLE
-  app.get('/users', UsersController.index);
-  app.get('/createUser', UsersController.create);
-
-  app.get('/students', StudentsController.index);
-  app.get('/parents', ParentsController.index);
-
-  app.get('/student/:id', StudentsController.show);
-  app.get('/students/new', StudentsController.createForm);
-  app.post('/students/new', StudentsController.create);
-  app.get('/student/edit/:id', StudentsController.edit);
-  app.put('/student/edit/:id', StudentsController.update);
-
-  app.get('/parent/:id', ParentsController.show);
-  app.get('/parents/new', ParentsController.createForm);
-  app.post('/parents/new', ParentsController.create);
-  app.get('/parent/edit/:id', ParentsController.edit);
-  app.put('/parent/edit/:id', ParentsController.update);
-
-  app.get('/instructors', InstructorsController.index);
-  app.get('/instructor/:id', InstructorsController.show);
-  app.get('/instructors/new', InstructorsController.createForm);
-  app.post('/instructors/new', InstructorsController.create);
-  app.get('/instructor/edit/:id', InstructorsController.edit);
-  app.put('/instructor/edit/:id', InstructorsController.update);
-
-  app.get('/employment', EmploymentController.index);
-  app.get('/employment/new', EmploymentController.createForm);
-  app.post('/employment/new', EmploymentController.create);
-  app.get('/employment/edit/:id', EmploymentController.edit);
-  app.put('/employment/edit/:id', EmploymentController.update);
-
   // COURSES
   app.get('/courses', CoursesController.index);
   app.get('/courses/upcoming', CoursesController.indexUpcoming);
@@ -99,6 +67,31 @@ export default function bindRoutes(app) {
 
   app.get('/session/:id', SessionsController.show);
 
+  // ATTENDANCE
+  app.get('/attendance/payment/:id', AttendancesController.pmtForm);
+  app.put('/attendance/payment/:id', AttendancesController.pmtUpdate);
+  // app.get('/attendance/payment/:id', AttendancesController.statusForm);
+  // app.put('/attendance/payment/:id', AttendancesController.statysUpdate);
+
+  // CLIENTS
+  app.get('/users', UsersController.index);
+  app.get('/createUser', UsersController.create);
+
+  app.get('/students', StudentsController.index);
+  app.get('/parents', ParentsController.index);
+
+  app.get('/student/:id', StudentsController.show);
+  app.get('/students/new', StudentsController.createForm);
+  app.post('/students/new', StudentsController.create);
+  app.get('/student/edit/:id', StudentsController.edit);
+  app.put('/student/edit/:id', StudentsController.update);
+
+  app.get('/parent/:id', ParentsController.show);
+  app.get('/parents/new', ParentsController.createForm);
+  app.post('/parents/new', ParentsController.create);
+  app.get('/parent/edit/:id', ParentsController.edit);
+  app.put('/parent/edit/:id', ParentsController.update);
+
   // CREDITS
   app.get('/credits', CreditsController.indexAll);
   app.get('/credits/unused', CreditsController.indexUnused);
@@ -117,11 +110,21 @@ export default function bindRoutes(app) {
   app.get('/item/edit/:id', ItemsController.edit);
   app.put('/item/edit/:id', ItemsController.update);
 
-  // ATTENDANCE
-  app.get('/attendance/payment/:id', AttendancesController.pmtForm);
-  app.put('/attendance/payment/:id', AttendancesController.pmtUpdate);
-  // app.get('/attendance/payment/:id', AttendancesController.statusForm);
-  // app.put('/attendance/payment/:id', AttendancesController.statysUpdate);
+  // INSTRUCTORS
+  app.get('/instructors', InstructorsController.index);
+  app.get('/instructors/currentmth/:year/:month', InstructorsController.currMthIndex);
+  app.get('/instructors/unassigned', InstructorsController.unassigned);
+  app.get('/instructor/:id', InstructorsController.show);
+  app.get('/instructors/new', InstructorsController.createForm);
+  app.post('/instructors/new', InstructorsController.create);
+  app.get('/instructor/edit/:id', InstructorsController.edit);
+  app.put('/instructor/edit/:id', InstructorsController.update);
+
+  app.get('/employment', EmploymentController.index);
+  app.get('/employment/new', EmploymentController.createForm);
+  app.post('/employment/new', EmploymentController.create);
+  app.get('/employment/edit/:id', EmploymentController.edit);
+  app.put('/employment/edit/:id', EmploymentController.update);
 
   // ASSIGNMENTS
   app.get('/assignment/new/:courseId', AssignmentsController.courseIntForm);

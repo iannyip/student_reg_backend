@@ -1,8 +1,14 @@
 import moment from 'moment';
+import pkg from 'sequelize';
+
+const { Op } = pkg;
 
 export default function initInstructorsController(db) {
   const index = async (request, response) => {
     try {
+      const year = moment().year();
+      const month = moment().month() + 1;
+      console.log(year, month);
       // navtabs
       const navtabs = [
         {
@@ -12,12 +18,12 @@ export default function initInstructorsController(db) {
         },
         {
           text: 'Current month',
-          link: '/courses/upcoming',
+          link: `/instructors/currentmth/${year}/${month}`,
           active: false,
         },
         {
           text: 'Unassigned courses',
-          link: '/courses/past',
+          link: '/instructors/unassigned',
           active: false,
         },
       ];
@@ -46,7 +52,134 @@ export default function initInstructorsController(db) {
         instructor.dataValues.hours = sumHours.toFixed(2);
       });
       // response.send(allInstructors);
-      response.render('people/instructors', { allInstructors, navtabs });
+      response.render('people/instructors', { allInstructors, courses: '', navtabs });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const currMthIndex = async (request, response) => {
+    try {
+      const { year, month } = request.params;
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '/instructors',
+          active: false,
+        },
+        {
+          text: 'Current month',
+          link: '#',
+          active: true,
+        },
+        {
+          text: 'Unassigned courses',
+          link: '/instructors/unassigned',
+          active: false,
+        },
+      ];
+      const thisMonth = moment().month(month - 1).year(year).date(1)
+        .hour(0);
+      const nextMonth = moment().month(month).year(year).date(1)
+        .hour(0)
+        .subtract(1, 'days');
+
+      const allInstructors = await db.Instructor.findAll({
+        include: [
+          {
+            model: db.User,
+            attributes: ['id', 'name', 'mobile'],
+          },
+          db.Employment,
+          {
+            model: db.Session,
+            // add where filter for current month
+            attributes: ['startDatetime', 'endDatetime'],
+            through: { model: db.Assignment, attributes: [] },
+            where: {
+              startDatetime: {
+                [Op.between]: [thisMonth.toDate(), nextMonth.toDate()],
+              },
+            },
+          },
+        ],
+      });
+
+      allInstructors.forEach((instructor) => {
+        let sumHours = 0;
+        instructor.sessions.forEach((session) => {
+          const duration = moment(session.endDatetime).diff(moment(session.startDatetime), 'hours', true);
+          sumHours += duration;
+        });
+        instructor.dataValues.hours = sumHours.toFixed(2);
+      });
+      // response.send(allInstructors);
+      response.render('people/instructors', { allInstructors, courses: '', navtabs });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unassigned = async (request, response) => {
+    try {
+      const year = moment().year();
+      const month = moment().month() + 1;
+      const today = moment();
+      // navtabs
+      const navtabs = [
+        {
+          text: 'All',
+          link: '/instructors',
+          active: false,
+        },
+        {
+          text: 'Current month',
+          link: `/instructors/currentmth/${year}/${month}`,
+          active: false,
+        },
+        {
+          text: 'Unassigned courses',
+          link: '#',
+          active: true,
+        },
+      ];
+
+      // Find all courses
+      const courses = await db.Course.findAll({
+        include: [{
+          model: db.Signup,
+        }, {
+          model: db.Session,
+          include: [
+            { model: db.Attendance, attributes: ['id'] },
+            { model: db.Assignment, attributes: ['id'] },
+          ],
+          where:
+          {
+            startDatetime: {
+              [Op.gte]: today.toDate(),
+            },
+          },
+        }],
+
+      });
+
+      const unassigned = [];
+      courses.forEach((course) => {
+        let UnassignedCount = 0;
+        course.sessions.forEach((sess) => {
+          if (sess.attendances.length > 0 && sess.assignments.length === 0) {
+            UnassignedCount += 1;
+          }
+        });
+        course.dataValues.unassignedCount = UnassignedCount;
+      });
+
+      // response.send(courses);
+      response.render('people/instructors', {
+        allInstructors: '', courses, navtabs, moment,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -313,6 +446,8 @@ export default function initInstructorsController(db) {
   // return all methods we define in an object
   return {
     index,
+    currMthIndex,
+    unassigned,
     show,
     createForm,
     create,
