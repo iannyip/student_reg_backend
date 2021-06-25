@@ -22,21 +22,22 @@
           </ol>
         </nav>
       </div>
-      <!-- Buttons row -->
+      <!-- Header and Buttons row -->
       <div class="row">
-        <div class="col">
+        <div class="col-md-6">
+          <h1><%= session.course.name %></h1>
+          <h3>
+            <%= moment(session.startDatetime).format('d MMM YYYY (dddd)') %>,
+            <%= moment(session.startDatetime).format('h.mm a')%> to <%=
+            moment(session.endDatetime).format('h.mm a')%>
+          </h3>
+        </div>
+        <div class="col-md-6 text-end">
           <a class="btn btn-secondary" href="#">Register student</a>
           <a class="btn btn-secondary" href="#">Edit session</a>
-          <p>TODO: enable edit, attendance, cancelling, package pmt</p>
         </div>
       </div>
 
-      <h1><%= session.course.name %></h1>
-      <h3>
-        <%= moment(session.startDatetime).format('d MMM YYYY (dddd)') %>, <%=
-        moment(session.startDatetime).format('h.mm a')%> to <%=
-        moment(session.endDatetime).format('h.mm a')%>
-      </h3>
       <hr class="my-4" />
       <!-- Session meta info row -->
       <div class="row">
