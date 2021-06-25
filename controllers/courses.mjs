@@ -323,6 +323,7 @@ export default function initCoursesController(db) {
         'isChargeable',
         'sessionType',
       ];
+      console.log(formData);
 
       const sessionsArr = [];
       for (let i = 0; i < formData.sessionsno.length; i += 1) {
@@ -330,8 +331,8 @@ export default function initCoursesController(db) {
         sessionFieldNameArr.forEach((field) => {
           tempObj[`${field}`] = formData[`sessions${field}`][i];
         });
-        tempObj.startDatetime = moment(`${tempObj.date} ${tempObj.startTime}`);
-        tempObj.endDatetime = moment(`${tempObj.date} ${tempObj.endTime}`);
+        tempObj.startDatetime = moment(`${tempObj.date} ${tempObj.startTime}`, 'YYYY-MM-DD HH:mm');
+        tempObj.endDatetime = moment(`${tempObj.date} ${tempObj.endTime}`, 'YYYY-MM-DD HH:mm');
         sessionsArr.push(tempObj);
       }
 
