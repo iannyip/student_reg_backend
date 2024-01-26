@@ -41,16 +41,20 @@ app.use((request, response, next) => {
     return;
   }
   if (request.cookies.session && request.cookies.userId) {
-    bcrypt.compare(request.cookies.userId, request.cookies.session, (err, result) => {
-      if (result) {
-        request.isUserLoggedIn = true;
-        next();
-      } else {
-        response.clearCookie('userId');
-        response.clearCookie('session');
-        response.redirect('/login');
+    bcrypt.compare(
+      request.cookies.userId,
+      request.cookies.session,
+      (err, result) => {
+        if (result) {
+          request.isUserLoggedIn = true;
+          next();
+        } else {
+          response.clearCookie('userId');
+          response.clearCookie('session');
+          response.redirect('/login');
+        }
       }
-    });
+    );
   } else {
     response.clearCookie('userId');
     response.clearCookie('session');
@@ -62,5 +66,5 @@ app.use((request, response, next) => {
 bindRoutes(app);
 
 // Set Express to listen on the given port
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT);
