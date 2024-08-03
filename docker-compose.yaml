@@ -1,0 +1,92 @@
+version: '3'
+
+services:
+  student-reg-backend:
+    command: sh -c "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed --seed mockseeder && npm start"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DIALECT: postgres
+      HOST: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres_password
+      USERNAME: postgres
+      PASSWORD: postgres_password
+      DATABASE: student-reg-backend
+      NODE_ENV: production
+      DATABASE_URL: postgres://postgres:postgres_password@postgres:5432/student-reg-backend
+    depends_on:
+      - postgres
+    ports:
+      - 3004:3000
+    links:
+      - postgres
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: student-reg-backend
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5430:5432
+
+volumes:
+  postgres-data:
+
+
+version: "3"
+
+services:
+ brillian: 
+  image: iannyip/brillian:latest
+  environment:
+   DB_HOST: postgres
+   HOST: postgres
+   DB_PASSWORD: postgres_password
+   PASSWORD: postgres_password
+   DATABASE_URL: postgres://postgres:postgres_password@postgres/online-education
+   DB: online-education
+   PORT: 3000
+   DB_PORT: 5432
+   DIALECT: postgres
+  depends_on:
+   - postgres
+  ports:
+   - 80:3000
+  platform: linux/arm64
+  command: sh -c "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
+  restart: always
+ student-reg-backend:
+  command: sh -c "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed --seed mockseeder && npm start"
+  image: iannyip/student-reg-backend:latest
+  environment:
+   DIALECT: postgres
+   HOST: postgres
+   DB_HOST: postgres
+   DB_PORT: 5432
+   DB_USERNAME: postgres
+   DB_PASSWORD: postgres_password
+   USERNAME: postgres
+   PASSWORD: postgres_password
+   DATABASE: online-education
+   NODE_ENV: production
+   DATABASE_URL: postgres://postgres:postgres_password@postgres:5432/online-education
+  depends_on:
+   - postgres
+  ports:
+   - 3004:3000
+  links:
+   - postgres
+  restart: always
+
+ postgres:
+  image: postgres:latest
+  environment:
+   POSTGRES_PASSWORD: postgres_password
+   POSTGRES_USER: postgres
+   POSTGRES_DB: online-education
