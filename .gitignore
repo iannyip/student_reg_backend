@@ -2,3 +2,4 @@ node_modules
 aws
 fly.toml
 .env
+.vscode
