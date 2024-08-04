@@ -31,7 +31,7 @@ if (env === 'production') {
   const username = dbUrl.auth.substr(0, dbUrl.auth.indexOf(':'));
   const password = dbUrl.auth.substr(
     dbUrl.auth.indexOf(':') + 1,
-    dbUrl.auth.length,
+    dbUrl.auth.length
   );
   const dbName = dbUrl.path.slice(1);
   const host = dbUrl.hostname;
@@ -47,7 +47,7 @@ else {
     config.database,
     config.username,
     config.password,
-    config,
+    config
   );
 }
 
@@ -68,13 +68,31 @@ db.Assignment = initAssignmentModel(sequelize, Sequelize.DataTypes);
 
 // Define M-M relationships here
 // -- Signup through table
-db.Course.belongsToMany(db.Student, { through: db.Signup, foreignKey: 'courseId' });
-db.Student.belongsToMany(db.Course, { through: db.Signup, foreignKey: 'studentId' });
+db.Course.belongsToMany(db.Student, {
+  through: db.Signup,
+  foreignKey: 'courseId',
+});
+db.Student.belongsToMany(db.Course, {
+  through: db.Signup,
+  foreignKey: 'studentId',
+});
 // -- Attendance through table
-db.Session.belongsToMany(db.Student, { through: db.Attendance, foreignKey: 'sessionId' });
-db.Student.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'studentId' });
-db.Session.belongsToMany(db.Credit, { through: db.Attendance, foreignKey: 'sessionId' });
-db.Credit.belongsToMany(db.Session, { through: db.Attendance, foreignKey: 'payment' });
+db.Session.belongsToMany(db.Student, {
+  through: db.Attendance,
+  foreignKey: 'sessionId',
+});
+db.Student.belongsToMany(db.Session, {
+  through: db.Attendance,
+  foreignKey: 'studentId',
+});
+db.Session.belongsToMany(db.Credit, {
+  through: db.Attendance,
+  foreignKey: 'sessionId',
+});
+db.Credit.belongsToMany(db.Session, {
+  through: db.Attendance,
+  foreignKey: 'payment',
+});
 // -- Assignment through table
 db.Session.belongsToMany(db.Instructor, { through: db.Assignment });
 db.Instructor.belongsToMany(db.Session, { through: db.Assignment });

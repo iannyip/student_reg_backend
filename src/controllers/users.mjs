@@ -34,9 +34,12 @@ export default function initUsersController(db) {
   const verifyLogin = async (request, response) => {
     try {
       const { email, password } = request.body;
+      console.log('inside verifyLogin');
+      console.log(email, password);
       const user = await db.User.findOne({
         where: { email },
       });
+      console.log(user);
       if (user === null) {
         response.render('auth/createLogin', { errorClass: 'd-block' });
       }

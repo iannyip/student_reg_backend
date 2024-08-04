@@ -1,4 +1,4 @@
-import db from './models/index.mjs';
+import db from '../models/index.mjs';
 
 const updateInsCols = async () => {
   try {

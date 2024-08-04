@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  student-reg-backend:
+    container_name: student-reg-backend
+    command: sh -c "cd src && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed --seed 20210609085858-seed-data && cd .. && npm run updateInstructor && npm run dev"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./src:/app/src

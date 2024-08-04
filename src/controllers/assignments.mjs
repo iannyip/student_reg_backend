@@ -56,7 +56,9 @@ export default function initAssignmentsController(db) {
             label: 'Date',
             type: 'text',
             placeholder: '',
-            value: `${moment(course.startDatetime).format('D MMM YYYY')} to ${moment(course.endDatetime).format('D MMM YYYY')}`,
+            value: `${moment(course.startDatetime).format(
+              'D MMM YYYY'
+            )} to ${moment(course.endDatetime).format('D MMM YYYY')}`,
             readonly: true,
           },
           {
@@ -64,7 +66,9 @@ export default function initAssignmentsController(db) {
             label: 'Time',
             type: 'text',
             placeholder: '',
-            value: `${moment(course.startDatetime).format('HH:mm')} to ${moment(course.endDatetime).format('HH:mm')}`,
+            value: `${moment(course.startDatetime).format('HH:mm')} to ${moment(
+              course.endDatetime
+            ).format('HH:mm')}`,
             readonly: true,
           },
           {
@@ -127,14 +131,16 @@ export default function initAssignmentsController(db) {
       });
       const instructor = await db.Instructor.findOne({
         where: { id: instructorId },
-        include: [{
-          model: db.User,
-          attributes: ['id', 'name'],
-        },
-        {
-          model: db.Employment,
-          attributes: ['rate'],
-        }],
+        include: [
+          {
+            model: db.User,
+            attributes: ['id', 'name'],
+          },
+          {
+            model: db.Employment,
+            attributes: ['rate'],
+          },
+        ],
       });
       const newInstObj = {
         id: instructor.id,
@@ -166,7 +172,9 @@ export default function initAssignmentsController(db) {
 
         // Step 2B: Check if need to new assignment
         if (!currentInsIdArr.includes(Number(instructorId))) {
-          console.log(`instructor ${instructorId} is not in ${currentInsIdArr}. To update`);
+          console.log(
+            `instructor ${instructorId} is not in ${currentInsIdArr}. To update`
+          );
           // Add new instructor
           sessionInstructorArr.push(newInstObj);
 
@@ -184,7 +192,7 @@ export default function initAssignmentsController(db) {
         console.log('with: ', sessionInstructorArr);
         await db.Session.update(
           { instructor: { instructor: sessionInstructorArr } },
-          { where: { id: session.id } },
+          { where: { id: session.id } }
         );
       });
 
@@ -195,7 +203,7 @@ export default function initAssignmentsController(db) {
       }
       await db.Course.update(
         { instructor: { instructor: courseInstructorsArr } },
-        { where: { id: courseId } },
+        { where: { id: courseId } }
       );
 
       // response.send({ newInstObj, instructor, course });

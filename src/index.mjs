@@ -4,7 +4,14 @@ import methodOverride from 'method-override';
 
 import jsSha from 'jssha';
 import bcrypt from 'bcrypt';
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import bindRoutes from './routes.mjs';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 const { SALT } = process.env;
 const saltyHash = (input) => {
@@ -24,6 +31,7 @@ const hash = (input) => {
 // Initialise Express instance
 const app = express();
 // Set the Express view engine to expect EJS templates
+app.set('views', path.join(dirname, 'views'));
 app.set('view engine', 'ejs');
 // Bind cookie parser middleware to parse cookies in requests
 app.use(cookieParser());
@@ -32,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 // Bind method override middleware to parse PUT and DELETE requests sent as POST requests
 app.use(methodOverride('_method'));
 // Expose the files stored in the public folder
-app.use(express.static('public'));
+app.use(express.static('src/public'));
 // Custom Middleware to verify hash and set request flag
 app.use((request, response, next) => {
   request.isUserLoggedIn = false;
